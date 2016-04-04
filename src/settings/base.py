@@ -3,9 +3,12 @@ import sys
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT_DIR = os.path.dirname(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 sys.path.append(os.path.join(BASE_DIR, 'apps'))
 
-SECRET_KEY = '...'
+SECRET_KEY = 'key'
 
 DEBUG = False
 
@@ -24,15 +27,18 @@ DJANGO_APPS = [
 EXTERNAL_APPS = [
     'django_extensions',
     'compressor',
+    'reversion',
 ]
 
 INTERNAL_APPS = [
     'example',
+    'kids',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + EXTERNAL_APPS + INTERNAL_APPS
 
 MIDDLEWARE_CLASSES = [
+    'reversion.middleware.RevisionMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -43,10 +49,9 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
 ]
 
-COMPRESS_ROOT = os.path.join(BASE_DIR, 'public','static')
+COMPRESS_ROOT = os.path.join(ROOT_DIR, 'public', 'static')
 
 COMPRESS_ENABLED = True
-
 
 ROOT_URLCONF = 'src.urls'
 
@@ -83,23 +88,27 @@ DATABASES = {
 
 SITE_ID = 1
 
-LANGUAGE_CODE = 'ru-RU'
+LANGUAGE_CODE = 'ru'
+
+DATE_FORMAT = 'd E Y'
+DATETIME_FORMAT = 'd E Y H:i'
+TIME_FORMAT = 'H:i'
 
 TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
-USE_TZ = True
+USE_TZ = False
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'public', 'media')
+MEDIA_ROOT = os.path.join(ROOT_DIR, 'public', 'media')
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'public', 'static')
+STATIC_ROOT = os.path.join(ROOT_DIR, 'public', 'static')
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
@@ -111,3 +120,15 @@ STATICFILES_FINDERS = [
     'compressor.finders.CompressorFinder',
 ]
 
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
+
+COMPRESS_CSS_FILTERS = [
+    "compressor.filters.css_default.CssAbsoluteFilter",
+    "compressor.filters.cssmin.CSSMinFilter"
+]
+
+COMPRESS_JS_FILTERS = [
+    "compressor.filters.jsmin.JSMinFilter"
+]
