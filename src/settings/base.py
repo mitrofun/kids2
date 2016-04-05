@@ -27,12 +27,12 @@ DJANGO_APPS = [
 EXTERNAL_APPS = [
     'django_extensions',
     'compressor',
-    'reversion',
 ]
 
 INTERNAL_APPS = [
     'example',
     'kids',
+    'institutions',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + EXTERNAL_APPS + INTERNAL_APPS
