@@ -26,6 +26,14 @@ class NameModel(models.Model):
         return self.name
 
 
+class HistoryModel(models.Model):
+    first_date = models.DateField('Начальная дата')
+    last_date = models.DateField('Конечная дата', blank=True, null=True)
+
+    class Meta:
+        abstract = True
+
+
 class PersonModel(CreatedAndUpdatedModel):
 
     SEX_CHOICE = (
@@ -36,7 +44,7 @@ class PersonModel(CreatedAndUpdatedModel):
     first_name = models.CharField('Имя', max_length=32)
     middle_name = models.CharField('Отчество', max_length=32, blank=True,
                                    null=True)
-    birthday = models.DateField('Дата рождения', default=datetime.now())
+    birthday = models.DateField('Дата рождения', default=datetime.now)
     sex = models.IntegerField('Пол', choices=SEX_CHOICE, blank=True, null=True)
 
     class Meta:

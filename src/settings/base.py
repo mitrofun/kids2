@@ -33,12 +33,12 @@ INTERNAL_APPS = [
     'example',
     'kids',
     'institutions',
+    'parameters',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + EXTERNAL_APPS + INTERNAL_APPS
 
 MIDDLEWARE_CLASSES = [
-    'reversion.middleware.RevisionMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
