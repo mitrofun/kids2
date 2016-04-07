@@ -27,7 +27,7 @@ class NameModel(models.Model):
 
 
 class HistoryModel(models.Model):
-    first_date = models.DateField('Начальная дата')
+    first_date = models.DateField('Начальная дата', default=datetime.now)
     last_date = models.DateField('Конечная дата', blank=True, null=True)
 
     class Meta:

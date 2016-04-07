@@ -1,6 +1,7 @@
 from django.db import models
 
 from common.models import HistoryModel
+from institutions.models import Institution, EducationClass, EducationGroup
 from kids.models import Kid
 
 
@@ -9,6 +10,22 @@ class HistoryParamsBase(HistoryModel):
 
     class Meta:
         abstract = True
+
+
+class GuideFamilyStatus(models.Model):
+
+    FAMILY_STATUS = (
+        (1, 'Многодетные'),
+        (2, 'Малоимущие'),
+        (3, 'Неполные'),
+        (4, 'КМНС'),
+        )
+    status = models.CharField(max_length=16, blank=True, choices=FAMILY_STATUS)
+
+    class Meta:
+        db_table = 'guide_status'
+        verbose_name = 'Справочник статуса семьи'
+        verbose_name_plural = 'Справочник статуса семьи'
 
 
 class HealthHistory(HistoryParamsBase):
@@ -42,22 +59,6 @@ class NoteHistory(HistoryParamsBase):
         verbose_name_plural = 'Примечания'
 
 
-class GuideFamilyStatus(models.Model):
-
-    FAMILY_STATUS = (
-        (1, 'Многодетные'),
-        (2, 'Малоимущие'),
-        (3, 'Неполные'),
-        (4, 'КМНС'),
-        )
-    status = models.CharField(max_length=16, blank=True, choices=FAMILY_STATUS)
-
-    class Meta:
-        db_table = 'guide_status'
-        verbose_name = 'Справочник статуса семьи'
-        verbose_name_plural = 'Справочник статуса семьи'
-
-
 class FamilyStatusHistory(HistoryParamsBase):
     status = models.ManyToManyField(GuideFamilyStatus)
 
@@ -66,3 +67,15 @@ class FamilyStatusHistory(HistoryParamsBase):
         verbose_name = 'Статус семьи'
         verbose_name_plural = 'Статусы семьи'
 
+
+class StudentHistory(HistoryParamsBase):
+    institution = models.ForeignKey(Institution, verbose_name='Учреждение')
+    education_group = models.ForeignKey(EducationGroup, verbose_name='Группа',
+                                        blank=True, null=True)
+    education_class = models.ForeignKey(EducationClass, verbose_name='Класс',
+                                        blank=True, null=True)
+
+    class Meta:
+        db_table = 'students'
+        verbose_name = 'Ученик'
+        verbose_name_plural = 'Ученики'

@@ -8,3 +8,4 @@ class Kid(PersonModel, AddressModel):
         db_table = 'kids'
         verbose_name = 'Ребенок'
         verbose_name_plural = 'Дети'
+
