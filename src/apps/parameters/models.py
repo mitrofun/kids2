@@ -1,12 +1,12 @@
 from django.db import models
 
 from common.models import HistoryModel
-from institutions.models import Institution, EducationClass, EducationGroup
-from kids.models import Kid
+from educations.models import Institution, Grade, Group
+from children.models import Child
 
 
 class HistoryParamsBase(HistoryModel):
-    kid = models.ForeignKey(Kid, verbose_name='Ребенок')
+    child = models.ForeignKey(Child, verbose_name='Ребенок')
 
     class Meta:
         abstract = True
@@ -20,12 +20,15 @@ class GuideFamilyStatus(models.Model):
         (3, 'Неполные'),
         (4, 'КМНС'),
         )
-    status = models.CharField(max_length=16, blank=True, choices=FAMILY_STATUS)
+    status = models.IntegerField(blank=True, choices=FAMILY_STATUS)
 
     class Meta:
         db_table = 'guide_status'
         verbose_name = 'Справочник статуса семьи'
         verbose_name_plural = 'Справочник статуса семьи'
+
+    def __str__(self):
+        return self.get_status_display()
 
 
 class HealthHistory(HistoryParamsBase):
@@ -70,12 +73,15 @@ class FamilyStatusHistory(HistoryParamsBase):
 
 class StudentHistory(HistoryParamsBase):
     institution = models.ForeignKey(Institution, verbose_name='Учреждение')
-    education_group = models.ForeignKey(EducationGroup, verbose_name='Группа',
-                                        blank=True, null=True)
-    education_class = models.ForeignKey(EducationClass, verbose_name='Класс',
-                                        blank=True, null=True)
+    group = models.ForeignKey(Group, verbose_name='Группа',
+                              blank=True, null=True)
+    grade = models.ForeignKey(Grade, verbose_name='Класс',
+                              blank=True, null=True)
 
     class Meta:
         db_table = 'students'
-        verbose_name = 'Ученик'
+        verbose_name = 'Учащийся'
         verbose_name_plural = 'Ученики'
+
+    def __str__(self):
+        return '{} ({})'.format(self.child, self.institution)

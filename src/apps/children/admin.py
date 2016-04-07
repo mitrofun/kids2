@@ -1,5 +1,5 @@
 from django.contrib import admin
-from kids.models import Kid
+from children.models import Child
 
 
 class ModelAdmin(admin.ModelAdmin):
@@ -9,4 +9,4 @@ class ModelAdmin(admin.ModelAdmin):
     list_filter = ('last_name', 'first_name', 'middle_name')
 
 
-admin.site.register(Kid, ModelAdmin)
+admin.site.register(Child, ModelAdmin)

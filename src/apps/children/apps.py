@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class KidsConfig(AppConfig):
-    name = 'kids'
+class ChildConfig(AppConfig):
+    name = 'children'
     verbose_name = 'Дети'

@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 
 
-class InstitutionsConfig(AppConfig):
-    name = 'institutions'
+class EducationsConfig(AppConfig):
+    name = 'educations'
     verbose_name = 'Образовательные учреждения'
 

@@ -1,11 +1,11 @@
 from common.models import PersonModel, AddressModel
 
 
-class Kid(PersonModel, AddressModel):
+class Child(PersonModel, AddressModel):
     pass
 
     class Meta:
-        db_table = 'kids'
+        db_table = 'children'
         verbose_name = 'Ребенок'
         verbose_name_plural = 'Дети'
 

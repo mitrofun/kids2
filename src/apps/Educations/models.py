@@ -18,19 +18,19 @@ class Institution(NameModel):
         verbose_name_plural = 'Учреждения'
 
 
-class EducationGroup(NameModel):
+class Group(NameModel):
     pass
 
     class Meta:
         db_table = 'groups'
-        verbose_name = 'Возрастная группа дошкольного образования'
-        verbose_name_plural = 'Возрастные группы дошкольного образования'
+        verbose_name = 'Возрастная группа'
+        verbose_name_plural = 'Возрастные группы'
 
 
-class EducationClass(NameModel):
+class Grade(NameModel):
     pass
 
     class Meta:
-        db_table = 'classes'
-        verbose_name = 'Класс обучения общего образования'
-        verbose_name_plural = 'Классы обучения общего образования'
+        db_table = 'grades'
+        verbose_name = 'Класс обучения'
+        verbose_name_plural = 'Классы обучения'

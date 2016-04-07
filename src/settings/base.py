@@ -30,9 +30,9 @@ EXTERNAL_APPS = [
 ]
 
 INTERNAL_APPS = [
-    'example',
-    'kids',
-    'institutions',
+    'cms',
+    'children',
+    'educations',
     'parameters',
 ]
 
