@@ -2,7 +2,8 @@
   "name": "kids2",
   "version": "0.1.0",
   "devDependencies": {
-    "grunt": "^1.0.1",
-    "grunt-contrib-less": "^1.2.0"
+    "grunt": "latest",
+    "grunt-contrib-less": "latest",
+    "grunt-contrib-uglify": "latest"
   }
 }

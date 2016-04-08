@@ -7,7 +7,7 @@ module.exports = function(grunt) {
             options: {
                 expand: true
             },
-            dev: {
+            development: {
                 options: {
                     strictMath: true
                 },
@@ -15,22 +15,34 @@ module.exports = function(grunt) {
                     'src/static/dist/css/main.css': ['src/static/assets/less/style.less']
                 }
             },
-            release: { // Target
+            production: { // Target
                 options: {
-                    strictMath: true,
-                    yuicompress: true
+                     compress: true,
+                     yuicompress: true,
+                     optimization: 2
                 },
                 files: {
-                    'src/static/dist/css/main.css': ['src/static/assets/less/style.less']
+                    'src/static/dist/css/main.min.css': ['src/static/assets/less/style.less']
+                }
+            }
+        },
+
+        uglify: {
+            options: {
+                compress: {
+                    drop_console: true
+                }
+            },
+            my_target: {
+                files: {
+                    'src/static/dist/js/ie10-viewport-bug-workaround.min.js': ['src/static/assets/js/ie10-viewport-bug-workaround.js'],
+                    'src/static/dist/js/ie-emulation-modes-warning.min.js': ['src/static/assets/js/ie-emulation-modes-warning.js']
                 }
             }
         }
-
     });
 
     grunt.loadNpmTasks('grunt-contrib-less');
-    
-    grunt.registerTask('default', [
-        'less:dev'
-    ]);
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.registerTask('default', ['less:production', 'uglify']);
 };
