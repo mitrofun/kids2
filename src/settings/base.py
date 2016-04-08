@@ -29,10 +29,10 @@ EXTERNAL_APPS = [
     'compressor',
     'bootstrapform',
     'sitetree',
+    'django_filters',
 ]
 
 INTERNAL_APPS = [
-    'cms',
     'children',
     'educations',
     'parameters',

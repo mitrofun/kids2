@@ -3,3 +3,4 @@ django-compressor==1.5
 django-extensions==1.6.1
 django-sitetree==1.5.1
 django-bootstrap-form==3.2
+django-filter==0.13.0

@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block page_header %}
+            Список детей
+            <div class="btn-group pull-right">
+            <a href="#" class="btn btn-primary">Добавить</a>
+        </div>
+{% endblock page_header %}
+
+{% block content %}
+    <div class="panel panel-default">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Ребенок</th>
+                        <th>Дата рождения</th>
+                        <th>Возраст</th>
+                        <th>Учреждение</th>
+                        <th>Класс</th>
+                        <th>Возрастная группа</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for child in children %}
+
+                    <tr>
+                        <td>{{ child }}</td>
+                        <td>{{ child.birthday| date:'d.m.Y' }}</td>
+                        <td>{{ child.get_age }}</td>
+                        {% with child.studenthistory_set.all as student_history %}
+                        {% for student in student_history  %}
+                        <td>{{ student.institution }}</td>
+                        <td>{{ student.grade }}</td>
+                        <td>{{ student.group }}</td>
+                        {% endfor %}
+                        {% endwith %}
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+</div>
+
+{% endblock content %}

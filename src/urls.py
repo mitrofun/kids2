@@ -5,9 +5,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
 
-    url(r'', include('cms.urls', namespace='cms')),
-
+    url(r'^children/', include('children.urls', namespace='children')),
     url(r'^admin/', include(admin.site.urls)),
+
+
 ]
 
 if settings.DEBUG:
