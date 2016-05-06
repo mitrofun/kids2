@@ -26,4 +26,4 @@ def user_login(request):
 
 def user_logout(request):
     auth.logout(request)
-    return HttpResponseRedirect("/")
+    return redirect('children:list')
