@@ -18,4 +18,3 @@ class ChildrenFilter(FilterSet):
         return queryset.filter(studenthistory__first_date__lte=value).\
             filter(Q(studenthistory__last_date__gt=value) |
                    Q(studenthistory__last_date__isnull=True))
-

@@ -33,6 +33,7 @@ EXTERNAL_APPS = [
 ]
 
 INTERNAL_APPS = [
+    'accounts',
     'children',
     'educations',
     'parameters',
@@ -79,12 +80,8 @@ WSGI_APPLICATION = 'src.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'products',
-        'USER': '...',
-        'PASSWORD': '...',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, '../db.sqlite3'),
     }
 }
 
@@ -134,3 +131,8 @@ COMPRESS_CSS_FILTERS = [
 COMPRESS_JS_FILTERS = [
     "compressor.filters.jsmin.JSMinFilter"
 ]
+
+LOGIN_URL = '/login/'
+LOGOUT_URL = '/logout/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

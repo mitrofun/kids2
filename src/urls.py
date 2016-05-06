@@ -4,10 +4,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-
+    url(r'', include('accounts.urls', namespace='accounts')),
     url(r'^children/', include('children.urls', namespace='children')),
     url(r'^admin/', include(admin.site.urls)),
-
 
 ]
 
