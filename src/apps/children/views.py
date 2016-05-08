@@ -7,6 +7,7 @@ from children.models import Child
 class ChildrenBaseView(LoginRequiredMixin):
     model = Child
     context_object_name = 'children'
+    pk_url_kwarg = 'child_id'
 
 
 class ChildBaseView(ChildrenBaseView):

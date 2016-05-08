@@ -1,5 +1,6 @@
 /public
 /node_modules
+/external
 /src/static/vendor
 /src/settings/local.py
 # Created by .ignore support plugin (hsz.mobi)

@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class ParametersConfig(AppConfig):
     name = 'parameters'
-    verbose_name = 'Параметры'
+    verbose_name = 'Параметры ребенка'

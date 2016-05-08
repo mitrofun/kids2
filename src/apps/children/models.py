@@ -13,4 +13,4 @@ class Child(PersonModel, AddressModel):
 
     @permalink
     def get_absolute_url(self):
-        return 'children:detail', None, {'pk': self.id}
+        return 'children:detail', None, {'child_id': self.id}

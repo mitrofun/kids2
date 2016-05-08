@@ -1,34 +1,40 @@
 from django.db import models
 
-from common.models import HistoryModel
-from educations.models import Institution, Grade, Group
 from children.models import Child
+from common.models import HistoryModel, NameModel
+from parameters.base_models import HistoryParamsBase
+from parameters.secondary_models import GuideFamilyStatus, Institution, Group, Grade
 
 
-class HistoryParamsBase(HistoryModel):
-    child = models.ForeignKey(Child, verbose_name='Ребенок')
-
-    class Meta:
-        abstract = True
-
-
-class GuideFamilyStatus(models.Model):
-
-    FAMILY_STATUS = (
-        (1, 'Многодетные'),
-        (2, 'Малоимущие'),
-        (3, 'Неполные'),
-        (4, 'КМНС'),
-        )
-    status = models.IntegerField(blank=True, choices=FAMILY_STATUS)
+class StudentHistory(HistoryParamsBase):
+    institution = models.ForeignKey(Institution, verbose_name='Учреждение')
+    group = models.ForeignKey(Group, verbose_name='Группа',
+                              blank=True, null=True)
+    grade = models.ForeignKey(Grade, verbose_name='Класс',
+                              blank=True, null=True)
 
     class Meta:
-        db_table = 'guide_status'
-        verbose_name = 'Справочник статуса семьи'
-        verbose_name_plural = 'Справочник статуса семьи'
+        db_table = 'students'
+        verbose_name = 'Истории обучения'
+        verbose_name_plural = 'История обучения'
 
     def __str__(self):
-        return self.get_status_display()
+        return '{} ({})'.format(self.child, self.institution)
+
+
+class FamilyStatusHistory(HistoryParamsBase):
+    status = models.ManyToManyField(GuideFamilyStatus)
+
+    class Meta:
+        db_table = 'family_status'
+        verbose_name = 'Истории статусов семей'
+        verbose_name_plural = 'История статуса семьи'
+
+    def __str__(self):
+        status_list = []
+        for status in self.status.all():
+            status_list.append(status.get_status_display())
+        return '{} {}'.format(self.child, status_list)
 
 
 class HealthHistory(HistoryParamsBase):
@@ -36,8 +42,8 @@ class HealthHistory(HistoryParamsBase):
 
     class Meta:
         db_table = 'healths'
-        verbose_name = 'Здоровье'
-        verbose_name_plural = 'Здоровье'
+        verbose_name = 'Истории состояния здоровья'
+        verbose_name_plural = 'История состояния здоровья'
 
     def __str__(self):
         return '{} ({})'.format(self.child, self.text)
@@ -64,39 +70,8 @@ class NoteHistory(HistoryParamsBase):
 
     class Meta:
         db_table = 'notes'
-        verbose_name = 'Примечание'
-        verbose_name_plural = 'Примечания'
+        verbose_name = 'Истории примечаний'
+        verbose_name_plural = 'История примечаний'
 
     def __str__(self):
         return '{} ({})'.format(self.child, self.text)
-
-
-class FamilyStatusHistory(HistoryParamsBase):
-    status = models.ManyToManyField(GuideFamilyStatus)
-
-    class Meta:
-        db_table = 'family_status'
-        verbose_name = 'Статус семьи'
-        verbose_name_plural = 'Статусы семьи'
-
-    def __str__(self):
-        status_list = []
-        for status in self.status.all():
-            status_list.append(status.get_status_display())
-        return '{} {}'.format(self.child, status_list)
-
-
-class StudentHistory(HistoryParamsBase):
-    institution = models.ForeignKey(Institution, verbose_name='Учреждение')
-    group = models.ForeignKey(Group, verbose_name='Группа',
-                              blank=True, null=True)
-    grade = models.ForeignKey(Grade, verbose_name='Класс',
-                              blank=True, null=True)
-
-    class Meta:
-        db_table = 'students'
-        verbose_name = 'Учащийся'
-        verbose_name_plural = 'Ученики'
-
-    def __str__(self):
-        return '{} ({})'.format(self.child, self.institution)

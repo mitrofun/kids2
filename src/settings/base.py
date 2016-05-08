@@ -34,7 +34,6 @@ INTERNAL_APPS = [
     'accounts',
     'dashboard',
     'children',
-    'educations',
     'parameters',
 ]
 
