@@ -75,4 +75,182 @@
     </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-lg-12">
+
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#education" aria-controls="education" role="tab" data-toggle="tab">Образование</a>
+        </li>
+        <li role="presentation">
+            <a href="#health" aria-controls="health" role="tab" data-toggle="tab">Статус здоровья</a>
+        </li>
+        <li role="presentation">
+            <a href="#family" aria-controls="family" role="tab" data-toggle="tab">Статус семьи</a>
+        </li>
+        <li role="presentation">
+            <a href="#risk" aria-controls="risk" role="tab" data-toggle="tab">Группа риска</a>
+        </li>
+        <li role="presentation">
+            <a href="#note" aria-controls="note" role="tab" data-toggle="tab">Примечание</a>
+        </li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="education">
+        {% with child.studenthistory_set.all as student_history %}
+         {% if student_history %}
+            <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Начальная дата</th>
+                        <th>Конечная дата</th>
+                        <th>Учреждение</th>
+                        <th>Класс</th>
+                        <th>Возрастная группа</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for student in student_history  %}
+                        <td>{{ student.first_date }}</td>
+                        <td>{{ student.last_date|default_if_none:"-" }}</td>
+                        <td>{{ student.institution }}</td>
+                        <td>{{ student.grade|default_if_none:"-" }}</td>
+                        <td>{{ student.group|default_if_none:"-" }}</td>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+          {% else %}
+          <br/><p>Нет истории</p>
+          {% endif %}
+        {% endwith %}
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="health">
+        {% with child.healthhistory_set.all as health_history %}
+         {% if health_history %}
+            <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Начальная дата</th>
+                        <th>Конечная дата</th>
+                        <th>Состояние</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for health in health_history  %}
+                        <td>{{ health.first_date }}</td>
+                        <td>{{ health.last_date|default_if_none:"-" }}</td>
+                        <td>{{ health.text|default_if_none:"-"  }}</td>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+          {% else %}
+          <br/><p>Нет истории</p>
+          {% endif %}
+        {% endwith %}
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="family">
+        {% with child.familystatushistory_set.all as familystatus_history %}
+         {% if student_history %}
+            <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Начальная дата</th>
+                        <th>Конечная дата</th>
+                        <th>Учреждение</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for familystatus in familystatus_history  %}
+                        <td>{{ familystatus.first_date }}</td>
+                        <td>{{ familystatus.last_date|default_if_none:"-" }}</td>
+                        <td>{{ familystatus.status }}</td>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+          {% else %}
+          <br/><p>Нет истории</p>
+          {% endif %}
+        {% endwith %}
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="risk">
+        {% with child.riskhistory_set.all as risk_history %}
+         {% if student_history %}
+            <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Начальная дата</th>
+                        <th>Конечная дата</th>
+                        <th>Группа риска</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for risk in risk_history  %}
+                        <td>{{ risk.first_date }}</td>
+                        <td>{{ risk.last_date|default_if_none:"-" }}</td>
+                        <td>{{ risk.group }}</td>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+          {% else %}
+          <br/><p>Нет истории</p>
+          {% endif %}
+        {% endwith %}
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="note">
+        {% with child.notehistory_set.all as note_history %}
+         {% if student_history %}
+            <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Начальная дата</th>
+                        <th>Конечная дата</th>
+                        <th>Примечание</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for note in note_history  %}
+                        <td>{{ note.first_date }}</td>
+                        <td>{{ note.last_date|default_if_none:"-" }}</td>
+                        <td>{{ note.text }}</td>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+          {% else %}
+          <br/><p>Нет истории</p>
+          {% endif %}
+        {% endwith %}
+        </div>
+
+      </div>
+
+    </div>
+</div>
 {% endblock content %}

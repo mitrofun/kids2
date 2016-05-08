@@ -32,9 +32,9 @@
                         {% with child.studenthistory_set.all as student_history %}
                         {% if student_history %}
                         {% for student in student_history  %}
-                        <td>{{ student.institution }}</td>
-                        <td>{{ student.grade }}</td>
-                        <td>{{ student.group }}</td>
+                        <td>{{ student.institution|default_if_none:'-' }}</td>
+                        <td>{{ student.grade|default_if_none:'-' }}</td>
+                        <td>{{ student.group|default_if_none:'-' }}</td>
                         {% endfor %}
                         {% else %}
                         <td>-</td>
