@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% load sitetree %}
+
+{% block page_header %}
+    {% sitetree_page_title from "children_tree" %}
+{% endblock page_header %}
+
+{% block breadcrumbs %}
+    {% sitetree_breadcrumbs from "children_tree" template "sitetree/breadcrumbs_bootstrap3.html" %}
+{% endblock breadcrumbs %}

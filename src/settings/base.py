@@ -1,7 +1,6 @@
 import os
 import sys
 
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROOT_DIR = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -13,7 +12,6 @@ SECRET_KEY = 'key'
 DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', ]
-
 
 DJANGO_APPS = [
     'django.contrib.admin',
@@ -34,6 +32,7 @@ EXTERNAL_APPS = [
 
 INTERNAL_APPS = [
     'accounts',
+    'dashboard',
     'children',
     'educations',
     'parameters',

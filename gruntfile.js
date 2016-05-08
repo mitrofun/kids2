@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -17,9 +17,9 @@ module.exports = function(grunt) {
             },
             production: { // Target
                 options: {
-                     compress: true,
-                     yuicompress: true,
-                     optimization: 2
+                    compress: true,
+                    yuicompress: true,
+                    optimization: 2
                 },
                 files: {
                     'src/static/dist/css/main.min.css': ['src/static/assets/less/style.less']

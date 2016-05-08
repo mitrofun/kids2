@@ -1,37 +1,45 @@
+{% load sitetree %}
 <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
+    <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Учет детей</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'dashboard' %}">Учет детей</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#main">Главная</a></li>
-            <li><a href="{% url 'children:list' %}">Дети</a></li>
-            <li><a href="#guaid">Справочники</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    {{ user }} <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    {% if user.is_superuser %}
-                    <li>
-                        <a href="{% url 'admin:index' %}">Администрирование</a>
-                    </li>
-                    {% endif %}
-                    <li>
-                        <a href="{% url 'accounts:logout' %}">Выйти</a>
-                    </li>
-                </ul>
-              </li>
-          </ul>
+            {% sitetree_menu from "children_tree" include "trunk,topmenu" template "sitetree/menu_bootstrap3.html" %}
+
+
+{#            <ul class="nav navbar-nav">#}
+{#                <li class="active"><a href="{% url 'main' %}">Главная</a></li>#}
+{#                <li><a href="{% url 'children:list' %}">Дети</a></li>#}
+{#                <li><a href="#guaid">Справочники</a></li>#}
+{#            </ul>#}
+
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-expanded="false">
+                        {{ user }} <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% if user.is_superuser %}
+                            <li>
+                                <a href="{% url 'admin:index' %}">Администрирование</a>
+                            </li>
+                        {% endif %}
+                        <li>
+                            <a href="{% url 'accounts:logout' %}">Выйти</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </div><!--/.nav-collapse -->
-      </div>
-    </nav>
+    </div>
+</nav>

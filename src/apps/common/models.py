@@ -36,16 +36,11 @@ class HistoryModel(models.Model):
 
 class PersonModel(CreatedAndUpdatedModel):
 
-    SEX_CHOICE = (
-        (0, 'жен'),
-        (1, 'муж'),)
-
     last_name = models.CharField('Фамилия', max_length=32)
     first_name = models.CharField('Имя', max_length=32)
     middle_name = models.CharField('Отчество', max_length=32, blank=True,
                                    null=True)
     birthday = models.DateField('Дата рождения', default=datetime.now)
-    sex = models.IntegerField('Пол', choices=SEX_CHOICE, blank=True, null=True)
 
     class Meta:
         abstract = True

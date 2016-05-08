@@ -1,13 +1,11 @@
-{% extends 'layout.html' %}
-{% load bootstrap %}
-{% block page_header %}
-            Список детей
-            <div class="btn-group pull-right">
-            <a href="#" class="btn btn-primary">Добавить</a>
-        </div>
-{% endblock page_header %}
+{% extends 'children/layout.html' %}
+{% load bootstrap sitetree %}
+{% block page_header %}{% sitetree_page_title from "children_tree" %}{% endblock page_header %}
 
 {% block content %}
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+
     <div class="panel panel-default">
     <div class="panel-body">
     <form action="" method="get" class="form">
@@ -53,5 +51,6 @@
             </table>
         </div>
 </div>
-
+</div>
+    </div>
 {% endblock content %}

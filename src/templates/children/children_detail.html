@@ -1,0 +1,78 @@
+{% extends 'children/layout.html' %}
+
+{% block page_header %}
+    {{ block.super }}
+    <div class="pull-right">
+        <a href="{% url 'children:edit' child.id %}" class="btn btn-primary">Редактировать</a>
+        <a href="{% url 'children:edit' child.id %}" class="btn btn-danger">Удалить</a>
+    </div>
+{% endblock page_header %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 col-sm-6">
+      <div class="panel panel-default">
+      <div class="panel-heading">Основные данные</div>
+      <ul class="list-group">
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-4 col-xs-4"><strong>Фамилия</strong></div>
+                <div class="col-md-8 col-xs-8">{{ child.last_name }}</div>
+            </div>
+        </li>
+         <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-4 col-xs-4"><strong>Имя</strong></div>
+                <div class="col-md-8 col-xs-8">{{ child.first_name }}</div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-4 col-xs-4"><strong>Отчество</strong></div>
+                <div class="col-md-8 col-xs-8">{{ child.middle_name }}</div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-4 col-xs-4"><strong>Дата рождения</strong></div>
+                <div class="col-md-8 col-xs-8">{{ child.birthday }}</div>
+            </div>
+        </li>
+      </ul>
+    </div>
+    </div>
+
+    <div class="col-md-6 col-sm-6">
+      <div class="panel panel-default">
+      <div class="panel-heading">Адрес</div>
+      <ul class="list-group">
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-4 col-xs-4"><strong>Населенный пункт</strong></div>
+                <div class="col-md-8 col-xs-8">{{ child.locality }}</div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-4 col-xs-4"><strong>Улица</strong></div>
+                <div class="col-md-8 col-xs-8">{{ child.street }}</div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-4 col-xs-4"><strong>Дом</strong></div>
+                <div class="col-md-8 col-xs-8">{{ child.house }}</div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-4 col-xs-4"><strong>Квартира</strong></div>
+                <div class="col-md-8 col-xs-8">{{ child.flat }}</div>
+            </div>
+        </li>
+      </ul>
+    </div>
+    </div>
+</div>
+{% endblock content %}
