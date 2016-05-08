@@ -75,7 +75,10 @@
     </div>
     </div>
 </div>
-
+ {{ child.healthhistory_set.all }}
+    {{ child.familystatushistory_set.all }}
+    {{ child.riskhistory_set.all }}
+     {{ child.notehistory_set.all }}
 <div class="row">
     <div class="col-lg-12">
 
@@ -164,14 +167,14 @@
 
         <div role="tabpanel" class="tab-pane" id="family">
         {% with child.familystatushistory_set.all as familystatus_history %}
-         {% if student_history %}
+         {% if familystatus_history %}
             <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>Начальная дата</th>
                         <th>Конечная дата</th>
-                        <th>Учреждение</th>
+                        <th>Статус</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -179,7 +182,9 @@
                         {% for familystatus in familystatus_history  %}
                         <td>{{ familystatus.first_date }}</td>
                         <td>{{ familystatus.last_date|default_if_none:"-" }}</td>
-                        <td>{{ familystatus.status }}</td>
+                        <td>{% for status in familystatus.status.all %}
+                            {{ status }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}</td>
                         {% endfor %}
                     </tr>
                 </tbody>
@@ -193,7 +198,7 @@
 
         <div role="tabpanel" class="tab-pane" id="risk">
         {% with child.riskhistory_set.all as risk_history %}
-         {% if student_history %}
+         {% if risk_history %}
             <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
@@ -208,7 +213,7 @@
                         {% for risk in risk_history  %}
                         <td>{{ risk.first_date }}</td>
                         <td>{{ risk.last_date|default_if_none:"-" }}</td>
-                        <td>{{ risk.group }}</td>
+                        <td>{{ risk.get_group_display }}</td>
                         {% endfor %}
                     </tr>
                 </tbody>
@@ -222,7 +227,7 @@
 
         <div role="tabpanel" class="tab-pane" id="note">
         {% with child.notehistory_set.all as note_history %}
-         {% if student_history %}
+         {% if note_history %}
             <div class="table-responsive">
             <table class="table table-hover">
                 <thead>

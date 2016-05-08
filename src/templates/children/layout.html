@@ -1,6 +1,8 @@
 {% extends 'layout.html' %}
 {% load sitetree %}
 
+{% block title %}{% sitetree_page_title from "children_tree" %} |  {{ block.super }}{% endblock title %}
+
 {% block page_header %}
     {% sitetree_page_title from "children_tree" %}
 {% endblock page_header %}

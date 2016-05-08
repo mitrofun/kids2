@@ -39,6 +39,9 @@ class HealthHistory(HistoryParamsBase):
         verbose_name = 'Здоровье'
         verbose_name_plural = 'Здоровье'
 
+    def __str__(self):
+        return '{} ({})'.format(self.child, self.text)
+
 
 class RiskHistory(HistoryParamsBase):
     BOOL_CHOICES = (
@@ -52,6 +55,9 @@ class RiskHistory(HistoryParamsBase):
         verbose_name = 'Группа риска'
         verbose_name_plural = 'Группа риска'
 
+    def __str__(self):
+        return '{} ({})'.format(self.child, self.get_group_display())
+
 
 class NoteHistory(HistoryParamsBase):
     text = models.CharField('Сосотяние', max_length=256)
@@ -61,6 +67,9 @@ class NoteHistory(HistoryParamsBase):
         verbose_name = 'Примечание'
         verbose_name_plural = 'Примечания'
 
+    def __str__(self):
+        return '{} ({})'.format(self.child, self.text)
+
 
 class FamilyStatusHistory(HistoryParamsBase):
     status = models.ManyToManyField(GuideFamilyStatus)
@@ -69,6 +78,12 @@ class FamilyStatusHistory(HistoryParamsBase):
         db_table = 'family_status'
         verbose_name = 'Статус семьи'
         verbose_name_plural = 'Статусы семьи'
+
+    def __str__(self):
+        status_list = []
+        for status in self.status.all():
+            status_list.append(status.get_status_display())
+        return '{} {}'.format(self.child, status_list)
 
 
 class StudentHistory(HistoryParamsBase):
