@@ -1,11 +1,16 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView, UpdateView, CreateView
+from django.core.urlresolvers import reverse_lazy
+from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from children.models import Child
 
 
 class ChildrenBaseView(LoginRequiredMixin):
     model = Child
     context_object_name = 'children'
+
+
+class ChildBaseView(ChildrenBaseView):
+    context_object_name = 'child'
 
 
 class ChildrenListView(ChildrenBaseView, ListView):
@@ -15,18 +20,21 @@ class ChildrenListView(ChildrenBaseView, ListView):
         return Child.objects.all()
 
 
-class ChildrenCreateView(ChildrenBaseView, CreateView):
+class ChildrenCreateView(ChildBaseView, CreateView):
     template_name = 'children/children_edit.html'
-    context_object_name = 'child'
     fields = '__all__'
 
 
-class ChildrenDetailView(ChildrenBaseView, DetailView):
+class ChildrenDetailView(ChildBaseView, DetailView):
     template_name = 'children/children_detail.html'
-    context_object_name = 'child'
 
 
-class ChildrenUpdateView(ChildrenBaseView, UpdateView):
+class ChildrenUpdateView(ChildBaseView, UpdateView):
     template_name = 'children/children_edit.html'
-    context_object_name = 'child'
     fields = '__all__'
+
+
+class ChildrenDeleteView(ChildBaseView, DeleteView):
+
+    def get_success_url(self):
+        return reverse_lazy('children:list')

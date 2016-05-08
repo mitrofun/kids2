@@ -4,12 +4,16 @@
     {{ block.super }}
     <div class="pull-right">
         <a href="{% url 'children:edit' child.id %}" class="btn btn-primary">Редактировать</a>
-        <a href="{% url 'children:edit' child.id %}" class="btn btn-danger">Удалить</a>
+        <a href="" class="btn btn-danger" data-toggle="modal" data-target=".delete-modal"
+           onClick='obj_delete("{{ child }}", "{% url 'children:delete' child.id  %}");'>Удалить</a>
     </div>
 {% endblock page_header %}
 
 
 {% block content %}
+
+    {% include 'children/_modal_delete.html' %}
+
 <div class="row">
     <div class="col-md-6 col-sm-6">
       <div class="panel panel-default">
@@ -75,10 +79,7 @@
     </div>
     </div>
 </div>
- {{ child.healthhistory_set.all }}
-    {{ child.familystatushistory_set.all }}
-    {{ child.riskhistory_set.all }}
-     {{ child.notehistory_set.all }}
+
 <div class="row">
     <div class="col-lg-12">
 
