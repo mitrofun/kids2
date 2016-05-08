@@ -45,7 +45,7 @@ class RiskHistory(HistoryParamsBase):
         (True, 'Да'),
         (False, 'Нет')
         )
-    group = models.BooleanField(choices=BOOL_CHOICES)
+    group = models.BooleanField(choices=BOOL_CHOICES, verbose_name='Группа риска')
 
     class Meta:
         db_table = 'risks'
