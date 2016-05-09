@@ -105,6 +105,13 @@
       <!-- Tab panes -->
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="education">
+            <h3>
+                История обучения
+                <a href="{% url 'educations:add' child.id %}" class="pull-right btn btn-primary">
+                    Добавить
+                </a>
+            </h3>
+
         {% with child.studenthistory_set.all as student_history %}
          {% if student_history %}
             <div class="table-responsive">

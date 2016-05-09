@@ -6,11 +6,7 @@
     <div class="col-md-12 col-sm-12">
         <div class="panel panel-default">
             <div class="panel-body">
-             <form class="form-horizontal" method="post">
-                 {% csrf_token %}
-                 {{ form | bootstrap_horizontal }}
-                 <button type="submit" class="btn btn-primary pull-right">Выполнить</button>
-             </form>
+             {{ education }}
             </div>
         </div>
     </div>

@@ -7,6 +7,7 @@ from dashboard.views import DashboardView
 urlpatterns = [
     url(r'^$', DashboardView.as_view(), name='dashboard'),
     url(r'', include('accounts.urls', namespace='accounts')),
+    url(r'^children/', include('parameters.urls')),
     url(r'^children/', include('children.urls', namespace='children')),
 
     url(r'^admin/', include(admin.site.urls)),
