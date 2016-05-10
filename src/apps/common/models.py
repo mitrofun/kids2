@@ -53,8 +53,8 @@ class PersonModel(CreatedAndUpdatedModel):
         return '{} {}.{}.'.format(self.last_name, self.first_name[:1] or '',
                                   self.middle_name[:1] or '')
 
-    def get_age(self):
-        return datetime.today().year - self.birthday.year
+    def get_age(self, date=datetime.now()):
+        return date.year - self.birthday.year
 
     def __str__(self):
         return self.get_full_name()

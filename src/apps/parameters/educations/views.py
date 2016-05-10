@@ -47,4 +47,4 @@ class EducationUpdateView(EducationDetailBaseView, UpdateView):
 class EducationDeleteView(EducationDetailBaseView, DeleteView):
 
     def get_success_url(self):
-        return reverse_lazy('educations:list')
+        return reverse_lazy('educations:list', kwargs={'child_id': self.kwargs['child_id']})

@@ -1,9 +1,10 @@
 from django.db import models
+from django.db.models import permalink
 
 from children.models import Child
 from common.models import HistoryModel, NameModel
 from parameters.base_models import HistoryParamsBase
-from parameters.secondary_models import GuideFamilyStatus, Institution, Group, Grade
+from parameters.reference_models import GuideFamilyStatus, Institution, Group, Grade
 
 
 class StudentHistory(HistoryParamsBase):
@@ -19,7 +20,14 @@ class StudentHistory(HistoryParamsBase):
         verbose_name_plural = 'История обучения'
 
     def __str__(self):
-        return '{} ({})'.format(self.child, self.institution)
+        if self.last_date:
+            return 'c {} по {}'.format(self.first_date, self.last_date)
+        else:
+            return 'c {} по н.в.'.format(self.first_date)
+
+    @permalink
+    def get_absolute_url(self):
+        return 'educations:detail', None, {'child_id': self.child.id, 'education_id': self.id}
 
 
 class FamilyStatusHistory(HistoryParamsBase):

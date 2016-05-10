@@ -1,4 +1,5 @@
 {% extends 'children/layout.html' %}
+{% load history_param %}
 
 {% block page_header %}
     {{ block.super }}
@@ -105,46 +106,27 @@
       <!-- Tab panes -->
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="education">
-            <h3>
+            <h3 class="tab-header">
                 История обучения
-                <a href="{% url 'educations:add' child.id %}" class="pull-right btn btn-primary">
+                <div class="pull-right">
+                <a href="{% url 'educations:list' child.id %}" class="btn btn-default">
+                    Вся история
+                </a>
+                <a href="{% url 'educations:add' child.id %}" class="btn btn-primary">
                     Добавить
                 </a>
+                </div>
             </h3>
 
-        {% with child.studenthistory_set.all as student_history %}
-         {% if student_history %}
-            <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Начальная дата</th>
-                        <th>Конечная дата</th>
-                        <th>Учреждение</th>
-                        <th>Класс</th>
-                        <th>Возрастная группа</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        {% for student in student_history  %}
-                        <td>{{ student.first_date }}</td>
-                        <td>{{ student.last_date|default_if_none:"-" }}</td>
-                        <td>{{ student.institution }}</td>
-                        <td>{{ student.grade|default_if_none:"-" }}</td>
-                        <td>{{ student.group|default_if_none:"-" }}</td>
-                        {% endfor %}
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-          {% else %}
-          <br/><p>Нет истории</p>
-          {% endif %}
-        {% endwith %}
+            {% with child.studenthistory_set.all|slice:":5" as education_list %}
+                {% child_education_history child education_list %}
+            {% endwith %}
         </div>
 
         <div role="tabpanel" class="tab-pane" id="health">
+
+
+
         {% with child.healthhistory_set.all as health_history %}
          {% if health_history %}
             <div class="table-responsive">
@@ -171,9 +153,11 @@
           <br/><p>Нет истории</p>
           {% endif %}
         {% endwith %}
+
         </div>
 
         <div role="tabpanel" class="tab-pane" id="family">
+
         {% with child.familystatushistory_set.all as familystatus_history %}
          {% if familystatus_history %}
             <div class="table-responsive">

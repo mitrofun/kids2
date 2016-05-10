@@ -2,7 +2,7 @@ from django.contrib import admin
 from parameters.models import Institution, Group, Grade
 from parameters.models import NoteHistory, HealthHistory, RiskHistory, \
     FamilyStatusHistory, StudentHistory
-from parameters.secondary_models import GuideFamilyStatus
+from parameters.reference_models import GuideFamilyStatus
 
 
 admin.site.register(Institution)

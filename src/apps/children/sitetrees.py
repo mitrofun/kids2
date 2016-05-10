@@ -15,8 +15,8 @@ sitetrees = (
                          in_sitetree=False, children=[
                             item('Добавить', 'educations:add child.id', in_menu=False,
                                  in_sitetree=False),
-                            item('Период обучения', 'educations:detail child.id education.id', in_menu=False,
-                                 in_sitetree=False, children=[
+                            item('{{ education }}', 'educations:detail child.id education.id',
+                                 in_menu=False, in_sitetree=False, children=[
                                     item('Редактировать', 'educations:edit child.id education.id', in_menu=False,
                                          in_sitetree=False),
                                     item('Удалить', 'educations:edit child.id education.id', in_menu=False,
