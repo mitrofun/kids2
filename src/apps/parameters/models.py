@@ -18,6 +18,7 @@ class StudentHistory(HistoryParamsBase):
         db_table = 'students'
         verbose_name = 'Истории обучения'
         verbose_name_plural = 'История обучения'
+        ordering = ['-first_date', '-last_date', ]
 
     def __str__(self):
         if self.last_date:
