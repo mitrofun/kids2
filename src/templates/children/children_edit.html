@@ -9,7 +9,11 @@
              <form class="form-horizontal" method="post">
                  {% csrf_token %}
                  {{ form | bootstrap_horizontal }}
-                 <button type="submit" class="btn btn-primary pull-right">Выполнить</button>
+                 {{ back_url }}
+                 <div class="pull-right">
+                    <a href="{{ back_url }}" class="btn btn-default">Отменить</a>
+                    <button type="submit" class="btn btn-primary">Выполнить</button>
+                 </div>
              </form>
             </div>
         </div>

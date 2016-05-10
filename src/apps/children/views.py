@@ -1,10 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.base import ContextMixin, View
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from children.models import Child
 
 
-class ChildrenBaseView(LoginRequiredMixin):
+class ChildrenBaseView(LoginRequiredMixin, ContextMixin):
     model = Child
     context_object_name = 'children'
     pk_url_kwarg = 'child_id'
@@ -25,6 +26,11 @@ class ChildrenCreateView(ChildBaseView, CreateView):
     template_name = 'children/children_edit.html'
     fields = '__all__'
 
+    def get_context_data(self, **kwargs):
+        context = super(ChildrenCreateView, self).get_context_data(**kwargs)
+        context['back_url'] = self.request.META.get('HTTP_REFERER', reverse_lazy('children:list'))
+        return context
+
 
 class ChildrenDetailView(ChildBaseView, DetailView):
     template_name = 'children/children_detail.html'
@@ -33,6 +39,14 @@ class ChildrenDetailView(ChildBaseView, DetailView):
 class ChildrenUpdateView(ChildBaseView, UpdateView):
     template_name = 'children/children_edit.html'
     fields = '__all__'
+
+    def get_context_data(self, **kwargs):
+        context = super(ChildrenUpdateView, self).get_context_data(**kwargs)
+        context['back_url'] = \
+            self.request.META.get('HTTP_REFERER',
+                                  reverse_lazy('children:detail',
+                                               kwargs={'children_id': self.object.id}))
+        return context
 
 
 class ChildrenDeleteView(ChildBaseView, DeleteView):
