@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from children.functions import get_age
 
 
 class CreatedModel(models.Model):
@@ -54,7 +55,7 @@ class PersonModel(CreatedAndUpdatedModel):
                                   self.middle_name[:1] or '')
 
     def get_age(self, date=datetime.now()):
-        return date.year - self.birthday.year
+        return get_age(self.birthday, date)
 
     def __str__(self):
         return self.get_full_name()
