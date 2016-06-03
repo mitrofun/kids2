@@ -10,12 +10,13 @@
     <title>{% block title %}Учет детей{% endblock title %}</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{% static "vendor/bootstrap/dist/css/bootstrap.min.css" %}" rel="stylesheet">
+{#    <!-- <link href="{% static "vendor/bootstrap/dist/css/bootstrap.min.css" %}" rel="stylesheet">-->#}
+
     <!-- Custom styles for this template -->
-    <link href="{% static 'dist/css/main.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="{% static  'dist/js/ie-emulation-modes-warning.min.js' %}"></script>
+    <!--[if lt IE 9]><script src="{% static  'js/ie-emulation-modes-warning.js' %}"></script>
     <![endif]-->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -34,10 +35,10 @@
 </div><!-- /.container -->
 
 <script src="{% static 'vendor/jquery/dist/jquery.min.js' %}"></script>
-<script src="{% static 'vendor/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap-sass/assets/javascripts/bootstrap.min.js' %}"></script>
 
-<script src="{% static 'dist/js/main.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="{% static 'dist/js/ie10-viewport-bug-workaround.min.js' %}"></script>
+<script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
 </body>
 </html>

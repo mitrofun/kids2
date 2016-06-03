@@ -1,8 +1,8 @@
 {
-  "name": "myproject",
+  "name": "kids2",
   "version": "0.0.1",
   "dependencies": {
-    "bootstrap": "~3.3.5",
+    "bootstrap-sass": "^3.3.6",
     "jquery": "~2.1.4"
   },
   "private": true
