@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends 'layout/content.html' %}
 {% load sitetree %}
 
 {% block title %}{% sitetree_page_title from "children_tree" %} |  {{ block.super }}{% endblock title %}

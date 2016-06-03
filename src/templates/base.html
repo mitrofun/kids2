@@ -28,7 +28,7 @@
 
 <body>
 {% if user.is_authenticated %}
-    {% include '_nav.html' %}
+    {% include 'layout/_header.html' %}
 {% endif %}
 <div class="container">
     {% block layout %}{% endblock layout %}
