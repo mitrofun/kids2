@@ -84,3 +84,4 @@ class NoteHistory(HistoryParamsBase):
 
     def __str__(self):
         return '{} ({})'.format(self.child, self.text)
+

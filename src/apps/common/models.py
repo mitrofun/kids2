@@ -62,8 +62,6 @@ class PersonModel(CreatedAndUpdatedModel):
 
 
 class AddressModel(models.Model):
-    locality = models.CharField('Населенный пункт', max_length=32)
-    street = models.CharField('Улица', max_length=32)
     house = models.CharField('Дом', max_length=4, blank=True, null=True)
     flat = models.CharField('Квартира', max_length=4, blank=True, null=True)
 
