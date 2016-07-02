@@ -26,7 +26,7 @@
                 <div class="col-md-8 col-xs-8">{{ child.last_name }}</div>
             </div>
         </li>
-         <li class="list-group-item">
+        <li class="list-group-item">
             <div class="row">
                 <div class="col-md-4 col-xs-4"><strong>Имя</strong></div>
                 <div class="col-md-8 col-xs-8">{{ child.first_name }}</div>
@@ -125,8 +125,6 @@
                 </div>
 
                 <div role="tabpanel" class="tab-pane fade" id="health">
-
-
 
                 {% with child.healthhistory_set.all as health_history %}
                  {% if health_history %}

@@ -25,6 +25,6 @@ sitetrees = (
                             ]),
                     ]),
         ]),
-        item('Фильтр', 'children:filter', in_menu=False, in_sitetree=False),
+        # item('Фильтр', 'children:filter', in_menu=False, in_sitetree=False),
     ]),
 )

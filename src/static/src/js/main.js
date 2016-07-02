@@ -1,5 +1,4 @@
 if(document.readyState||document.body.readyState=='complete'){
-    // alert('YES!');
 
     window.obj_delete = function(obj_name, del_url)
     {
