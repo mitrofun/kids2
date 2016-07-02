@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "dependencies": {
     "bootstrap-sass": "^3.3.6",
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "Bootflat": "^2.0.4"
   },
   "private": true
 }
