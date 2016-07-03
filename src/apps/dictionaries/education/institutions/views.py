@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from dictionaries.models import Institution
 
-template = 'dictionaries/institution/institution_'
+template = 'dictionaries/institutions/institution_'
 
 
 class InstitutionBaseView(LoginRequiredMixin, ContextMixin):

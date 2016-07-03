@@ -50,6 +50,10 @@ class Group(NameModel):
         verbose_name = 'Возрастная группа'
         verbose_name_plural = ' Возрастные группы'
 
+    @permalink
+    def get_absolute_url(self):
+        return 'groups:detail', None, {'group_id': self.id}
+
 
 class Grade(NameModel):
     pass
