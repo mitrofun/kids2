@@ -63,6 +63,10 @@ class Grade(NameModel):
         verbose_name = 'Класс обучения'
         verbose_name_plural = ' Классы обучения'
 
+    @permalink
+    def get_absolute_url(self):
+        return 'grades:detail', None, {'grade_id': self.id}
+
 
 class Locality(NameModel):
     pass

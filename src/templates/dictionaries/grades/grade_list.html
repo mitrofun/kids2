@@ -1,0 +1,24 @@
+{% extends 'dictionaries/layout.html' %}
+
+{% block page_header %}
+            {{ block.super }}
+            <div class="pull-right">
+            <a href="{% url 'grades:add' %}" class="btn btn-primary">Добавить</a>
+        </div>
+{% endblock page_header %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="list-group">
+        {% if grades %}
+            {% for grade in grades %}
+                <a href="{% url 'grades:detail' grade.id %}" class="list-group-item">{{ grade.name }}</a>
+            {% endfor %}
+        {% else %}
+                <div class="list-group-item">Объектов нет</div>
+        {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

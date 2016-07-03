@@ -22,12 +22,12 @@ sitetrees = (
                         item('Удалить', 'groups:delete group.id', in_menu=False, in_sitetree=False),
                     ])
                 ]),
-                item('Классы', '', in_menu=True, in_sitetree=True,  children=[
-                    # item('Добавить', '', in_menu=False, in_sitetree=False),
-                    # item('Учреждение', '', in_menu=False, in_sitetree=False, children=[
-                    #     item('Редактировать', '', in_menu=False, in_sitetree=False),
-                    #     item('Удалить', '', in_menu=False, in_sitetree=False),
-                    # ])
+                item('Классы', 'grades:list', in_menu=True, in_sitetree=True,  children=[
+                    item('Добавить', 'grades:add', in_menu=False, in_sitetree=False),
+                    item('{{ grade }}', 'grades:detail grade.id', in_menu=False, in_sitetree=False, children=[
+                        item('Редактировать', 'grades:edit grade.id', in_menu=False, in_sitetree=False),
+                        item('Удалить', 'grades:delete grade.id', in_menu=False, in_sitetree=False),
+                    ])
                 ])
             ]),
             # item('Адреса', '', in_menu=True, in_sitetree=True, children=[
