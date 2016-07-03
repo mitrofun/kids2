@@ -1,0 +1,17 @@
+{% extends 'dictionaries/layout.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="list-group">
+          <a href="{% url 'locality:list' %}" class="list-group-item">Населенные пункты</a>
+        </div>
+    </div>
+
+     <div class="col-md-6">
+        <div class="list-group">
+          <a href="{% url 'streets:list' %}" class="list-group-item">Улицы</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

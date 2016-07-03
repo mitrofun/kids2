@@ -1,5 +1,5 @@
 from django.contrib import admin
-from dictionaries.models import GuideFamilyStatus, Institution, Group, Grade, Locality, Street
+from dictionaries.models import ParentsStatus, HealthStates, Institution, Group, Grade, Locality, Street
 
 
 class InstitutionAdmin(admin.ModelAdmin):
@@ -13,4 +13,5 @@ admin.site.register(Group)
 admin.site.register(Locality)
 admin.site.register(Street)
 
-admin.site.register(GuideFamilyStatus)
+admin.site.register(ParentsStatus)
+admin.site.register(HealthStates)

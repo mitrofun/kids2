@@ -1,0 +1,24 @@
+{% extends 'dictionaries/layout.html' %}
+
+{% block page_header %}
+            {{ block.super }}
+            <div class="pull-right">
+            <a href="{% url 'parents:add' %}" class="btn btn-primary">Добавить</a>
+        </div>
+{% endblock page_header %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="list-group">
+        {% if parents %}
+            {% for parent in parents %}
+                <a href="{% url 'parents:detail' parent.id %}" class="list-group-item">{{ parent.name }}</a>
+            {% endfor %}
+        {% else %}
+                <div class="list-group-item">Объектов нет</div>
+        {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

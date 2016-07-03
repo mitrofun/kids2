@@ -1,0 +1,17 @@
+{% extends 'dictionaries/layout.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="list-group">
+          <a href="{% url 'health:list' %}" class="list-group-item">Сосотяния здоровья</a>
+        </div>
+    </div>
+
+     <div class="col-md-6">
+        <div class="list-group">
+          <a href="{% url 'parents:list' %}" class="list-group-item">Статусы родителей</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -27,6 +27,16 @@ class NameModel(models.Model):
         return self.name
 
 
+class NameUniqueModel(models.Model):
+    name = models.CharField('Наименование', max_length=128, unique=True)
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.name
+
+
 class HistoryModel(models.Model):
     first_date = models.DateField('Начальная дата', default=datetime.now)
     last_date = models.DateField('Конечная дата', blank=True, null=True)

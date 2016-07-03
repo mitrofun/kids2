@@ -30,14 +30,38 @@ sitetrees = (
                     ])
                 ])
             ]),
-            # item('Адреса', '', in_menu=True, in_sitetree=True, children=[
-            #     item('Населенные пункты', '', in_menu=True, in_sitetree=True, children=[]),
-            #     item('Улицы', '', in_menu=True, in_sitetree=True, children=[]),
-            # ]),
-            # item('Дополнительные данные', '', in_menu=True, in_sitetree=True, children=[
-            #     item('Состояния здоровья', '', in_menu=True, in_sitetree=True, children=[]),
-            #     item('Статусы родителей', '', in_menu=True, in_sitetree=True, children=[]),
-            # ]),
+            item('Адреса', 'address', in_menu=True, in_sitetree=True, children=[
+                item('Населенные пункты', 'locality:list', in_menu=True, in_sitetree=True, children=[
+                    item('Добавить', 'locality:add', in_menu=False, in_sitetree=False),
+                    item('{{ locality }}', 'locality:detail locality.id', in_menu=False, in_sitetree=False, children=[
+                        item('Редактировать', 'locality:edit locality.id', in_menu=False, in_sitetree=False),
+                        item('Удалить', 'locality:delete locality.id', in_menu=False, in_sitetree=False),
+                    ])
+                ]),
+                item('Улицы', 'streets:list', in_menu=True, in_sitetree=True, children=[
+                    item('Добавить', 'streets:add', in_menu=False, in_sitetree=False),
+                    item('{{ street }}', 'streets:detail street.id', in_menu=False, in_sitetree=False, children=[
+                        item('Редактировать', 'streets:edit street.id', in_menu=False, in_sitetree=False),
+                        item('Удалить', 'streets:delete street.id', in_menu=False, in_sitetree=False),
+                    ])
+                ]),
+            ]),
+            item('Дополнительные', 'secondary', in_menu=True, in_sitetree=True, children=[
+                item('Состояния здоровья', 'health:list', in_menu=True, in_sitetree=True, children=[
+                    item('Добавить', 'health:add', in_menu=False, in_sitetree=False),
+                    item('{{ health }}', 'health:detail health.id', in_menu=False, in_sitetree=False, children=[
+                        item('Редактировать', 'health:edit health.id', in_menu=False, in_sitetree=False),
+                        item('Удалить', 'health:delete health.id', in_menu=False, in_sitetree=False),
+                    ])
+                ]),
+                item('Статусы родителей', 'parents:list', in_menu=True, in_sitetree=True, children=[
+                    item('Добавить', 'parents:add', in_menu=False, in_sitetree=False),
+                    item('{{ parent }}', 'parents:detail parent.id', in_menu=False, in_sitetree=False, children=[
+                        item('Редактировать', 'parents:edit parent.id', in_menu=False, in_sitetree=False),
+                        item('Удалить', 'parents:delete parent.id', in_menu=False, in_sitetree=False),
+                    ])
+                ]),
+            ]),
         ]),
         # item('Сформировать отчет', '', in_menu=True, in_sitetree=True),
         # item('Загрузить данные', '', in_menu=True, in_sitetree=True),

@@ -24,7 +24,7 @@ class ChildrenListView(ChildrenBaseView, ListView):
 
 class ChildrenCreateView(ChildBaseView, CreateView):
     template_name = 'children/children_edit.html'
-    fields = '__all__'
+    fields = '__all__'  # TODO: задать очередось полей
 
     def get_context_data(self, **kwargs):
         context = super(ChildrenCreateView, self).get_context_data(**kwargs)
@@ -38,7 +38,7 @@ class ChildrenDetailView(ChildBaseView, DetailView):
 
 class ChildrenUpdateView(ChildBaseView, UpdateView):
     template_name = 'children/children_edit.html'
-    fields = '__all__'
+    fields = '__all__'  # TODO: задать очередось полей
 
     def get_context_data(self, **kwargs):
         context = super(ChildrenUpdateView, self).get_context_data(**kwargs)

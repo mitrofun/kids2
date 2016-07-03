@@ -1,29 +1,10 @@
 from django.db import models
 from django.db.models import permalink
 
-from common.models import NameModel
+from common.models import NameUniqueModel
 
 
-class GuideFamilyStatus(models.Model):
-
-    FAMILY_STATUS = (
-        (1, 'Многодетные'),
-        (2, 'Малоимущие'),
-        (3, 'Неполные'),
-        (4, 'КМНС'),
-        )
-    status = models.IntegerField(blank=True, choices=FAMILY_STATUS)
-
-    class Meta:
-        db_table = 'guide_status'
-        verbose_name = 'Статус семьи'
-        verbose_name_plural = ' Статус семьи'
-
-    def __str__(self):
-        return self.get_status_display()
-
-
-class Institution(NameModel):
+class Institution(NameUniqueModel):
 
     INSTITUTION_TYPE_CHOICE = (
         (0, 'Дошкольное'),
@@ -42,7 +23,33 @@ class Institution(NameModel):
         return 'institutions:detail', None, {'institution_id': self.id}
 
 
-class Group(NameModel):
+class ParentsStatus(NameUniqueModel):
+    pass
+
+    class Meta:
+        db_table = 'parents_status'
+        verbose_name = 'Статус родителей'
+        verbose_name_plural = ' Статусы родителей(семьи)'
+
+    @permalink
+    def get_absolute_url(self):
+        return 'parents:detail', None, {'parent_id': self.id}
+
+
+class HealthStates(NameUniqueModel):
+    pass
+
+    class Meta:
+        db_table = 'health_states'
+        verbose_name = 'Состояние здоровья'
+        verbose_name_plural = 'Состояния здоровья'
+
+    @permalink
+    def get_absolute_url(self):
+        return 'health:detail', None, {'health_id': self.id}
+
+
+class Group(NameUniqueModel):
     pass
 
     class Meta:
@@ -55,7 +62,7 @@ class Group(NameModel):
         return 'groups:detail', None, {'group_id': self.id}
 
 
-class Grade(NameModel):
+class Grade(NameUniqueModel):
     pass
 
     class Meta:
@@ -68,7 +75,7 @@ class Grade(NameModel):
         return 'grades:detail', None, {'grade_id': self.id}
 
 
-class Locality(NameModel):
+class Locality(NameUniqueModel):
     pass
 
     class Meta:
@@ -76,11 +83,19 @@ class Locality(NameModel):
         verbose_name = 'Населенный пункт'
         verbose_name_plural = 'Населенные пункты'
 
+    @permalink
+    def get_absolute_url(self):
+        return 'locality:detail', None, {'locality_id': self.id}
 
-class Street(NameModel):
+
+class Street(NameUniqueModel):
     pass
 
     class Meta:
         db_table = 'streets'
         verbose_name = 'Улица'
         verbose_name_plural = 'Улицы'
+
+    @permalink
+    def get_absolute_url(self):
+        return 'streets:detail', None, {'street_id': self.id}

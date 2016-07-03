@@ -4,7 +4,7 @@ from django.db.models import permalink
 from children.models import Child
 from common.models import HistoryModel, NameModel
 from parameters.base_models import HistoryParamsBase
-from dictionaries.models import GuideFamilyStatus, Institution, Group, Grade
+from dictionaries.models import ParentsStatus, HealthStates, Institution, Group, Grade
 
 
 class StudentHistory(HistoryParamsBase):
@@ -15,7 +15,7 @@ class StudentHistory(HistoryParamsBase):
                               blank=True, null=True)
 
     class Meta:
-        db_table = 'students'
+        db_table = 'students_history'
         verbose_name = 'Истории обучения'
         verbose_name_plural = 'История обучения'
         ordering = ['-first_date', '-last_date', ]
@@ -31,13 +31,13 @@ class StudentHistory(HistoryParamsBase):
         return 'educations:detail', None, {'child_id': self.child.id, 'education_id': self.id}
 
 
-class FamilyStatusHistory(HistoryParamsBase):
-    status = models.ManyToManyField(GuideFamilyStatus)
+class ParentsStatesHistory(HistoryParamsBase):
+    status = models.ManyToManyField(ParentsStatus)
 
     class Meta:
-        db_table = 'family_status'
-        verbose_name = 'Истории статусов семей'
-        verbose_name_plural = 'История статуса семьи'
+        db_table = 'parents_status_history'
+        verbose_name = 'Истории статусов родителей'
+        verbose_name_plural = 'История статуса родителей'
 
     def __str__(self):
         status_list = []
@@ -47,26 +47,31 @@ class FamilyStatusHistory(HistoryParamsBase):
 
 
 class HealthHistory(HistoryParamsBase):
-    text = models.CharField('Сосотяние', max_length=128)
+    states = models.ManyToManyField(HealthStates)
 
     class Meta:
-        db_table = 'healths'
+        db_table = 'healths_history'
         verbose_name = 'Истории состояния здоровья'
         verbose_name_plural = 'История состояния здоровья'
 
     def __str__(self):
-        return '{} ({})'.format(self.child, self.text)
+        status_list = []
+        for status in self.status.all():
+            status_list.append(status.get_status_display())
+        return '{} {}'.format(self.child, status_list)
 
 
 class RiskHistory(HistoryParamsBase):
+
     BOOL_CHOICES = (
         (True, 'Да'),
         (False, 'Нет')
         )
+
     group = models.BooleanField(choices=BOOL_CHOICES, verbose_name='Группа риска')
 
     class Meta:
-        db_table = 'risks'
+        db_table = 'risks_history'
         verbose_name = 'Группа риска'
         verbose_name_plural = 'Группа риска'
 
@@ -78,10 +83,9 @@ class NoteHistory(HistoryParamsBase):
     text = models.CharField('Сосотяние', max_length=256)
 
     class Meta:
-        db_table = 'notes'
+        db_table = 'notes_history'
         verbose_name = 'Истории примечаний'
         verbose_name_plural = 'История примечаний'
 
     def __str__(self):
         return '{} ({})'.format(self.child, self.text)
-

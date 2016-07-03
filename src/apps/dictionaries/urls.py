@@ -7,6 +7,6 @@ from dictionaries.views import DictionariesView
 urlpatterns = [
     url(r'^$', DictionariesView.as_view(), name='dictionaries'),
     url(r'^education/', include('dictionaries.education.urls')),
-    # url(r'^address/', include('dictionaries.address.urls')),
-    # url(r'^secondary/', include('dictionaries.secondary.urls')),
+    url(r'^address/', include('dictionaries.address.urls')),
+    url(r'^secondary/', include('dictionaries.secondary.urls')),
 ]
