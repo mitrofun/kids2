@@ -5,7 +5,7 @@
     {{ block.super }}
     <div class="pull-right">
         <a href="{% url 'children:edit' child.id %}" class="btn btn-primary">Редактировать</a>
-        <a href="" class="btn btn-danger" data-toggle="modal" data-target=".delete-modal"
+        <a href="javascript:void(0);" class="btn btn-danger" data-toggle="modal" data-target=".delete-modal"
            onClick='obj_delete("{{ child }}", "{% url 'children:delete' child.id  %}");'>Удалить</a>
     </div>
 {% endblock page_header %}
@@ -13,7 +13,7 @@
 
 {% block content %}
 
-    {% include 'children/_modal_delete.html' %}
+    {% include 'modals/_modal_delete.html' %}
 
 <div class="row">
     <div class="col-md-6 col-sm-6">

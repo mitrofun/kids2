@@ -4,7 +4,7 @@ from django.db.models import permalink
 from children.models import Child
 from common.models import HistoryModel, NameModel
 from parameters.base_models import HistoryParamsBase
-from parameters.reference_models import GuideFamilyStatus, Institution, Group, Grade
+from dictionaries.models import GuideFamilyStatus, Institution, Group, Grade
 
 
 class StudentHistory(HistoryParamsBase):

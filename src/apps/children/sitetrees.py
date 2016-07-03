@@ -4,6 +4,7 @@ from sitetree.utils import tree, item
 
 sitetrees = (
     tree('children_tree', items=[
+
         item('Дети', 'children:list', children=[
             item('Добавить', 'children:add', in_menu=False, in_sitetree=False),
             item('{{ child }}', 'children:detail child.id', in_menu=False,
@@ -25,6 +26,5 @@ sitetrees = (
                             ]),
                     ]),
         ]),
-        # item('Фильтр', 'children:filter', in_menu=False, in_sitetree=False),
     ]),
 )

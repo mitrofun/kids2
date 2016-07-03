@@ -1,0 +1,12 @@
+{% extends 'layout/content.html' %}
+{% load sitetree %}
+
+{% block title %}{% sitetree_page_title from "dictionaries_tree" %} |  {{ block.super }}{% endblock title %}
+
+{% block page_header %}
+    {% sitetree_page_title from "dictionaries_tree" %}
+{% endblock page_header %}
+
+{% block breadcrumbs %}
+    {% sitetree_breadcrumbs from "dictionaries_tree" template "layout/breadcrumbs.html" %}
+{% endblock breadcrumbs %}

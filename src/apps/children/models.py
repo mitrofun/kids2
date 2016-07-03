@@ -1,7 +1,7 @@
 from django.db.models import permalink
 from django.db import models
 from common.models import PersonModel, AddressModel
-from parameters.reference_models import Locality, Street
+from dictionaries.models import Locality, Street
 
 
 class Child(PersonModel, AddressModel):

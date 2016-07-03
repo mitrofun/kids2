@@ -1,0 +1,25 @@
+{% extends 'dictionaries/layout.html' %}
+
+{% block content %}
+<div class="row">
+
+            <div class="col-md-4">
+                <div class="list-group">
+                  <a href="{% url 'institutions:list' %}" class="list-group-item">Учреждения</a>
+                </div>
+            </div>
+
+             <div class="col-md-4">
+                <div class="list-group">
+                  <a href="#" class="list-group-item">Возростные группы</a>
+                </div>
+            </div>
+
+             <div class="col-md-4">
+                <div class="list-group">
+                  <a href="#" class="list-group-item">Классы</a>
+                </div>
+            </div>
+
+          </div>
+{% endblock content %}

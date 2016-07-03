@@ -1,6 +1,6 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 from django.db import models
+from django.db.models import permalink
+
 from common.models import NameModel
 
 
@@ -36,6 +36,10 @@ class Institution(NameModel):
         db_table = 'institutions'
         verbose_name = 'Учреждение'
         verbose_name_plural = ' Учреждения'
+
+    @permalink
+    def get_absolute_url(self):
+        return 'institutions:detail', None, {'institution_id': self.id}
 
 
 class Group(NameModel):

@@ -35,6 +35,7 @@ INTERNAL_APPS = [
     'dashboard',
     'children',
     'parameters',
+    'dictionaries',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + EXTERNAL_APPS + INTERNAL_APPS

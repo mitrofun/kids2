@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^children/', include('parameters.urls')),
     url(r'^children/', include('children.urls', namespace='children')),
 
+    url(r'^dictionaries/', include('dictionaries.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
 ]
