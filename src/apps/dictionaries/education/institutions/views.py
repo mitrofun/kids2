@@ -25,6 +25,7 @@ class InstitutionListView(InstitutionBaseView, ListView):
     def get_context_data(self, **kwargs):
         context = super(InstitutionListView, self).get_context_data(**kwargs)
         context['add_obj'] = reverse_lazy('institutions:add')
+        context['institution'] = True
         return context
 
 

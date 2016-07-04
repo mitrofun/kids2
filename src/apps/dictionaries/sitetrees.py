@@ -8,11 +8,11 @@ sitetrees = (
         item('Справочники', 'dictionaries', children=[
             item('Образование', 'education', in_menu=True, in_sitetree=True,  children=[
                 item('Учреждения', 'institutions:list', in_menu=True, in_sitetree=True,  children=[
-                    item('Добавить', 'institutions:add', in_menu=False, in_sitetree=False),
-                    item('{{ institution }}', 'institutions:detail institution.id', in_menu=True,
+                    item('Добавить', 'obj:add', in_menu=False, in_sitetree=False),
+                    item('{{ obj.name }}', 'institutions:detail obj.id', in_menu=True,
                          in_sitetree=True, children=[
-                            item('Редактировать', 'institutions:edit institution.id', in_menu=False, in_sitetree=False),
-                            item('Удалить', 'institutions:delete institution.id', in_menu=False, in_sitetree=False),
+                            item('Редактировать', 'institutions:edit obj.id', in_menu=False, in_sitetree=False),
+                            item('Удалить', 'institutions:delete obj.id', in_menu=False, in_sitetree=False),
                     ])
                 ]),
                 item('Возрастные группы', 'groups:list', in_menu=True, in_sitetree=True,  children=[
