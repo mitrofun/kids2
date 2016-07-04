@@ -1,6 +1,7 @@
 /public
 /node_modules
 /external
+
 /src/settings/local.py
 /src/static/src/vendors/
 /src/static/src/fonts/bootstrap/
