@@ -1,9 +1,24 @@
 {
   "name": "kids2",
   "version": "1.0.0",
+  "description": "",
   "devDependencies": {
     "babel-cli": "^6.10.1",
     "babel-preset-es2015": "^6.9.0",
-    "gulp": "github:gulpjs/gulp#4.0"
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.6.0"
+  },
+  "scripts": {
+    "gulp": "node_modules/gulp/bin/gulp.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mitrofun/kids2.git"
+  },
+  "author": "mitri4",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mitrofun/kids2/issues"
   }
 }
