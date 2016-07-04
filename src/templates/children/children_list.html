@@ -9,44 +9,51 @@
 {% block content %}
 <div class="row">
     <div class="col-md-12 col-sm-12">
-    <div class="panel panel-default">
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover table-striped">
-                <thead>
-                    <tr>
-                        <th>Ребенок</th>
-                        <th>Дата рождения</th>
-                        <th>Возраст</th>
-                        <th>Учреждение</th>
-                        <th>Класс</th>
-                        <th>Возрастная группа</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for child in children %}
-                    <tr>
-                        <td><a href="{{ child.get_absolute_url }}">{{ child }}</a></td>
-                        <td>{{ child.birthday| date:'d.m.Y' }}</td>
-                      {#  TODO: сделать определение возраста на дату #}
-                        <td>{{ child.get_age }}</td>
-                        {#  TODO: сделать определение актуальной на дату  #}
-                        {% with child.studenthistory_set.all.first as student_history %}
-                            {% if student_history %}
-                                <td>{{ student_history.institution|default_if_none:'-' }}</td>
-                                <td>{{ student_history.grade|default_if_none:'-' }}</td>
-                                <td>{{ student_history.group|default_if_none:'-' }}</td>
-                            {% else %}
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                            {% endif %}
-                        {% endwith %}
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+
+        <div class="panel panel-default">
+            {% if children %}
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Ребенок</th>
+                            <th>Дата рождения</th>
+                            <th>Возраст</th>
+                            <th>Учреждение</th>
+                            <th>Класс</th>
+                            <th>Возрастная группа</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for child in children %}
+                        <tr>
+                            <td><a href="{{ child.get_absolute_url }}">{{ child }}</a></td>
+                            <td>{{ child.birthday| date:'d.m.Y' }}</td>
+                          {#  TODO: сделать определение возраста на дату #}
+                            <td>{{ child.get_age }}</td>
+                            {#  TODO: сделать определение актуальной на дату  #}
+                            {% with child.studenthistory_set.all.first as student_history %}
+                                {% if student_history %}
+                                    <td>{{ student_history.institution|default_if_none:'-' }}</td>
+                                    <td>{{ student_history.grade|default_if_none:'-' }}</td>
+                                    <td>{{ student_history.group|default_if_none:'-' }}</td>
+                                {% else %}
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                {% endif %}
+                            {% endwith %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+                <div class="panel-body">
+                Объектов нет
+                </div>
+            {% endif %}
         </div>
-</div>
-</div>
+    </div>
 </div>
 {% endblock content %}
