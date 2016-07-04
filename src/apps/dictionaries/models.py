@@ -35,6 +35,14 @@ class ParentsStatus(NameUniqueModel):
     def get_absolute_url(self):
         return 'parents:detail', None, {'parent_id': self.id}
 
+    @permalink
+    def get_edit_url(self):
+        return 'parents:edit', None, {'parent_id': self.id}
+
+    @permalink
+    def get_delete_url(self):
+        return 'parents:delete', None, {'parent_id': self.id}
+
 
 class HealthStates(NameUniqueModel):
     pass
@@ -47,6 +55,14 @@ class HealthStates(NameUniqueModel):
     @permalink
     def get_absolute_url(self):
         return 'health:detail', None, {'health_id': self.id}
+
+    @permalink
+    def get_edit_url(self):
+        return 'health:edit', None, {'health_id': self.id}
+
+    @permalink
+    def get_delete_url(self):
+        return 'health:delete', None, {'health_id': self.id}
 
 
 class Group(NameUniqueModel):
@@ -61,6 +77,14 @@ class Group(NameUniqueModel):
     def get_absolute_url(self):
         return 'groups:detail', None, {'group_id': self.id}
 
+    @permalink
+    def get_edit_url(self):
+        return 'groups:edit', None, {'group_id': self.id}
+
+    @permalink
+    def get_delete_url(self):
+        return 'groups:delete', None, {'group_id': self.id}
+
 
 class Grade(NameUniqueModel):
     pass
@@ -73,6 +97,14 @@ class Grade(NameUniqueModel):
     @permalink
     def get_absolute_url(self):
         return 'grades:detail', None, {'grade_id': self.id}
+
+    @permalink
+    def get_edit_url(self):
+        return 'grades:edit', None, {'grade_id': self.id}
+
+    @permalink
+    def get_delete_url(self):
+        return 'grades:delete', None, {'grade_id': self.id}
 
 
 class Locality(NameUniqueModel):
@@ -87,6 +119,14 @@ class Locality(NameUniqueModel):
     def get_absolute_url(self):
         return 'locality:detail', None, {'locality_id': self.id}
 
+    @permalink
+    def get_edit_url(self):
+        return 'locality:edit', None, {'locality_id': self.id}
+
+    @permalink
+    def get_delete_url(self):
+        return 'locality:delete', None, {'locality_id': self.id}
+
 
 class Street(NameUniqueModel):
     pass
@@ -99,3 +139,11 @@ class Street(NameUniqueModel):
     @permalink
     def get_absolute_url(self):
         return 'streets:detail', None, {'street_id': self.id}
+
+    @permalink
+    def get_edit_url(self):
+        return 'streets:edit', None, {'street_id': self.id}
+
+    @permalink
+    def get_delete_url(self):
+        return 'streets:delete', None, {'street_id': self.id}

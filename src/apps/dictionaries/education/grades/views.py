@@ -6,21 +6,26 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from dictionaries.models import Grade
 
-template = 'dictionaries/grades/grade_'
+template = 'dictionaries/elementary/'
 
 
 class GradeBaseView(LoginRequiredMixin, ContextMixin):
     model = Grade
-    context_object_name = 'grade'
+    context_object_name = 'obj'
     pk_url_kwarg = 'grade_id'
 
 
 class GradeListView(GradeBaseView, ListView):
-    context_object_name = 'grades'
+    context_object_name = 'obj_list'
     template_name = template + 'list.html'
 
     def get_queryset(self):
         return Grade.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(GradeListView, self).get_context_data(**kwargs)
+        context['add_obj'] = reverse_lazy('grades:add')
+        return context
 
 
 class GradeCreateView(GradeBaseView, CreateView):

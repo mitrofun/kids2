@@ -6,21 +6,26 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from dictionaries.models import Street
 
-template = 'dictionaries/streets/street_'
+template = 'dictionaries/elementary/'
 
 
 class StreetBaseView(LoginRequiredMixin, ContextMixin):
     model = Street
-    context_object_name = 'street'
+    context_object_name = 'obj'
     pk_url_kwarg = 'street_id'
 
 
 class StreetListView(StreetBaseView, ListView):
-    context_object_name = 'streets'
+    context_object_name = 'obj_list'
     template_name = template + 'list.html'
 
     def get_queryset(self):
         return Street.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(StreetListView, self).get_context_data(**kwargs)
+        context['add_obj'] = reverse_lazy('streets:add')
+        return context
 
 
 class StreetCreateView(StreetBaseView, CreateView):

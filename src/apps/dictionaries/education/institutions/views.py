@@ -6,21 +6,26 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from dictionaries.models import Institution
 
-template = 'dictionaries/institutions/institution_'
+template = 'dictionaries/elementary/'
 
 
 class InstitutionBaseView(LoginRequiredMixin, ContextMixin):
     model = Institution
-    context_object_name = 'institution'
+    context_object_name = 'obj'
     pk_url_kwarg = 'institution_id'
 
 
 class InstitutionListView(InstitutionBaseView, ListView):
-    context_object_name = 'institutions'
+    context_object_name = 'obj_list'
     template_name = template + 'list.html'
 
     def get_queryset(self):
         return Institution.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(InstitutionListView, self).get_context_data(**kwargs)
+        context['add_obj'] = reverse_lazy('institutions:add')
+        return context
 
 
 class InstitutionCreateView(InstitutionBaseView, CreateView):

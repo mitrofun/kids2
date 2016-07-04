@@ -6,21 +6,26 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from dictionaries.models import Group
 
-template = 'dictionaries/groups/group_'
+template = 'dictionaries/elementary/'
 
 
 class GroupBaseView(LoginRequiredMixin, ContextMixin):
     model = Group
-    context_object_name = 'group'
+    context_object_name = 'obj'
     pk_url_kwarg = 'group_id'
 
 
 class GroupListView(GroupBaseView, ListView):
-    context_object_name = 'groups'
+    context_object_name = 'obj_list'
     template_name = template + 'list.html'
 
     def get_queryset(self):
         return Group.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(GroupListView, self).get_context_data(**kwargs)
+        context['add_obj'] = reverse_lazy('groups:add')
+        return context
 
 
 class GroupCreateView(GroupBaseView, CreateView):

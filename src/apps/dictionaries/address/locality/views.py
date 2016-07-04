@@ -6,21 +6,26 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from dictionaries.models import Locality
 
-template = 'dictionaries/locality/locality_'
+template = 'dictionaries/elementary/'
 
 
 class LocalityBaseView(LoginRequiredMixin, ContextMixin):
     model = Locality
-    context_object_name = 'locality'
+    context_object_name = 'obj'
     pk_url_kwarg = 'locality_id'
 
 
 class LocalityListView(LocalityBaseView, ListView):
-    context_object_name = 'locality_list'
+    context_object_name = 'obj_list'
     template_name = template + 'list.html'
 
     def get_queryset(self):
         return Locality.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(LocalityListView, self).get_context_data(**kwargs)
+        context['add_obj'] = reverse_lazy('locality:add')
+        return context
 
 
 class LocalityCreateView(LocalityBaseView, CreateView):

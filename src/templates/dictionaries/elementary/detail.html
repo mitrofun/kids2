@@ -3,9 +3,9 @@
 {% block page_header %}
             {{ block.super }}
             <div class="pull-right">
-             <a href="{% url 'groups:edit' group.id %}" class="btn btn-primary">Редактировать</a>
+             <a href="{{ obj.get_edit_url }}" class="btn btn-primary">Редактировать</a>
              <a href="javascript:void(0);" class="btn btn-danger" data-toggle="modal" data-target=".delete-modal"
-           onClick='obj_delete("{{ group }}", "{% url 'groups:delete' group.id %}");'>Удалить</a>
+           onClick='obj_delete("{{ obj }}", "{{ obj.get_delete_url }}");'>Удалить</a>
         </div>
 {% endblock page_header %}
 
@@ -20,7 +20,7 @@
                  <li class="list-group-item">
                     <div class="row">
                         <div class="col-md-4 col-xs-4"><strong>Наименование</strong></div>
-                        <div class="col-md-8 col-xs-8">{{ group.name }}</div>
+                        <div class="col-md-8 col-xs-8">{{ obj.name }}</div>
                     </div>
                 </li>
               </ul>

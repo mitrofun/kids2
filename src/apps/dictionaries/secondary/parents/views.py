@@ -6,21 +6,26 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from dictionaries.models import ParentsStatus
 
-template = 'dictionaries/parents/parent_'
+template = 'dictionaries/elementary/'
 
 
 class ParentsBaseView(LoginRequiredMixin, ContextMixin):
     model = ParentsStatus
-    context_object_name = 'parent'
+    context_object_name = 'obj'
     pk_url_kwarg = 'parent_id'
 
 
 class ParentsListView(ParentsBaseView, ListView):
-    context_object_name = 'parents'
+    context_object_name = 'obj_list'
     template_name = template + 'list.html'
 
     def get_queryset(self):
         return ParentsStatus.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(ParentsListView, self).get_context_data(**kwargs)
+        context['add_obj'] = reverse_lazy('parents:add')
+        return context
 
 
 class ParentsCreateView(ParentsBaseView, CreateView):

@@ -6,21 +6,26 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from dictionaries.models import HealthStates
 
-template = 'dictionaries/health/health_'
+template = 'dictionaries/elementary/'
 
 
 class HealthBaseView(LoginRequiredMixin, ContextMixin):
     model = HealthStates
-    context_object_name = 'health'
+    context_object_name = 'obj'
     pk_url_kwarg = 'health_id'
 
 
 class HealthListView(HealthBaseView, ListView):
-    context_object_name = 'health_list'
+    context_object_name = 'obj_list'
     template_name = template + 'list.html'
 
     def get_queryset(self):
         return HealthStates.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(HealthListView, self).get_context_data(**kwargs)
+        context['add_obj'] = reverse_lazy('health:add')
+        return context
 
 
 class HealthCreateView(HealthBaseView, CreateView):
