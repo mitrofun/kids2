@@ -6,7 +6,7 @@ NOSE?=$(VENV_DIR)/bin/nosetests
 
 .PHONY: all clean test run requirements install virtualenv bower_install copy_settings
 
-all: bower_install copy_settings virtualenv install create_database create_admin
+all: bower_install copy_settings virtualenv install create_database create_admin create_menu
 
 bower_install:
 	bower install
@@ -29,6 +29,9 @@ create_database:
 
 create_admin:
 	echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@site.com', 'admin')" | $(PYTHON) manage.py shell
+
+create_menu:
+    $(PYTHON) manage.py sitetree_resync_apps
 
 run:
 	$(PYTHON) manage.py runserver localhost:8000
