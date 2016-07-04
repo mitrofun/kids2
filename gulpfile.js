@@ -14,6 +14,14 @@ gulp.task('sass', function () {
 });
 
 gulp.task('watch', function() {
-  gulp.watch('/src/static/src/sass/**/*.scss', gulp.series('sass'));
+  gulp.watch('./src/static/src/sass/**/*.scss', gulp.series('sass'));
 
 });
+
+gulp.task('fonts', function() {
+  return gulp.src('./src/static/src/vendors/bootstrap-sass/assets/fonts/**/*')
+      .pipe(gulp.dest('./src/static/src/fonts/'))
+
+});
+
+gulp.task('dev', gulp.series('fonts', 'sass'));
