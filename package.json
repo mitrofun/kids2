@@ -1,9 +1,9 @@
 {
   "name": "kids2",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "devDependencies": {
-    "grunt": "latest",
-    "grunt-contrib-less": "latest",
-    "grunt-contrib-uglify": "latest"
+    "babel-cli": "^6.10.1",
+    "babel-preset-es2015": "^6.9.0",
+    "gulp": "github:gulpjs/gulp#4.0"
   }
 }
