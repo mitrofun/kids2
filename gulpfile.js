@@ -12,3 +12,8 @@ gulp.task('sass', function () {
   .pipe(sourcemaps.write())
   .pipe(gulp.dest('./src/static/src/css'));
 });
+
+gulp.task('watch', function() {
+  gulp.watch('/src/static/src/sass/**/*.scss', gulp.series('sass'));
+
+});
