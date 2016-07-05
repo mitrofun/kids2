@@ -8,7 +8,7 @@ sitetrees = (
         item('Справочники', 'dictionaries', children=[
             item('Образование', 'education', in_menu=True, in_sitetree=True,  children=[
                 item('Учреждения', 'institutions:list', in_menu=True, in_sitetree=True,  children=[
-                    item('Добавить', 'obj:add', in_menu=False, in_sitetree=False),
+                    item('Добавить', 'institutions:add', in_menu=False, in_sitetree=False),
                     item('{{ obj.name }}', 'institutions:detail obj.id', in_menu=True,
                          in_sitetree=True, children=[
                             item('Редактировать', 'institutions:edit obj.id', in_menu=False, in_sitetree=False),

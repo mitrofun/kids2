@@ -28,10 +28,8 @@
                     {% for child in children %}
                         <tr>
                             <td><a href="{{ child.get_absolute_url }}">{{ child }}</a></td>
-                            <td>{{ child.birthday| date:'d.m.Y' }}</td>
-                          {#  TODO: сделать определение возраста на дату #}
+                            <td>{{ child.birthday }}</td>
                             <td>{{ child.get_age }}</td>
-                            {#  TODO: сделать определение актуальной на дату  #}
                             {% with child.studenthistory_set.all.first as student_history %}
                                 {% if student_history %}
                                     <td>{{ student_history.institution|default_if_none:'-' }}</td>

@@ -1,7 +1,10 @@
 @import "../vendors/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "../vendors/Bootflat/bootflat/scss/bootflat";
+@import "../vendors/select2/src/scss/core";
 @import "abstracts/variables";
 @import "base/adjustment";
+
+@import "components/select2";
 
 @import "pages/children/children_detail";
 

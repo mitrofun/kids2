@@ -3,6 +3,7 @@ from django.views.generic.base import ContextMixin
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from children.models import Child
+from children.forms import ChildForm
 
 
 class ChildrenBaseView(LoginRequiredMixin, ContextMixin):
@@ -24,7 +25,7 @@ class ChildrenListView(ChildrenBaseView, ListView):
 
 class ChildrenCreateView(ChildBaseView, CreateView):
     template_name = 'children/children_edit.html'
-    fields = '__all__'  # TODO: задать очередось полей
+    form_class = ChildForm
 
     def get_context_data(self, **kwargs):
         context = super(ChildrenCreateView, self).get_context_data(**kwargs)
@@ -38,7 +39,7 @@ class ChildrenDetailView(ChildBaseView, DetailView):
 
 class ChildrenUpdateView(ChildBaseView, UpdateView):
     template_name = 'children/children_edit.html'
-    fields = '__all__'  # TODO: задать очередось полей
+    form_class = ChildForm
 
     def get_context_data(self, **kwargs):
         context = super(ChildrenUpdateView, self).get_context_data(**kwargs)
