@@ -2,15 +2,15 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
-from dashboard.views import DashboardView
+from django.views.generic import TemplateView
 
 urlpatterns = [
-    url(r'^$', DashboardView.as_view(), name='dashboard'),
+    url(r'^$', TemplateView.as_view(template_name='dashboard.html'), name='dashboard'),
     url(r'', include('accounts.urls', namespace='accounts')),
     url(r'^children/', include('parameters.urls')),
     url(r'^children/', include('children.urls', namespace='children')),
 
-    url(r'^dictionaries/', include('dictionaries.urls')),
+    url(r'^dictionaries/', include('dictionaries.urls', namespace='dictionaries')),
     url(r'^admin/', include(admin.site.urls)),
 
 ]

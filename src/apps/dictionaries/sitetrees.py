@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# from sitetree.utils import tree, item
+from sitetree.utils import tree, item
 #
 # sitetrees = (
 #     tree('dictionaries_tree', items=[
@@ -68,3 +68,16 @@
 #         # item('Фильтр', 'children:filter', in_menu=False, in_sitetree=False),
 #     ]),
 # )
+
+
+sitetrees = (
+  tree('dictionaries_tree', items=[
+    item('Справочники', 'dictionaries', children=[
+        item('Категории', 'dictionaries:categories-list', children=[
+            item('Добавить', 'dictionaries:categories-add'),
+            item('"{{ obj }}"', 'dictionaries:categories-detail obj.id', in_menu=False, in_sitetree=False),
+            item('Редактировать', 'dictionaries:categories-edit obj.id', in_menu=False, in_sitetree=False)
+            ])
+        ])
+    ]),
+)

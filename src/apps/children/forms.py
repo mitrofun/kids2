@@ -9,8 +9,10 @@ from dictionaries.models import Dictionary
 class ChildForm(forms.ModelForm):
     birthday = forms.CharField(label='Дата рождения',
                                widget=forms.TextInput(attrs={'type': 'date'}))
-    locality = forms.ModelChoiceField(Dictionary.objects.all(), empty_label=None, label='Населенный пункт')
-    street = forms.ModelChoiceField(Dictionary.objects.all(), empty_label=None, label='Улица')
+    locality = forms.ModelChoiceField(Dictionary.objects.filter(type__slug='locality'),
+                                      empty_label=None, label='Населенный пункт')
+    street = forms.ModelChoiceField(Dictionary.objects.filter(type__slug='street'),
+                                    empty_label=None, label='Улица')
 
     class Meta:
         model = Child
