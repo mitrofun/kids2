@@ -72,7 +72,7 @@ from sitetree.utils import tree, item
 
 sitetrees = (
   tree('dictionaries_tree', items=[
-    item('Справочники', 'dictionaries', children=[
+    item('Справочники', 'dictionaries:main', children=[
         item('Категории', 'dictionaries:categories-list', in_menu=True, in_sitetree=True, children=[
             item('Добавить', 'dictionaries:categories-add'),
             item('"{{ obj }}"', 'dictionaries:categories-detail obj.id', in_menu=False, in_sitetree=False),
