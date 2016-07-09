@@ -4,15 +4,13 @@ from django.db.models import permalink
 from children.models import Child
 from common.models import HistoryModel, NameModel
 from parameters.base_models import HistoryParamsBase
-from dictionaries.models import ParentsStatus, HealthStates, Institution, Group, Grade
+from dictionaries.models import Dictionary
 
 
 class StudentHistory(HistoryParamsBase):
-    institution = models.ForeignKey(Institution, verbose_name='Учреждение')
-    group = models.ForeignKey(Group, verbose_name='Группа',
-                              blank=True, null=True)
-    grade = models.ForeignKey(Grade, verbose_name='Класс',
-                              blank=True, null=True)
+    institution = models.ForeignKey(Dictionary, verbose_name='Учреждение', related_name='institution')
+    group = models.ForeignKey(Dictionary, verbose_name='Группа', related_name='groups', blank=True, null=True)
+    grade = models.ForeignKey(Dictionary, verbose_name='Класс', related_name='grades', blank=True, null=True)
 
     class Meta:
         db_table = 'students_history'
@@ -32,7 +30,7 @@ class StudentHistory(HistoryParamsBase):
 
 
 class ParentsStatesHistory(HistoryParamsBase):
-    status = models.ManyToManyField(ParentsStatus)
+    status = models.ManyToManyField(Dictionary)
 
     class Meta:
         db_table = 'parents_status_history'
@@ -47,7 +45,7 @@ class ParentsStatesHistory(HistoryParamsBase):
 
 
 class HealthHistory(HistoryParamsBase):
-    states = models.ManyToManyField(HealthStates)
+    states = models.ManyToManyField(Dictionary)
 
     class Meta:
         db_table = 'healths_history'

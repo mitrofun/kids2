@@ -1,17 +1,17 @@
 from django.contrib import admin
-from dictionaries.models import ParentsStatus, HealthStates, Institution, Group, Grade, Locality, Street
+from dictionaries.models import Category, DictionariesType, Dictionary
 
 
-class InstitutionAdmin(admin.ModelAdmin):
+class DictionariesTypeAdmin(admin.ModelAdmin):
+    list_display = ('name', 'category', 'slug', 'position')
+    list_filter = ('category',)
+
+
+class DictionaryAdmin(admin.ModelAdmin):
     list_display = ('name', 'type')
     list_filter = ('type',)
 
-admin.site.register(Institution, InstitutionAdmin)
-admin.site.register(Grade)
-admin.site.register(Group)
 
-admin.site.register(Locality)
-admin.site.register(Street)
-
-admin.site.register(ParentsStatus)
-admin.site.register(HealthStates)
+admin.site.register(Category)
+admin.site.register(DictionariesType, DictionariesTypeAdmin)
+admin.site.register(Dictionary, DictionaryAdmin)

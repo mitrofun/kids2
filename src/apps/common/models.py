@@ -37,6 +37,17 @@ class NameUniqueModel(models.Model):
         return self.name
 
 
+class NameSlugUniqueModel(NameUniqueModel):
+    slug = models.SlugField(verbose_name='Слаг', unique=True)
+    position = models.IntegerField(verbose_name='Очередность', default=0)
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.name
+
+
 class HistoryModel(models.Model):
     first_date = models.DateField('Начальная дата', default=datetime.now)
     last_date = models.DateField('Конечная дата', blank=True, null=True)

@@ -1,13 +1,13 @@
 from django.db.models import permalink
 from django.db import models
 from common.models import PersonModel, AddressModel
-from dictionaries.models import Locality, Street
+from dictionaries.models import Dictionary
 
 
 class Child(PersonModel, AddressModel):
-    locality = models.ForeignKey(Locality, verbose_name="Населенный пункт",
+    locality = models.ForeignKey(Dictionary, verbose_name="Населенный пункт",
                                  related_name='locality', blank=True, null=True)
-    street = models.ForeignKey(Street, verbose_name="Улица", related_name='street', blank=True, null=True)
+    street = models.ForeignKey(Dictionary, verbose_name="Улица", related_name='street', blank=True, null=True)
 
     class Meta:
         db_table = 'children'
