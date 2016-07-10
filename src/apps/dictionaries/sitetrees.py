@@ -16,7 +16,7 @@ sitetrees = (
                      item('Типы справочников', 'dictionaries:types-list category', in_menu=True, in_sitetree=True,
                           children=[
                               item('Добавить', 'dictionaries:types-add category', in_menu=False, in_sitetree=False),
-                              item('{{ obj.name }}', 'dictionaries:types-detail obj.category.slug obj.slug',
+                              item('{{ obj.name }}', 'dictionaries:types-detail category.slug obj.slug',
                                    in_menu=False, in_sitetree=False,
                                    children=[
                                        item('Редактировать', 'dictionaries:types-edit obj.category.slug obj.slug',
