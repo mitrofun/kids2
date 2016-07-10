@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import permalink
 from common.models import NameUniqueModel, NameSlugUniqueModel
 
 
@@ -14,6 +15,18 @@ class Category(NameSlugUniqueModel):
         if self.position == 0:
             self.position = Category.objects.all().count() + 1
         return super().save(*args, **kwargs)
+
+    @permalink
+    def get_absolute_url(self):
+        return 'dictionaries:categories-detail', None, {'category': self.slug}
+
+    @permalink
+    def get_edit_url(self):
+        return 'dictionaries:categories-edit', None, {'category': self.slug}
+
+    @permalink
+    def get_delete_url(self):
+        return 'dictionaries:categories-delete', None, {'category': self.slug}
 
 
 class DictionariesType(NameSlugUniqueModel):

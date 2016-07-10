@@ -75,9 +75,9 @@ sitetrees = (
     item('Справочники', 'dictionaries:main', children=[
         item('Категории', 'dictionaries:categories-list', in_menu=True, in_sitetree=True, children=[
             item('Добавить', 'dictionaries:categories-add'),
-            item('"{{ obj }}"', 'dictionaries:categories-detail obj.id', in_menu=False, in_sitetree=False),
-            item('Редактировать', 'dictionaries:categories-edit obj.id', in_menu=False, in_sitetree=False),
-            item('Удалить', 'dictionaries:categories-delete obj.id', in_menu=False, in_sitetree=False),
+            item('{{ obj }}', 'dictionaries:categories-detail obj.slug', in_menu=False, in_sitetree=False),
+            item('Редактировать', 'dictionaries:categories-edit obj.slug', in_menu=False, in_sitetree=False),
+            item('Удалить', 'dictionaries:categories-delete obj.slug', in_menu=False, in_sitetree=False),
             ])
         ])
     ]),
