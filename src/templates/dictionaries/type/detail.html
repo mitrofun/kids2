@@ -3,9 +3,9 @@
 {% block page_header %}
             {{ block.super }}
             <div class="pull-right">
-             <a href="{{ category.get_edit_url }}" class="btn btn-primary">Редактировать</a>
+             <a href="{{ type.get_edit_url }}" class="btn btn-primary">Редактировать</a>
              <a href="javascript:void(0);" class="btn btn-danger" data-toggle="modal" data-target=".delete-modal"
-           onClick='obj_delete("{{ category }}", "{{ category.get_delete_url }}");'>Удалить</a>
+           onClick='obj_delete("{{ type }}", "{{ type.get_delete_url }}");'>Удалить</a>
         </div>
 {% endblock page_header %}
 
@@ -17,12 +17,14 @@
         <div class="col-md-12 col-sm-12">
             <div class="panel panel-default">
               <ul class="list-group">
+
                  <li class="list-group-item">
                     <div class="row">
                         <div class="col-md-3"><strong>Наименование</strong></div>
-                        <div class="col-md-9"><a href="{% url 'dictionaries:types-list' category.slug %}">{{ category.name }}</a></div>
+                        <div class="col-md-9">{{ type.name }}</div>
                     </div>
                 </li>
+
               </ul>
             </div>
         </div>

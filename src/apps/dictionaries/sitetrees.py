@@ -13,15 +13,15 @@ sitetrees = (
                      item('Редактировать', 'dictionaries:categories-edit category.slug', in_menu=False, in_sitetree=False),
                      item('Удалить', 'dictionaries:categories-delete category.slug', in_menu=False, in_sitetree=False),
 
-                     item('Типы справочников', 'dictionaries:types-list category', in_menu=True, in_sitetree=True,
+                     item('Типы справочников', 'dictionaries:types-list category.slug', in_menu=True, in_sitetree=True,
                           children=[
-                              item('Добавить', 'dictionaries:types-add category', in_menu=False, in_sitetree=False),
-                              item('{{ obj.name }}', 'dictionaries:types-detail category.slug obj.slug',
+                              item('Добавить', 'dictionaries:types-add category.slug', in_menu=False, in_sitetree=False),
+                              item('{{ type.name }}', 'dictionaries:types-detail category.slug type.slug',
                                    in_menu=False, in_sitetree=False,
                                    children=[
-                                       item('Редактировать', 'dictionaries:types-edit obj.category.slug obj.slug',
+                                       item('Редактировать', 'dictionaries:types-edit category.slug type.slug',
                                             in_menu=False, in_sitetree=False),
-                                       item('Удалить', 'dictionaries:types-delete obj.category.slug obj.slug',
+                                       item('Удалить', 'dictionaries:types-delete category.slug type.slug',
                                             in_menu=False, in_sitetree=False),
                                     ])
                              ]),
