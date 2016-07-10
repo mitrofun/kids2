@@ -6,17 +6,17 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 from dictionaries.models import Category
 from django.core.urlresolvers import reverse_lazy
 
-template = 'dictionaries/items/'
+template = 'dictionaries/category/'
 
 
 class CategoriesBaseView(LoginRequiredMixin, ContextMixin):
     model = Category
-    context_object_name = 'obj'
+    context_object_name = 'category'
     slug_url_kwarg = 'category'
 
 
 class CategoriesListView(CategoriesBaseView, ListView):
-    context_object_name = 'obj_list'
+    context_object_name = 'categories'
     template_name = template + 'list.html'
 
     def get_queryset(self):
@@ -24,7 +24,7 @@ class CategoriesListView(CategoriesBaseView, ListView):
 
     def get_context_data(self, **kwargs):
         context = super(CategoriesListView, self).get_context_data(**kwargs)
-        context['add_obj'] = reverse_lazy('dictionaries:categories-add')
+        context['add_category'] = reverse_lazy('dictionaries:categories-add')
         return context
 
 

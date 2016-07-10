@@ -1,6 +1,39 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from sitetree.utils import tree, item
+
+
+sitetrees = (
+  tree('dictionaries', items=[
+    item('Справочники', 'dictionaries:main', children=[
+        item('Категории', 'dictionaries:categories-list', in_menu=True, in_sitetree=True, children=[
+            item('Добавить', 'dictionaries:categories-add'),
+            item('{{ category }}', 'dictionaries:categories-detail category.slug', in_menu=False, in_sitetree=False,
+                 children=[
+                     item('Редактировать', 'dictionaries:categories-edit category.slug', in_menu=False, in_sitetree=False),
+                     item('Удалить', 'dictionaries:categories-delete category.slug', in_menu=False, in_sitetree=False),
+
+                     item('Типы справочников', 'dictionaries:types-list category', in_menu=True, in_sitetree=True,
+                          children=[
+                              item('Добавить', 'dictionaries:types-add category', in_menu=False, in_sitetree=False),
+                              item('{{ obj.name }}', 'dictionaries:types-detail obj.category.slug obj.slug',
+                                   in_menu=False, in_sitetree=False,
+                                   children=[
+                                       item('Редактировать', 'dictionaries:types-edit obj.category.slug obj.slug',
+                                            in_menu=False, in_sitetree=False),
+                                       item('Удалить', 'dictionaries:types-delete obj.category.slug obj.slug',
+                                            in_menu=False, in_sitetree=False),
+                                    ])
+                             ]),
+                 ]),
+
+            ]),
+
+        ]),
+    ]),
+)
+
+
 #
 # sitetrees = (
 #     tree('dictionaries_tree', items=[
@@ -69,16 +102,3 @@ from sitetree.utils import tree, item
 #     ]),
 # )
 
-
-sitetrees = (
-  tree('dictionaries_tree', items=[
-    item('Справочники', 'dictionaries:main', children=[
-        item('Категории', 'dictionaries:categories-list', in_menu=True, in_sitetree=True, children=[
-            item('Добавить', 'dictionaries:categories-add'),
-            item('{{ obj }}', 'dictionaries:categories-detail obj.slug', in_menu=False, in_sitetree=False),
-            item('Редактировать', 'dictionaries:categories-edit obj.slug', in_menu=False, in_sitetree=False),
-            item('Удалить', 'dictionaries:categories-delete obj.slug', in_menu=False, in_sitetree=False),
-            ])
-        ])
-    ]),
-)

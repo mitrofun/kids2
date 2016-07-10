@@ -3,9 +3,9 @@
 {% block page_header %}
             {{ block.super }}
             <div class="pull-right">
-             <a href="{{ obj.get_edit_url }}" class="btn btn-primary">Редактировать</a>
+             <a href="{{ category.get_edit_url }}" class="btn btn-primary">Редактировать</a>
              <a href="javascript:void(0);" class="btn btn-danger" data-toggle="modal" data-target=".delete-modal"
-           onClick='obj_delete("{{ obj }}", "{{ obj.get_delete_url }}");'>Удалить</a>
+           onClick='obj_delete("{{ category }}", "{{ category.get_delete_url }}");'>Удалить</a>
         </div>
 {% endblock page_header %}
 
@@ -17,18 +17,10 @@
         <div class="col-md-12 col-sm-12">
             <div class="panel panel-default">
               <ul class="list-group">
-                 {% if obj.type == 0 or obj.type == 1 %}
-                 <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-md-4 col-xs-4"><strong>Тип учреждения</strong></div>
-                        <div class="col-md-8 col-xs-8">{{ obj.get_type_display }}</div>
-                    </div>
-                 </li>
-                  {% endif %}
                  <li class="list-group-item">
                     <div class="row">
                         <div class="col-md-4 col-xs-4"><strong>Наименование</strong></div>
-                        <div class="col-md-8 col-xs-8">{{ obj.name }}</div>
+                        <div class="col-md-8 col-xs-8">{{ category.name }}</div>
                     </div>
                 </li>
               </ul>

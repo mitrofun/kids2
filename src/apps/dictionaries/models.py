@@ -42,6 +42,18 @@ class DictionariesType(NameSlugUniqueModel):
             self.position = DictionariesType.objects.filter(category=self.category).count() + 1
         return super().save(*args, **kwargs)
 
+    @permalink
+    def get_absolute_url(self):
+        return 'dictionaries:types-detail', None, {'category': self.category.slug, 'dictionary_type': self.slug}
+
+    @permalink
+    def get_edit_url(self):
+        return 'dictionaries:types-edit', None, {'category': self.category.slug, 'dictionary_type': self.slug}
+
+    @permalink
+    def get_delete_url(self):
+        return 'dictionaries:types-delete', None, {'category': self.category.slug, 'dictionary_type': self.slug}
+
 
 class Dictionary(NameUniqueModel):
     INSTITUTION_TYPE_CHOICE = (
