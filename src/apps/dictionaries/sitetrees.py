@@ -6,7 +6,7 @@ from sitetree.utils import tree, item
 sitetrees = (
   tree('dictionaries', items=[
     item('Справочники', 'dictionaries:main', children=[
-        item('Категории', 'dictionaries:categories-list', in_menu=True, in_sitetree=True, children=[
+        item('Категории', 'dictionaries:categories-list', in_menu=False, in_sitetree=True, children=[
             item('Добавить', 'dictionaries:categories-add'),
             item('{{ category }}', 'dictionaries:categories-detail category.slug', in_menu=False, in_sitetree=False,
                  children=[
@@ -22,6 +22,9 @@ sitetrees = (
                                        item('Редактировать', 'dictionaries:types-edit category.slug type.slug',
                                             in_menu=False, in_sitetree=False),
                                        item('Удалить', 'dictionaries:types-delete category.slug type.slug',
+                                            in_menu=False, in_sitetree=False),
+
+                                       item('Записи в справочнике "{{ type }}"', 'dictionaries:items-list category.slug type.slug',
                                             in_menu=False, in_sitetree=False),
                                     ])
                              ]),

@@ -1,0 +1,53 @@
+{% extends 'dictionaries/layout.html' %}
+
+{% block page_header %}
+            {{ block.super }}
+            <div class="pull-right">
+            <a href="{{ add_item }}" class="btn btn-primary">Добавить</a>
+        </div>
+{% endblock page_header %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+
+    {% if type.slug == 'institution' %}
+        <div class="panel panel-default">
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover table-striped">
+                <thead>
+                  <tr>
+                    <th>Наименование</th>
+                    <th>Тип</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% if items %}
+                    {% for item in items %}
+                      <tr>
+                        <td><a href="{{ item.get_absolute_url }}">{{ item.name }}</a></td>
+                        <td>{{ item.get_institution_type_display }}</td>
+                      </tr>
+                    {% endfor %}
+                {% else %}
+                    <td>Объектов нет</td>
+                    <td></td>
+                {% endif %}
+                </tbody>
+              </table>
+            </div>
+        </div>
+        {% else %}
+        <div class="list-group">
+        {% if items %}
+            {% for item in items %}
+                <a href="{{ item.get_absolute_url }}" class="list-group-item">{{ item.name }}</a>
+            {% endfor %}
+        {% else %}
+                <div class="list-group-item">Объектов нет</div>
+        {% endif %}
+        </div>
+     {% endif %}
+    </div>
+</div>
+{% endblock %}

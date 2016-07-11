@@ -1,32 +1,27 @@
 {% extends 'dictionaries/layout.html' %}
 
+{% block page_header %}
+            {{ block.super }}
+            <div class="pull-right">
+            <a href="{% url 'dictionaries:categories-add' %}" class="btn btn-primary">Добавить категорию</a>
+        </div>
+{% endblock page_header %}
+
 {% block content %}
-<div class="row">
 
-    <div class="col-md-4">
-        <div class="list-group">
-          <a href="#" class="list-group-item active">Образование</a>
-          <a href="#" class="list-group-item">Учреждения</a>
-          <a href="#" class="list-group-item">Возрастные группы</a>
-          <a href="#" class="list-group-item">Классы</a>
-        </div>
-    </div>
+    {% for category in categories %}
+        {% cycle '<div class="row">' '' ''%}
+            <div class="col-md-4">
+                 <div class="list-group">
+                     <a href="{% url 'dictionaries:categories-detail' category.slug %}"
+                        class="list-group-item active">{{ category.name }}</a>
+                     {% for type in category.dictionariestype_set.all %}
+                        <a href="{% url 'dictionaries:items-list' category.slug type.slug %}"
+                           class="list-group-item">{{ type }}</a>
+                     {% endfor %}
+                 </div>
+            </div>
+        {% cycle '' '' '</div>' %}
+    {% endfor %}
 
-    <div class="col-md-4">
-        <div class="list-group">
-          <a href="#" class="list-group-item active">Адреса</a>
-          <a href="#" class="list-group-item">Населенные пункты</a>
-          <a href="#" class="list-group-item">Улицы</a>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="list-group">
-          <a href="#" class="list-group-item active">Дополнительные сведения</a>
-          <a href="#" class="list-group-item">Состояния здоровья</a>
-          <a href="#" class="list-group-item">Статусы родителей</a>
-        </div>
-    </div>
-
-</div>
 {% endblock content %}

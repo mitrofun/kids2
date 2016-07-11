@@ -20,11 +20,11 @@ class DicTypesListView(DicTypesBaseView, ListView):
     template_name = template + 'list.html'
 
     def get_queryset(self):
-        return DictionariesType.objects.all()
+        return DictionariesType.objects.filter(category__slug=(self.kwargs['category']))
 
     def get_context_data(self, **kwargs):
         context = super(DicTypesListView, self).get_context_data(**kwargs)
-        context['add_category'] = reverse_lazy('dictionaries:types-add')
+        context['add_types'] = reverse_lazy('dictionaries:types-add', kwargs={'category': self.kwargs['category']})
         context['category'] = Category.objects.get(slug=self.kwargs['category'])
         return context
 

@@ -23,6 +23,12 @@
                         <div class="col-md-9"><a href="{% url 'dictionaries:types-list' category.slug %}">{{ category.name }}</a></div>
                     </div>
                 </li>
+                 <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-3"><strong>Слаг</strong></div>
+                        <div class="col-md-9">{{ category.slug }}</div>
+                    </div>
+                </li>
               </ul>
             </div>
         </div>

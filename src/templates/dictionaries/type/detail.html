@@ -3,6 +3,7 @@
 {% block page_header %}
             {{ block.super }}
             <div class="pull-right">
+             <a href="{% url 'dictionaries:items-list' type.category.slug type.slug %}" class="btn btn-info">Посмотреть данные</a>
              <a href="{{ type.get_edit_url }}" class="btn btn-primary">Редактировать</a>
              <a href="javascript:void(0);" class="btn btn-danger" data-toggle="modal" data-target=".delete-modal"
            onClick='obj_delete("{{ type }}", "{{ type.get_delete_url }}");'>Удалить</a>
@@ -24,7 +25,18 @@
                         <div class="col-md-9">{{ type.name }}</div>
                     </div>
                 </li>
-
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-3"><strong>Слаг</strong></div>
+                        <div class="col-md-9">{{ type.slug }}</div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-3"><strong>Категория</strong></div>
+                        <div class="col-md-9">{{ type.category }}</div>
+                    </div>
+                </li>
               </ul>
             </div>
         </div>
