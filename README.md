@@ -1,10 +1,9 @@
-Kid2
-=====
+#Kids2
 
-Описание
---------
-Приложение для учета детей в возрасте от 0 до 18 +
+##Description
 
-Реализация
-----------
-Бэкенд приложения сделан на Python 3.4, Djangо 1.9
+Application for registration of children ages 0 to 18 +
+
+##Implementation
+
+Backend - Python 3, Djangо 1.9
