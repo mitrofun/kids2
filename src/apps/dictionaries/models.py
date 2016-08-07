@@ -44,15 +44,30 @@ class DictionariesType(NameSlugUniqueModel):
 
     @permalink
     def get_absolute_url(self):
-        return 'dictionaries:types-detail', None, {'category': self.category.slug, 'dictionary_type': self.slug}
+        return 'dictionaries:types-detail', \
+               None, \
+               {
+                   'category': self.category.slug,
+                   'dictionary_type': self.slug
+               }
 
     @permalink
     def get_edit_url(self):
-        return 'dictionaries:types-edit', None, {'category': self.category.slug, 'dictionary_type': self.slug}
+        return 'dictionaries:types-edit', \
+               None, \
+               {
+                   'category': self.category.slug,
+                   'dictionary_type': self.slug
+               }
 
     @permalink
     def get_delete_url(self):
-        return 'dictionaries:types-delete', None, {'category': self.category.slug, 'dictionary_type': self.slug}
+        return 'dictionaries:types-delete', \
+               None, \
+               {
+                   'category': self.category.slug,
+                   'dictionary_type': self.slug
+               }
 
 
 class Dictionary(NameUniqueModel):
@@ -68,3 +83,36 @@ class Dictionary(NameUniqueModel):
         db_table = 'dictionaries'
         verbose_name = 'Справочник'
         verbose_name_plural = 'Справочники'
+
+
+@permalink
+def get_absolute_url(self):
+    return 'dictionaries:items-detail', \
+           None, \
+           {
+               'category': self.category.slug,
+               'dictionary_type': self.slug,
+               'item_id': self.id
+           }
+
+
+@permalink
+def get_edit_url(self):
+    return 'dictionaries:items-edit',  \
+           None, \
+           {
+               'category': self.category.slug,
+               'dictionary_type': self.slug,
+               'item_id': self.id
+           }
+
+
+@permalink
+def get_delete_url(self):
+    return 'dictionaries:items-delete',  \
+           None, \
+           {
+               'category': self.category.slug,
+               'dictionary_type': self.slug,
+               'item_id': self.id
+           }

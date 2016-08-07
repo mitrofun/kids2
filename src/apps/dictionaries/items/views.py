@@ -9,13 +9,13 @@ from django.core.urlresolvers import reverse_lazy
 template = 'dictionaries/items/'
 
 
-class DictionaryDaseView(LoginRequiredMixin, ContextMixin):
+class DictionaryBaseView(LoginRequiredMixin, ContextMixin):
     model = Dictionary
     context_object_name = 'item'
     slug_url_kwarg = 'dictionary_id'
 
 
-class DicTypesListView(DictionaryDaseView, ListView):
+class DicItemsListView(DictionaryBaseView, ListView):
     context_object_name = 'items'
     template_name = template + 'list.html'
 
@@ -23,8 +23,32 @@ class DicTypesListView(DictionaryDaseView, ListView):
         return Dictionary.objects.filter(type__slug=self.kwargs['dictionary_type'])
 
     def get_context_data(self, **kwargs):
-        context = super(DicTypesListView, self).get_context_data(**kwargs)
-        context['add_types'] = reverse_lazy('dictionaries:types-add', kwargs={'category': self.kwargs['category']})
+        context = super(DicItemsListView, self).get_context_data(**kwargs)
+        context['add_item'] = reverse_lazy('dictionaries:items-add',
+                                           kwargs={
+                                               'category': self.kwargs['category'],
+                                               'dictionary_type': self.kwargs['dictionary_type']
+                                                  }
+                                           )
         context['category'] = Category.objects.get(slug=self.kwargs['category'])
         context['type'] = DictionariesType.objects.get(slug=self.kwargs['dictionary_type'])
         return context
+
+
+class DicItemsCreateView(DictionaryBaseView, CreateView):
+    template_name = template + 'edit.html'
+    fields = '__all__'
+
+    def get_context_data(self, **kwargs):
+        context = super(DicItemsCreateView, self).get_context_data(**kwargs)
+        context['category'] = Category.objects.get(slug=self.kwargs['category'])
+        context['type'] = DictionariesType.objects.get(slug=self.kwargs['dictionary_type'])
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy('dictionaries:items-list',
+                            kwargs={'category': self.kwargs['category'],
+                                    'dictionary_type': self.kwargs['dictionary_type']
+                                    }
+                            )
+
