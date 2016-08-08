@@ -38,7 +38,7 @@ sitetrees = (
                                            item('Удалить', 'dictionaries:types-delete category.slug type.slug',
                                                 in_menu=False, in_sitetree=False),
 
-                                           item('Записи в справочнике "{{ type.name }}"',
+                                           item('Записи',
                                                 'dictionaries:items-list category.slug type.slug',
                                                 in_menu=False, in_sitetree=False, children=[
                                                    item('Добавить', 'dictionaries:items-add category.slug type.slug',
