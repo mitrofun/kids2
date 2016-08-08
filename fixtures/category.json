@@ -2,19 +2,19 @@
   {
     "id": "1",
     "name": "Образование",
-    "slag": "education",
+    "slug": "education",
     "position": "1"
   },
   {
     "id": "2",
     "name": "Адреса",
-    "slag": "address",
+    "slug": "address",
     "position": "2"
   },
   {
     "id": "3",
     "name": "Дополнительные",
-    "slag": "secondary",
+    "slug": "secondary",
     "position": "3"
   }
 ]

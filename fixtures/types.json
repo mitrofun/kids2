@@ -1,43 +1,43 @@
 [
   {
 	"name": "Учреждения",
-	"slag": "institutions",
+	"slug": "institutions",
 	"position": "1",
 	"category_id": "1"
   },
   {
 	"name": "Возрастные группы",
-	"slag": "groups",
+	"slug": "groups",
 	"position": "2",
 	"category_id": "1"
   },
   {
 	"name": "Классы",
-	"slag": "grades",
+	"slug": "grades",
 	"position": "3",
 	"category_id": "1"
   },
   {
 	"name": "Населенные пункты",
-	"slag": "locality",
+	"slug": "locality",
 	"position": "4",
 	"category_id": "2"
   },
   {
 	"name": "Улицы",
-	"slag": "streets",
+	"slug": "streets",
 	"position": "5",
 	"category_id": "2"
   },
   {
 	"name": "Состояния здоровья",
-	"slag": "health",
+	"slug": "health",
 	"position": "6",
 	"category_id": "3"
   },
   {
 	"name": "Статус родителей",
-	"slag": "parents",
+	"slug": "parents",
 	"position": "7",
 	"category_id": "3"
   }
