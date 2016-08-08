@@ -23,10 +23,10 @@
                 </thead>
                 <tbody>
                 {% if items %}
-                    {% for item in items %}
+                    {% for dict_item in items %}
                       <tr>
-                        <td><a href="{{ item.get_absolute_url }}">{{ item.name }}</a></td>
-                        <td>{{ item.get_institution_type_display }}</td>
+                        <td><a href="{{ dict_item.get_absolute_url }}">{{ dict_item.name }}</a></td>
+                        <td>{{ dict_item.get_institution_type_display }}</td>
                       </tr>
                     {% endfor %}
                 {% else %}
@@ -40,8 +40,8 @@
         {% else %}
         <div class="list-group">
         {% if items %}
-            {% for item in items %}
-                <a href="{{ item.get_absolute_url }}" class="list-group-item">{{ item.name }}</a>
+            {% for dict_item in items %}
+                <a href="{{ dict_item.get_absolute_url }}" class="list-group-item">{{ dict_item.name }}</a>
             {% endfor %}
         {% else %}
                 <div class="list-group-item">Объектов нет</div>

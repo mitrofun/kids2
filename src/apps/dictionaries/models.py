@@ -84,35 +84,32 @@ class Dictionary(NameUniqueModel):
         verbose_name = 'Справочник'
         verbose_name_plural = 'Справочники'
 
+    @permalink
+    def get_absolute_url(self):
+        return 'dictionaries:items-detail', \
+               None, \
+               {
+                   'category': self.type.category.slug,
+                   'dictionary_type': self.type.slug,
+                   'dictionary_id': self.id
+               }
 
-@permalink
-def get_absolute_url(self):
-    return 'dictionaries:items-detail', \
-           None, \
-           {
-               'category': self.category.slug,
-               'dictionary_type': self.slug,
-               'item_id': self.id
-           }
+    @permalink
+    def get_edit_url(self):
+        return 'dictionaries:items-edit',  \
+               None, \
+               {
+                   'category': self.type.category.slug,
+                   'dictionary_type': self.type.slug,
+                   'dictionary_id': self.id
+               }
 
-
-@permalink
-def get_edit_url(self):
-    return 'dictionaries:items-edit',  \
-           None, \
-           {
-               'category': self.category.slug,
-               'dictionary_type': self.slug,
-               'item_id': self.id
-           }
-
-
-@permalink
-def get_delete_url(self):
-    return 'dictionaries:items-delete',  \
-           None, \
-           {
-               'category': self.category.slug,
-               'dictionary_type': self.slug,
-               'item_id': self.id
-           }
+    @permalink
+    def get_delete_url(self):
+        return 'dictionaries:items-delete',  \
+               None, \
+               {
+                   'category': self.type.category.slug,
+                   'dictionary_type': self.type.slug,
+                   'dictionary_id': self.id
+               }

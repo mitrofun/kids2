@@ -3,11 +3,11 @@
 {% block page_header %}
             {{ block.super }}
             <div class="pull-right">
-             <a href="{% url 'dictionaries:items-list' type.category.slug type.slug %}" class="btn btn-info">Посмотреть данные</a>
-             <a href="{{ type.get_edit_url }}" class="btn btn-primary">Редактировать</a>
-             <a href="javascript:void(0);" class="btn btn-danger" data-toggle="modal" data-target=".delete-modal"
-           onClick='obj_delete("{{ type }}", "{{ type.get_delete_url }}");'>Удалить</a>
-        </div>
+                 <a href="{% url 'dictionaries:items-list' type.category.slug type.slug %}" class="btn btn-info">Посмотреть данные</a>
+                 <a href="{{ type.get_edit_url }}" class="btn btn-primary">Редактировать</a>
+                 <a href="javascript:void(0);" class="btn btn-danger" data-toggle="modal" data-target=".delete-modal"
+               onClick='obj_delete("{{ type }}", "{{ type.get_delete_url }}");'>Удалить</a>
+            </div>
 {% endblock page_header %}
 
 {% block content %}

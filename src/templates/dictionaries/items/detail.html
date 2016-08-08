@@ -1,0 +1,30 @@
+{% extends 'dictionaries/layout.html' %}
+
+{% block page_header %}
+            {{ block.super }}
+            <div class="pull-right">
+                 <a href="{{ dict_item.get_edit_url }}" class="btn btn-primary">Редактировать</a>
+                 <a href="javascript:void(0);" class="btn btn-danger" data-toggle="modal" data-target=".delete-modal"
+               onClick='obj_delete("{{ dict_item }}", "{{ dict_item.get_delete_url }}");'>Удалить</a>
+            </div>
+{% endblock page_header %}
+
+{% block content %}
+
+    {% include 'modals/_modal_delete.html' %}
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="panel panel-default">
+              <ul class="list-group">
+                 <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-3"><strong>Наименование</strong></div>
+                        <div class="col-md-9">{{ dict_item.name }}</div>
+                    </div>
+                </li>
+              </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

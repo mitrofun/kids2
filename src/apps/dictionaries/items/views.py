@@ -11,8 +11,8 @@ template = 'dictionaries/items/'
 
 class DictionaryBaseView(LoginRequiredMixin, ContextMixin):
     model = Dictionary
-    context_object_name = 'item'
-    slug_url_kwarg = 'dictionary_id'
+    context_object_name = 'dict_item'
+    pk_url_kwarg = 'dictionary_id'
 
 
 class DicItemsListView(DictionaryBaseView, ListView):
@@ -43,6 +43,14 @@ class DicItemsCreateView(DictionaryBaseView, CreateView):
         context = super(DicItemsCreateView, self).get_context_data(**kwargs)
         context['category'] = Category.objects.get(slug=self.kwargs['category'])
         context['type'] = DictionariesType.objects.get(slug=self.kwargs['dictionary_type'])
+        context['back_url'] = \
+            self.request.META.get('HTTP_REFERER',
+                                  reverse_lazy('dictionaries:items-list',
+                                               kwargs={'category': self.kwargs['category'],
+                                                       'dictionary_type': self.kwargs['dictionary_type']
+                                                       }
+                                               )
+                                  )
         return context
 
     def get_success_url(self):
@@ -52,3 +60,42 @@ class DicItemsCreateView(DictionaryBaseView, CreateView):
                                     }
                             )
 
+
+class DicItemsDetailView(DictionaryBaseView, DetailView):
+    template_name = template + 'detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(DicItemsDetailView, self).get_context_data(**kwargs)
+        context['category'] = Category.objects.get(slug=self.kwargs['category'])
+        context['type'] = DictionariesType.objects.get(slug=self.kwargs['dictionary_type'])
+        return context
+
+
+class DicItemsUpdateView(DictionaryBaseView, UpdateView):
+    template_name = template + 'edit.html'
+    fields = '__all__'
+
+    def get_context_data(self, **kwargs):
+        context = super(DicItemsUpdateView, self).get_context_data(**kwargs)
+        context['category'] = Category.objects.get(slug=self.kwargs['category'])
+        context['type'] = DictionariesType.objects.get(slug=self.kwargs['dictionary_type'])
+        context['back_url'] = \
+            self.request.META.get('HTTP_REFERER',
+                                  reverse_lazy('dictionaries:items-list',
+                                               kwargs={'category': self.kwargs['category'],
+                                                       'dictionary_type': self.kwargs['dictionary_type']
+                                                       }
+                                               )
+                                  )
+        return context
+
+
+class DicItemsDeleteView(DictionaryBaseView, DeleteView):
+    pass
+
+    def get_success_url(self):
+        return reverse_lazy('dictionaries:items-list',
+                            kwargs={'category': self.kwargs['category'],
+                                    'dictionary_type': self.kwargs['dictionary_type']
+                                    }
+                            )
