@@ -9,7 +9,6 @@ from django.views.generic import TemplateView
 urlpatterns = [
     url(r'^$', login_required(TemplateView.as_view(template_name='dashboard.html')), name='dashboard'),
     url(r'', include('accounts.urls', namespace='accounts')),
-    url(r'^children/', include('parameters.urls')),
     url(r'^children/', include('children.urls', namespace='children')),
 
     url(r'^dictionaries/', include('dictionaries.urls', namespace='dictionaries')),

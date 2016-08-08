@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "name": "Образование",
+    "slag": "education",
+    "position": "1"
+  },
+  {
+    "id": "2",
+    "name": "Адреса",
+    "slag": "address",
+    "position": "2"
+  },
+  {
+    "id": "3",
+    "name": "Дополнительные",
+    "slag": "secondary",
+    "position": "3"
+  }
+]

@@ -33,7 +33,6 @@ EXTERNAL_APPS = [
 INTERNAL_APPS = [
     'accounts',
     'children',
-    'parameters',
     'dictionaries',
 ]
 
