@@ -5,7 +5,8 @@
     "bootstrap-sass": "^3.3.6",
     "jquery": "~2.1.4",
     "Bootflat": "^2.0.4",
-    "select2": "^4.0.3"
+    "select2": "^4.0.3",
+    "bootstrap-datepicker": "^1.6.4"
   },
   "private": true
 }

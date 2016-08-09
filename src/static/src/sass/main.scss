@@ -1,10 +1,14 @@
+// plugins
 @import "../vendors/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "../vendors/Bootflat/bootflat/scss/bootflat";
 @import "../vendors/select2/src/scss/core";
+@import "../vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker.css";
+
 @import "abstracts/variables";
 @import "base/adjustment";
 
 @import "components/select2";
+@import "components/datepicker";
 
 @import "pages/children/children_detail";
 

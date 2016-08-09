@@ -90,7 +90,7 @@ LANGUAGE_CODE = 'ru'
 DATE_FORMAT = 'd.m.Y'
 DATETIME_FORMAT = 'd E Y H:i'
 TIME_FORMAT = 'H:i'
-DATE_INPUT_FORMATS = ('%d-%m-%Y', '%Y-%m-%d')
+DATE_INPUT_FORMATS = ('%d.%m.%Y', '%Y.%m.%d')
 
 TIME_ZONE = 'Europe/Moscow'
 

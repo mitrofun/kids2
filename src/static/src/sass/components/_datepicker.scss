@@ -1,0 +1,31 @@
+.datepicker {
+  padding: 4px !important;
+  color: #fff;
+
+  & .datepicker-switch,
+  .prev,
+  .next,
+  .day,
+  .month,
+  .year {
+    &:hover {
+      background: #000!important;
+    }
+  }
+
+  & .active {
+    border-color: #3BAFDA!important;
+    background-color: #3BAFDA!important;
+    background-image: none!important;
+    background-repeat: no-repeat!important;
+  }
+
+}
+
+.datepicker-dropdown:after {
+  border-bottom: 6px solid #434A54;
+}
+
+.datepicker-dropdown.datepicker-orient-top:after {
+  border-top: 6px solid #434A54;
+}

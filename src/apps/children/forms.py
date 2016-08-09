@@ -7,8 +7,8 @@ from dictionaries.models import Dictionary
 
 
 class ChildForm(forms.ModelForm):
-    birthday = forms.CharField(label='Дата рождения',
-                               widget=forms.TextInput(attrs={'type': 'date'}))
+    # birthday = forms.CharField(label='Дата рождения',
+    #                            widget=forms.TextInput(attrs={'type': 'date'}))
     locality = forms.ModelChoiceField(Dictionary.objects.filter(type__slug='locality'),
                                       empty_label=None, label='Населенный пункт')
     street = forms.ModelChoiceField(Dictionary.objects.filter(type__slug='streets'),
