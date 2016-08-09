@@ -5,6 +5,7 @@ from django.views.generic.base import ContextMixin
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from dictionaries.models import DictionariesType, Category
 from django.core.urlresolvers import reverse_lazy
+from django.forms.widgets import HiddenInput
 
 template = 'dictionaries/type/'
 
@@ -33,11 +34,19 @@ class DicTypesCreateView(DicTypesBaseView, CreateView):
     template_name = template + 'edit.html'
     fields = '__all__'
 
+    def get_form(self, *args, **kwargs):
+        form = super(DicTypesCreateView, self).get_form(*args, **kwargs)
+        if 'category' in self.kwargs:
+            form.fields['category'].initial = Category.objects.get(slug=self.kwargs['category'])
+            form.fields['category'].widget = HiddenInput()
+        return form
+
     def get_context_data(self, **kwargs):
         context = super(DicTypesCreateView, self).get_context_data(**kwargs)
         context['category'] = Category.objects.get(slug=self.kwargs['category'])
         context['back_url'] = self.request.META.get('HTTP_REFERER',
-                                                    reverse_lazy('dictionaries:types-list'))
+                                                    reverse_lazy('dictionaries:types-list',
+                                                                 kwargs={'category': self.kwargs['category']}))
         return context
 
 
@@ -70,4 +79,4 @@ class DicTypesDeleteView(DicTypesBaseView, DeleteView):
     pass
 
     def get_success_url(self):
-        return reverse_lazy('dictionaries:types-list')
+        return reverse_lazy('dictionaries:types-list', kwargs={'category': self.object.category.slug})

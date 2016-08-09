@@ -22,6 +22,14 @@
                         <div class="col-md-9">{{ dict_item.name }}</div>
                     </div>
                 </li>
+                {% if type.slug == 'institutions' %}
+                <li class="list-group-item">
+                   <div class="row">
+                        <div class="col-md-3"><strong>Тип учреждения</strong></div>
+                        <div class="col-md-9">{{ dict_item.get_institution_type_display }}</div>
+                    </div>
+                </li>
+                {% endif %}
               </ul>
             </div>
         </div>

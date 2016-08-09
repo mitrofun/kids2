@@ -5,6 +5,7 @@ from django.views.generic.base import ContextMixin
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from dictionaries.models import Dictionary, Category, DictionariesType
 from django.core.urlresolvers import reverse_lazy
+from django.forms.widgets import HiddenInput
 
 template = 'dictionaries/items/'
 
@@ -53,6 +54,15 @@ class DicItemsCreateView(DictionaryBaseView, CreateView):
                                   )
         return context
 
+    def get_form(self, *args, **kwargs):
+        form = super(DicItemsCreateView, self).get_form(*args, **kwargs)
+        if 'dictionary_type' in self.kwargs:
+            form.fields['type'].initial = DictionariesType.objects.get(slug=self.kwargs['dictionary_type'])
+            form.fields['type'].widget = HiddenInput()
+            if self.kwargs['dictionary_type'] != 'institutions':
+                form.fields['institution_type'].widget = HiddenInput()
+        return form
+
     def get_success_url(self):
         return reverse_lazy('dictionaries:items-list',
                             kwargs={'category': self.kwargs['category'],
@@ -74,6 +84,15 @@ class DicItemsDetailView(DictionaryBaseView, DetailView):
 class DicItemsUpdateView(DictionaryBaseView, UpdateView):
     template_name = template + 'edit.html'
     fields = '__all__'
+
+    def get_form(self, *args, **kwargs):
+        form = super(DicItemsUpdateView, self).get_form(*args, **kwargs)
+        if 'dictionary_type' in self.kwargs:
+            form.fields['type'].initial = DictionariesType.objects.get(slug=self.kwargs['dictionary_type'])
+            form.fields['type'].widget = HiddenInput()
+            if self.kwargs['dictionary_type'] != 'institutions':
+                form.fields['institution_type'].widget = HiddenInput()
+        return form
 
     def get_context_data(self, **kwargs):
         context = super(DicItemsUpdateView, self).get_context_data(**kwargs)
