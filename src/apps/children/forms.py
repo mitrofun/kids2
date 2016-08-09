@@ -11,7 +11,7 @@ class ChildForm(forms.ModelForm):
                                widget=forms.TextInput(attrs={'type': 'date'}))
     locality = forms.ModelChoiceField(Dictionary.objects.filter(type__slug='locality'),
                                       empty_label=None, label='Населенный пункт')
-    street = forms.ModelChoiceField(Dictionary.objects.filter(type__slug='street'),
+    street = forms.ModelChoiceField(Dictionary.objects.filter(type__slug='streets'),
                                     empty_label=None, label='Улица')
 
     class Meta:

@@ -1,0 +1,54 @@
+{% extends 'children/layout.html' %}
+
+{% block page_header %}
+    {{ block.super }}
+    <div class="pull-right">
+        <a href="{% url 'educations:edit' child.id education.id %}" class="btn btn-primary">Редактировать</a>
+        <a href="" class="btn btn-danger" data-toggle="modal" data-target=".delete-modal"
+           onClick='obj_delete("{{ education }}", "{% url 'educations:delete' child.id education.id  %}");'>Удалить</a>
+    </div>
+{% endblock page_header %}
+
+{% block content %}
+
+     {% include 'modals/_modal_delete.html' %}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="panel panel-default">
+          <ul class="list-group">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-md-4 col-xs-4"><strong>Начальная дата</strong></div>
+                    <div class="col-md-8 col-xs-8">{{ education.first_date }}</div>
+                </div>
+            </li>
+             <li class="list-group-item">
+                <div class="row">
+                    <div class="col-md-4 col-xs-4"><strong>Конечная дата</strong></div>
+                    <div class="col-md-8 col-xs-8">{{ education.last_date | default_if_none:'-' }}</div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-md-4 col-xs-4"><strong>Учреждение</strong></div>
+                    <div class="col-md-8 col-xs-8">{{ education.institution | default_if_none:'-' }}</div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-md-4 col-xs-4"><strong>Возростная группа</strong></div>
+                    <div class="col-md-8 col-xs-8">{{ education.group | default_if_none:'-' }}</div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-md-4 col-xs-4"><strong>Класс</strong></div>
+                    <div class="col-md-8 col-xs-8">{{ education.grade | default_if_none:'-' }}</div>
+                </div>
+            </li>
+          </ul>
+        </div>
+    </div>
+</div>
+{% endblock content  %}
