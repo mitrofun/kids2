@@ -20,14 +20,6 @@ class Category(NameSlugUniqueModel):
     def get_absolute_url(self):
         return 'dictionaries:categories-detail', None, {'category': self.slug}
 
-    @permalink
-    def get_edit_url(self):
-        return 'dictionaries:categories-edit', None, {'category': self.slug}
-
-    @permalink
-    def get_delete_url(self):
-        return 'dictionaries:categories-delete', None, {'category': self.slug}
-
 
 class DictionariesType(NameSlugUniqueModel):
     category = models.ForeignKey(Category, verbose_name='Категория')
@@ -45,24 +37,6 @@ class DictionariesType(NameSlugUniqueModel):
     @permalink
     def get_absolute_url(self):
         return 'dictionaries:types-detail', \
-               None, \
-               {
-                   'category': self.category.slug,
-                   'dictionary_type': self.slug
-               }
-
-    @permalink
-    def get_edit_url(self):
-        return 'dictionaries:types-edit', \
-               None, \
-               {
-                   'category': self.category.slug,
-                   'dictionary_type': self.slug
-               }
-
-    @permalink
-    def get_delete_url(self):
-        return 'dictionaries:types-delete', \
                None, \
                {
                    'category': self.category.slug,
@@ -87,26 +61,6 @@ class Dictionary(NameUniqueModel):
     @permalink
     def get_absolute_url(self):
         return 'dictionaries:items-detail', \
-               None, \
-               {
-                   'category': self.type.category.slug,
-                   'dictionary_type': self.type.slug,
-                   'dictionary_id': self.id
-               }
-
-    @permalink
-    def get_edit_url(self):
-        return 'dictionaries:items-edit',  \
-               None, \
-               {
-                   'category': self.type.category.slug,
-                   'dictionary_type': self.type.slug,
-                   'dictionary_id': self.id
-               }
-
-    @permalink
-    def get_delete_url(self):
-        return 'dictionaries:items-delete',  \
                None, \
                {
                    'category': self.type.category.slug,

@@ -3,9 +3,9 @@
 {% block page_header %}
             {{ block.super }}
             <div class="pull-right">
-                 <a href="{{ dict_item.get_edit_url }}" class="btn btn-primary">Редактировать</a>
+                 <a href="{% url 'dictionaries:items-edit' category.slug type.slug dict_item.id %}" class="btn btn-primary">Редактировать</a>
                  <a href="javascript:void(0);" class="btn btn-danger" data-toggle="modal" data-target=".delete-modal"
-               onClick='obj_delete("{{ dict_item }}", "{{ dict_item.get_delete_url }}");'>Удалить</a>
+               onClick='obj_delete("{{ dict_item }}", "{% url 'dictionaries:items-delete' category.slug type.slug dict_item.id %}");'>Удалить</a>
             </div>
 {% endblock page_header %}
 

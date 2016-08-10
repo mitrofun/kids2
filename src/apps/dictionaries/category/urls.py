@@ -10,11 +10,6 @@ urlpatterns = [
     url(r'^(?P<category>[-\w]+)/$', CategoriesDetailView.as_view(), name='categories-detail'),
     url(r'^(?P<category>[-\w]+)/edit/$', CategoriesUpdateView.as_view(), name='categories-edit'),
     url(r'^(?P<category>[-\w]+)/delete/$', CategoriesDeleteView.as_view(), name='categories-delete'),
-
     url(r'^(?P<category>[-\w]+)/types/', include('dictionaries.type.urls')),
-    # url(r'^(?P<category>[-\w]+)/types/(?P<dictionary_type>[-\w]+)/items/$',
-    #     DictionariesView.as_view(),
-    #     name='dictionaries'
-    #     ),
 
 ]
