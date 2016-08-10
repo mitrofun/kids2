@@ -5,6 +5,7 @@ from django.views.generic.base import ContextMixin
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from dictionaries.models import Category
 from django.core.urlresolvers import reverse_lazy
+from dictionaries.views import EDIT_TEMPLATE, get_template
 
 template = 'dictionaries/category/'
 
@@ -17,7 +18,7 @@ class CategoriesBaseView(LoginRequiredMixin, ContextMixin):
 
 class CategoriesListView(CategoriesBaseView, ListView):
     context_object_name = 'categories'
-    template_name = template + 'list.html'
+    template_name = get_template(template, 'list')
 
     def get_queryset(self):
         return Category.objects.all()
@@ -29,7 +30,7 @@ class CategoriesListView(CategoriesBaseView, ListView):
 
 
 class CategoriesCreateView(CategoriesBaseView, CreateView):
-    template_name = template + 'edit.html'
+    template_name = EDIT_TEMPLATE
     fields = '__all__'
 
     def get_context_data(self, **kwargs):
@@ -39,11 +40,11 @@ class CategoriesCreateView(CategoriesBaseView, CreateView):
 
 
 class CategoriesDetailView(CategoriesBaseView, DetailView):
-    template_name = template + 'detail.html'
+    template_name = get_template(template, 'detail')
 
 
 class CategoriesUpdateView(CategoriesBaseView, UpdateView):
-    template_name = template + 'edit.html'
+    template_name = EDIT_TEMPLATE
     fields = '__all__'
 
     def get_context_data(self, **kwargs):

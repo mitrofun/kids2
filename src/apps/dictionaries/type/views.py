@@ -6,6 +6,8 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 from dictionaries.models import DictionariesType, Category
 from django.core.urlresolvers import reverse_lazy
 from django.forms.widgets import HiddenInput
+from dictionaries.views import EDIT_TEMPLATE, get_template
+
 
 template = 'dictionaries/type/'
 
@@ -18,7 +20,7 @@ class DicTypesBaseView(LoginRequiredMixin, ContextMixin):
 
 class DicTypesListView(DicTypesBaseView, ListView):
     context_object_name = 'types'
-    template_name = template + 'list.html'
+    template_name = get_template(template, 'list')
 
     def get_queryset(self):
         return DictionariesType.objects.filter(category__slug=(self.kwargs['category']))
@@ -31,7 +33,7 @@ class DicTypesListView(DicTypesBaseView, ListView):
 
 
 class DicTypesCreateView(DicTypesBaseView, CreateView):
-    template_name = template + 'edit.html'
+    template_name = EDIT_TEMPLATE
     fields = '__all__'
 
     def get_form(self, *args, **kwargs):
@@ -51,7 +53,7 @@ class DicTypesCreateView(DicTypesBaseView, CreateView):
 
 
 class DicTypesDetailView(DicTypesBaseView, DetailView):
-    template_name = template + 'detail.html'
+    template_name = get_template(template, 'detail')
 
     def get_context_data(self, **kwargs):
         context = super(DicTypesDetailView, self).get_context_data(**kwargs)
@@ -60,7 +62,7 @@ class DicTypesDetailView(DicTypesBaseView, DetailView):
 
 
 class DicTypesUpdateView(DicTypesBaseView, UpdateView):
-    template_name = template + 'edit.html'
+    template_name = EDIT_TEMPLATE
     fields = '__all__'
 
     def get_context_data(self, **kwargs):
