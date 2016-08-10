@@ -87,7 +87,7 @@
           <!-- Nav tabs -->
           <ul class="nav nav-tabs nav-justified" role="tablist">
             {% for param in params %}
-            <li role="presentation" class="active">
+            <li role="presentation" {% if forloop.first %}class="active"{% endif %}>
                 <a href="#{{ param.slug }}" aria-controls="{{ param.slug }}" role="tab" data-toggle="tab">{{ param.name }}</a>
             </li>
             {% endfor %}
@@ -96,11 +96,11 @@
             <!-- Tab panes -->
 
             <div class="tab-content">
+            {% for param in params %}
 
-
-                <div role="tabpanel" class="tab-pane fade active in" id="education">
+                <div role="tabpanel" class="tab-pane fade {% if forloop.first %}active in{% endif %}" id="{{ param.slug }}">
                     <h4 class="tab-header">
-                        <span class="title title_tab">История обучения</span>
+                        <span class="title title_tab">{{ param.name }}</span>
                         <div class="pull-right">
                             <a href="{% url 'educations:list' child.id %}" class="btn btn-default">Вся история</a>
                             <a href="{% url 'educations:add' child.id %}" class="btn btn-primary">Добавить</a>
@@ -112,7 +112,7 @@
                     {% endwith %}
                 </div>
 
-
+            {% endfor %}
             </div>
 
         </div>
