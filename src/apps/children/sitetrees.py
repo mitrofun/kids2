@@ -12,6 +12,7 @@ sitetrees = (
                     item('Редактировать', 'children:edit child.id', in_menu=False,
                          in_sitetree=False),
                     item('Удалить', 'children:edit child.id', in_menu=False, in_sitetree=False),
+
                     item('История обучения', 'educations:list child.id', in_menu=False,
                          in_sitetree=False, children=[
                             item('Добавить', 'educations:add child.id', in_menu=False,
@@ -24,7 +25,20 @@ sitetrees = (
                                          in_sitetree=False),
                                     ]),
                             ]),
-                    ]),
+                    item('История здоровья', 'health:list child.id', in_menu=False,
+                         in_sitetree=False, children=[
+                            # item('Добавить', 'health:add child.id', in_menu=False,
+                            #      in_sitetree=False),
+                            # item('{{ health }}', 'health:detail child.id health.id',
+                            #      in_menu=False, in_sitetree=False, children=[
+                            #         item('Редактировать', 'health:edit child.id health.id', in_menu=False,
+                            #              in_sitetree=False),
+                            #         item('Удалить', 'health:edit child.id health.id', in_menu=False,
+                            #              in_sitetree=False),
+                            #     ]),
+                        ]),
+                ]),
+
         ]),
     ]),
 )

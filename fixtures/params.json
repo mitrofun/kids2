@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Образование",
+    "slug": "education",
+    "position": "1"
+  },
+  {
+    "name": "Состояние здоровья",
+    "slug": "health",
+    "position": "2"
+  },
+  {
+    "name": "Статус родителей",
+    "slug": "parent",
+    "position": "3"
+  },
+  {
+    "name": "Группа риска",
+    "slug": "risk",
+    "position": "4"
+  },
+  {
+    "name": "Примечание",
+    "slug": "note",
+    "position": "5"
+  }
+]

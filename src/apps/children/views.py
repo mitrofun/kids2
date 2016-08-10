@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from children.models import Child
 from children.forms import ChildForm
+from history.models import Param
 
 
 class ChildrenBaseView(LoginRequiredMixin, ContextMixin):
@@ -35,6 +36,11 @@ class ChildrenCreateView(ChildBaseView, CreateView):
 
 class ChildrenDetailView(ChildBaseView, DetailView):
     template_name = 'children/children_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ChildrenDetailView, self).get_context_data(**kwargs)
+        context['params'] = Param.objects.all()
+        return context
 
 
 class ChildrenUpdateView(ChildBaseView, UpdateView):

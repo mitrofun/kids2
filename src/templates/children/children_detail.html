@@ -1,5 +1,5 @@
 {% extends 'children/layout.html' %}
-{% load history_param %}
+
 
 {% block page_header %}
     {{ block.super }}
@@ -80,33 +80,24 @@
     </div>
     </div>
 </div>
-
+{% if params %}
 <div class="row">
     <div class="col-lg-12">
         <div class="panel">
           <!-- Nav tabs -->
           <ul class="nav nav-tabs nav-justified" role="tablist">
+            {% for param in params %}
             <li role="presentation" class="active">
-                <a href="#education" aria-controls="education" role="tab" data-toggle="tab">Образование</a>
+                <a href="#{{ param.slug }}" aria-controls="{{ param.slug }}" role="tab" data-toggle="tab">{{ param.name }}</a>
             </li>
-            <li role="presentation">
-                <a href="#health" aria-controls="health" role="tab" data-toggle="tab">Состояние здоровья</a>
-            </li>
-            <li role="presentation">
-                <a href="#family" aria-controls="family" role="tab" data-toggle="tab">Статус семьи</a>
-            </li>
-            <li role="presentation">
-                <a href="#risk" aria-controls="risk" role="tab" data-toggle="tab">Группа риска</a>
-            </li>
-            <li role="presentation">
-                <a href="#note" aria-controls="note" role="tab" data-toggle="tab">Примечание</a>
-            </li>
+            {% endfor %}
           </ul>
 
             <!-- Tab panes -->
 
             <div class="tab-content">
-                <!--// Education \\-->
+
+
                 <div role="tabpanel" class="tab-pane fade active in" id="education">
                     <h4 class="tab-header">
                         <span class="title title_tab">История обучения</span>
@@ -116,78 +107,16 @@
                         </div>
                     </h4>
 
-                    {% with child.studenthistory_set.all|slice:":5" as education_list %}
-                        {% child_education_history child education_list %}
+                    {% with child.paramhistory_set.all|slice:":5" as paramhistory %}
+                        {{ paramhistory }}
                     {% endwith %}
                 </div>
-                <!--\\ Education //-->
 
-                <!--// Health \\-->
-                <div role="tabpanel" class="tab-pane fade" id="health">
-                    <h4 class="tab-header">
-                        <span class="title title_tab">Состояние здоровья</span>
-                        <div class="pull-right">
-                            <a href="{% url 'educations:list' child.id %}" class="btn btn-default">Вся история</a>
-                            <a href="{% url 'educations:add' child.id %}" class="btn btn-primary">Добавить</a>
-                        </div>
-                    </h4>
-
-                    {% with child.healthhistory_set.all|slice:":5" as health_list %}
-                        {% child_health_history child health_list %}
-                    {% endwith %}
-                </div>
-                <!--\\ Health //-->
-
-                <!--// Family \\-->
-                <div role="tabpanel" class="tab-pane fade" id="family">
-                    <h4 class="tab-header">
-                        <span class="title title_tab">Статус семьи</span>
-                        <div class="pull-right">
-                            <a href="{% url 'educations:list' child.id %}" class="btn btn-default">Вся история</a>
-                            <a href="{% url 'educations:add' child.id %}" class="btn btn-primary">Добавить</a>
-                        </div>
-                    </h4>
-
-                {% with child.parentsstateshistory_set.all as parents_list %}
-                     {% child_parent_history child parents_list %}
-                {% endwith %}
-                </div>
-                <!--\\ Family //-->
-
-                <!--// Risk \\-->
-                <div role="tabpanel" class="tab-pane fade" id="risk">
-                    <h4 class="tab-header">
-                        <span class="title title_tab">Группа риска</span>
-                        <div class="pull-right">
-                            <a href="{% url 'educations:list' child.id %}" class="btn btn-default">Вся история</a>
-                            <a href="{% url 'educations:add' child.id %}" class="btn btn-primary">Добавить</a>
-                        </div>
-                    </h4>
-                {% with child.riskhistory_set.all as risk_history %}
-                    {% child_risk_history child risk_history %}
-                {% endwith %}
-                </div>
-                <!--\\ Risk //-->
-
-                <!--// Notes \\-->
-                <div role="tabpanel" class="tab-pane fade" id="note">
-
-                    <h4 class="tab-header">
-                        <span class="title title_tab">Примечание</span>
-                        <div class="pull-right">
-                            <a href="{% url 'educations:list' child.id %}" class="btn btn-default">Вся история</a>
-                            <a href="{% url 'educations:add' child.id %}" class="btn btn-primary">Добавить</a>
-                        </div>
-                    </h4>
-                {% with child.notehistory_set.all as note_history %}
-                    {% child_note_history child note_history %}
-                {% endwith %}
-                </div>
-                <!--\\ Notes //-->
 
             </div>
 
         </div>
     </div>
 </div>
+{% endif %}
 {% endblock content %}

@@ -34,6 +34,7 @@ INTERNAL_APPS = [
     'accounts',
     'children',
     'parameters',
+    'history',
     'dictionaries',
 ]
 
