@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+    {% if note_list %}
+        <div class="panel-heading">Последние записи</div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Начальная дата</th>
+                    <th>Конечная дата</th>
+                    <th>Состояние</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    {% for note in note_list %}
+                        <td>{{ note.first_date }}</td>
+                        <td>{{ note.last_date|default_if_none:"-" }}</td>
+                        <td>{{ note.text }}</td>
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    {% else %}
+        <div class="panel-body">Нет истории</div>
+    {% endif %}
+</div>

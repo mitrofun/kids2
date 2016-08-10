@@ -50,36 +50,59 @@ class EducationAddView(EducationDetailBaseView, CreateView):
         return form
 
     def form_valid(self, form):
+
         one_day = timedelta(days=1)
         next_history = None
         open_history_list = StudentHistory.objects.filter(child=self.kwargs['child_id']).filter(last_date=None)
-        next_history_list = StudentHistory.objects. \
-            filter(child=self.kwargs['child_id']). \
-            filter(first_date__gt=form.cleaned_data['first_date']).order_by('first_date')
-        if len(next_history_list) > 0:
+
+        if 'child_id' in self.kwargs:
+            all_history = StudentHistory.objects.filter(child=self.kwargs['child_id']). \
+                order_by('first_date')
+            next_history_list = StudentHistory.objects. \
+                filter(child=self.kwargs['child_id']). \
+                filter(first_date__gt=form.cleaned_data['first_date']).order_by('first_date')
+        else:
+            all_history = StudentHistory.objects.filter(child=self.kwargs['child_id']). \
+                order_by('first_date')
+            next_history_list = StudentHistory.objects. \
+                filter(child=self.kwargs['child_id']). \
+                filter(first_date__gt=form.cleaned_data['first_date']).order_by('first_date')
+
+        if len(all_history):
+            for history in all_history:
+                if form.cleaned_data['first_date'] <= history.first_date:
+                    text_error = 'Ранее сужествует история, установите более раннюю дату'
+                    form.errors['first_date'] = [text_error]
+                    return self.form_invalid(form)
+
+        if len(next_history_list):
             next_history = next_history_list[0]
 
-        if len(open_history_list) > 0:
+        if len(open_history_list):
             for open_history in open_history_list:
-                if open_history.first_date < form.cleaned_data['first_date'] - one_day:
+                if open_history.first_date <= form.cleaned_data['first_date'] - one_day:
                     open_history.last_date = form.cleaned_data['first_date'] - one_day
                     open_history.save()
+
         if form.cleaned_data['group'] and form.cleaned_data['grade']:
             text_error = 'Не возможно обновреммено группа и класс.Выберете что-то одно'
             form.errors['group'] = [text_error]
             form.errors['grade'] = [text_error]
             return self.form_invalid(form)
+
         if form.cleaned_data['last_date']:
             if form.cleaned_data['last_date'] < form.cleaned_data['first_date']:
                 text_error = 'Конечная дата не может быть меньше начальной'
                 form.errors['last_date'] = [text_error]
                 return self.form_invalid(form)
+
             if next_history:
                 if form.cleaned_data['last_date'] > next_history.first_date - one_day:
                     text_error = 'Позже уже есть история.' \
                                  'Конечная дата не может быть больше {}'.format(next_history.first_date - one_day)
                     form.errors['last_date'] = [text_error]
                     return self.form_invalid(form)
+
         if form.cleaned_data['last_date'] is None and next_history:
             text_error = 'Позже уже есть история.' \
                          'Данная история должна быть закрыта ' \
@@ -109,36 +132,60 @@ class EducationUpdateView(EducationDetailBaseView, UpdateView):
         return form
 
     def form_valid(self, form):
+
         one_day = timedelta(days=1)
         next_history = None
         open_history_list = StudentHistory.objects.filter(child=self.kwargs['child_id']).filter(last_date=None)
-        next_history_list = StudentHistory.objects. \
-            filter(child=self.kwargs['child_id']). \
-            filter(first_date__gt=form.cleaned_data['first_date']).order_by('first_date')
-        if len(next_history_list) > 0:
+
+        if 'child_id' in self.kwargs:
+            all_history = StudentHistory.objects.filter(child=self.kwargs['child_id']).\
+                exclude(pk=self.kwargs['education_id']).order_by('first_date')
+            next_history_list = StudentHistory.objects. \
+                filter(child=self.kwargs['child_id']). \
+                exclude(pk=self.kwargs['education_id']). \
+                filter(first_date__gt=form.cleaned_data['first_date']).order_by('first_date')
+        else:
+            all_history = StudentHistory.objects.filter(child=self.kwargs['child_id']). \
+                order_by('first_date')
+            next_history_list = StudentHistory.objects. \
+                filter(child=self.kwargs['child_id']). \
+                filter(first_date__gt=form.cleaned_data['first_date']).order_by('first_date')
+
+        if len(all_history):
+            for history in all_history:
+                if form.cleaned_data['first_date'] <= history.first_date:
+                    text_error = 'Ранее сужествует история, установите более раннюю дату'
+                    form.errors['first_date'] = [text_error]
+                    return self.form_invalid(form)
+
+        if len(next_history_list):
             next_history = next_history_list[0]
 
-        if len(open_history_list) > 0:
+        if len(open_history_list):
             for open_history in open_history_list:
-                if open_history.first_date < form.cleaned_data['first_date'] - one_day:
+                if open_history.first_date <= form.cleaned_data['first_date'] - one_day:
                     open_history.last_date = form.cleaned_data['first_date'] - one_day
                     open_history.save()
+
         if form.cleaned_data['group'] and form.cleaned_data['grade']:
             text_error = 'Не возможно обновреммено группа и класс.Выберете что-то одно'
             form.errors['group'] = [text_error]
             form.errors['grade'] = [text_error]
             return self.form_invalid(form)
+
         if form.cleaned_data['last_date']:
             if form.cleaned_data['last_date'] < form.cleaned_data['first_date']:
                 text_error = 'Конечная дата не может быть меньше начальной'
                 form.errors['last_date'] = [text_error]
                 return self.form_invalid(form)
+
             if next_history:
                 if form.cleaned_data['last_date'] > next_history.first_date - one_day:
                     text_error = 'Позже уже есть история.' \
                                  'Конечная дата не может быть больше {}'.format(next_history.first_date - one_day)
                     form.errors['last_date'] = [text_error]
                     return self.form_invalid(form)
+
         if form.cleaned_data['last_date'] is None and next_history:
             text_error = 'Позже уже есть история.' \
                          'Данная история должна быть закрыта ' \

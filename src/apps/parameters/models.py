@@ -43,7 +43,7 @@ class ParentsStatesHistory(HistoryParamsBase):
     def __str__(self):
         status_list = []
         for status in self.status.all():
-            status_list.append(status.get_status_display())
+            status_list.append(status)
         return '{} {}'.format(self.child, status_list)
 
 
@@ -56,10 +56,10 @@ class HealthHistory(HistoryParamsBase):
         verbose_name_plural = 'История состояния здоровья'
 
     def __str__(self):
-        status_list = []
-        for status in self.status.all():
-            status_list.append(status.get_status_display())
-        return '{} {}'.format(self.child, status_list)
+        states_list = []
+        for states in self.states.all():
+            states_list.append(states)
+        return '{} {}'.format(self.child, states_list)
 
 
 class RiskHistory(HistoryParamsBase):

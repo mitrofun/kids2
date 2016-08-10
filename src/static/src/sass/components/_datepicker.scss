@@ -7,7 +7,9 @@
   .next,
   .day,
   .month,
-  .year {
+  .year,
+  .today,
+  .clear {
     &:hover {
       background: #000!important;
     }

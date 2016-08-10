@@ -90,7 +90,7 @@
                 <a href="#education" aria-controls="education" role="tab" data-toggle="tab">Образование</a>
             </li>
             <li role="presentation">
-                <a href="#health" aria-controls="health" role="tab" data-toggle="tab">Статус здоровья</a>
+                <a href="#health" aria-controls="health" role="tab" data-toggle="tab">Состояние здоровья</a>
             </li>
             <li role="presentation">
                 <a href="#family" aria-controls="family" role="tab" data-toggle="tab">Статус семьи</a>
@@ -103,19 +103,16 @@
             </li>
           </ul>
 
-          <!-- Tab panes -->
+            <!-- Tab panes -->
 
             <div class="tab-content">
+                <!--// Education \\-->
                 <div role="tabpanel" class="tab-pane fade active in" id="education">
                     <h4 class="tab-header">
-                        История обучения
+                        <span class="title title_tab">История обучения</span>
                         <div class="pull-right">
-                        <a href="{% url 'educations:list' child.id %}" class="btn btn-default">
-                            Вся история
-                        </a>
-                        <a href="{% url 'educations:add' child.id %}" class="btn btn-primary">
-                            Добавить
-                        </a>
+                            <a href="{% url 'educations:list' child.id %}" class="btn btn-default">Вся история</a>
+                            <a href="{% url 'educations:add' child.id %}" class="btn btn-primary">Добавить</a>
                         </div>
                     </h4>
 
@@ -123,127 +120,71 @@
                         {% child_education_history child education_list %}
                     {% endwith %}
                 </div>
+                <!--\\ Education //-->
 
+                <!--// Health \\-->
                 <div role="tabpanel" class="tab-pane fade" id="health">
+                    <h4 class="tab-header">
+                        <span class="title title_tab">Состояние здоровья</span>
+                        <div class="pull-right">
+                            <a href="{% url 'educations:list' child.id %}" class="btn btn-default">Вся история</a>
+                            <a href="{% url 'educations:add' child.id %}" class="btn btn-primary">Добавить</a>
+                        </div>
+                    </h4>
 
-                {% with child.healthhistory_set.all as health_history %}
-                 {% if health_history %}
-                    <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Начальная дата</th>
-                                <th>Конечная дата</th>
-                                <th>Состояние</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                {% for health in health_history  %}
-                                <td>{{ health.first_date }}</td>
-                                <td>{{ health.last_date|default_if_none:"-" }}</td>
-                                <td>{{ health.text|default_if_none:"-"  }}</td>
-                                {% endfor %}
-                            </tr>
-                        </tbody>
-                    </table>
+                    {% with child.healthhistory_set.all|slice:":5" as health_list %}
+                        {% child_health_history child health_list %}
+                    {% endwith %}
                 </div>
-                  {% else %}
-                  <br/><p>Нет истории</p>
-                  {% endif %}
-                {% endwith %}
+                <!--\\ Health //-->
 
-                </div>
-
+                <!--// Family \\-->
                 <div role="tabpanel" class="tab-pane fade" id="family">
+                    <h4 class="tab-header">
+                        <span class="title title_tab">Статус семьи</span>
+                        <div class="pull-right">
+                            <a href="{% url 'educations:list' child.id %}" class="btn btn-default">Вся история</a>
+                            <a href="{% url 'educations:add' child.id %}" class="btn btn-primary">Добавить</a>
+                        </div>
+                    </h4>
 
-                {% with child.familystatushistory_set.all as familystatus_history %}
-                 {% if familystatus_history %}
-                    <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Начальная дата</th>
-                                <th>Конечная дата</th>
-                                <th>Статус</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                {% for familystatus in familystatus_history  %}
-                                <td>{{ familystatus.first_date }}</td>
-                                <td>{{ familystatus.last_date|default_if_none:"-" }}</td>
-                                <td>{% for status in familystatus.status.all %}
-                                    {{ status }}{% if not forloop.last %}, {% endif %}
-                                {% endfor %}</td>
-                                {% endfor %}
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                  {% else %}
-                  <br/><p>Нет истории</p>
-                  {% endif %}
+                {% with child.parentsstateshistory_set.all as parents_list %}
+                     {% child_parent_history child parents_list %}
                 {% endwith %}
                 </div>
+                <!--\\ Family //-->
 
+                <!--// Risk \\-->
                 <div role="tabpanel" class="tab-pane fade" id="risk">
+                    <h4 class="tab-header">
+                        <span class="title title_tab">Группа риска</span>
+                        <div class="pull-right">
+                            <a href="{% url 'educations:list' child.id %}" class="btn btn-default">Вся история</a>
+                            <a href="{% url 'educations:add' child.id %}" class="btn btn-primary">Добавить</a>
+                        </div>
+                    </h4>
                 {% with child.riskhistory_set.all as risk_history %}
-                 {% if risk_history %}
-                    <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Начальная дата</th>
-                                <th>Конечная дата</th>
-                                <th>Группа риска</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                {% for risk in risk_history  %}
-                                <td>{{ risk.first_date }}</td>
-                                <td>{{ risk.last_date|default_if_none:"-" }}</td>
-                                <td>{{ risk.get_group_display }}</td>
-                                {% endfor %}
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                  {% else %}
-                  <br/><p>Нет истории</p>
-                  {% endif %}
+                    {% child_risk_history child risk_history %}
                 {% endwith %}
                 </div>
+                <!--\\ Risk //-->
 
+                <!--// Notes \\-->
                 <div role="tabpanel" class="tab-pane fade" id="note">
-            {% with child.notehistory_set.all as note_history %}
-             {% if note_history %}
-                <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Начальная дата</th>
-                            <th>Конечная дата</th>
-                            <th>Примечание</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            {% for note in note_history  %}
-                            <td>{{ note.first_date }}</td>
-                            <td>{{ note.last_date|default_if_none:"-" }}</td>
-                            <td>{{ note.text }}</td>
-                            {% endfor %}
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-              {% else %}
-              <br/><p>Нет истории</p>
-              {% endif %}
-            {% endwith %}
-            </div>
+
+                    <h4 class="tab-header">
+                        <span class="title title_tab">Примечание</span>
+                        <div class="pull-right">
+                            <a href="{% url 'educations:list' child.id %}" class="btn btn-default">Вся история</a>
+                            <a href="{% url 'educations:add' child.id %}" class="btn btn-primary">Добавить</a>
+                        </div>
+                    </h4>
+                {% with child.notehistory_set.all as note_history %}
+                    {% child_note_history child note_history %}
+                {% endwith %}
+                </div>
+                <!--\\ Notes //-->
+
             </div>
 
         </div>
