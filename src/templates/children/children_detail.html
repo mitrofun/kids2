@@ -101,7 +101,7 @@
                     <h4 class="tab-header">
                         <span class="title title_tab">{{ param.name }}</span>
                         <div class="pull-right">
-                            <a href="#{{ param.slug }}" class="btn btn-primary">Добавить</a>
+                            <a href="{% url 'children:history-add' child.id param.slug %}" class="btn btn-primary">Добавить</a>
                         </div>
                     </h4>
                     {% with child.paramhistory_set.all as param_history %}

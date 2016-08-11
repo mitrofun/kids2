@@ -12,8 +12,12 @@ sitetrees = (
                     item('Редактировать', 'children:edit child.id', in_menu=False,
                          in_sitetree=False),
                     item('Удалить', 'children:edit child.id', in_menu=False, in_sitetree=False),
+
+                    item('Добавить {{param.name}}', 'children:history-add child.id param.slug',
+                         in_menu=False, in_sitetree=False),
+                ]),
+
                 ]),
 
         ]),
-    ]),
 )
