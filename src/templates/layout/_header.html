@@ -13,7 +13,7 @@
             <a class="navbar-brand" href="{% url 'dashboard' %}">Учет детей</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-            {% sitetree_menu from "children_tree" include "trunk,topmenu" template "sitetree/menu_bootstrap3.html" %}
+            {% sitetree_menu from "children" include "trunk,topmenu" template "sitetree/menu_bootstrap3.html" %}
             {% sitetree_menu from "dictionaries" include "trunk,topmenu" template "sitetree/menu_bootstrap3.html" %}
         <form class="navbar-form navbar-right" role="search">
             <div class="form-search search-only">

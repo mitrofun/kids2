@@ -1,7 +1,7 @@
 from django.db import models
 from children.models import Child
 from common.models import HistoryModel, NameSlugUniqueModel
-from parameters.base_models import HistoryParamsBase
+from history.base_models import HistoryParamsBase
 from dictionaries.models import Category, DictionariesType, Dictionary
 
 
@@ -44,3 +44,9 @@ class ParamHistory(HistoryParamsBase):
         verbose_name = 'Истории параметров'
         verbose_name_plural = 'История параметров'
         ordering = ['-first_date', '-last_date', ]
+
+    def __str__(self):
+        if self.last_date:
+            return 'c {} по {} - {}'.format(self.first_date, self.last_date, self.parameter.name)
+        else:
+            return 'c {} по н.в. - {}'.format(self.first_date, self.parameter.name)

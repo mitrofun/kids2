@@ -1,0 +1,9 @@
+{% if last_education %}
+    <td>{{ last_education.institution|default_if_none:'-' }}</td>
+    <td>{{ last_education.grade|default_if_none:'-' }}</td>
+    <td>{{ last_education.group|default_if_none:'-' }}</td>
+{% else %}
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+{% endif %}

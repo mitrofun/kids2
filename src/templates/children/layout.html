@@ -1,12 +1,12 @@
 {% extends 'layout/content.html' %}
 {% load sitetree %}
 
-{% block title %}{% sitetree_page_title from "children_tree" %} |  {{ block.super }}{% endblock title %}
+{% block title %}{% sitetree_page_title from "children" %} |  {{ block.super }}{% endblock title %}
 
 {% block page_header %}
-    {% sitetree_page_title from "children_tree" %}
+    {% sitetree_page_title from "children" %}
 {% endblock page_header %}
 
 {% block breadcrumbs %}
-    {% sitetree_breadcrumbs from "children_tree" template "layout/breadcrumbs.html" %}
+    {% sitetree_breadcrumbs from "children" template "layout/breadcrumbs.html" %}
 {% endblock breadcrumbs %}

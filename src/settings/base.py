@@ -26,14 +26,12 @@ EXTERNAL_APPS = [
     'django_extensions',
     'compressor',
     'bootstrapform',
-    'sitetree',
-    'django_filters',
+    'sitetree'
 ]
 
 INTERNAL_APPS = [
     'accounts',
     'children',
-    'parameters',
     'history',
     'dictionaries',
 ]

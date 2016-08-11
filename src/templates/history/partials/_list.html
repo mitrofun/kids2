@@ -1,0 +1,135 @@
+<div class="panel panel-default">
+{% if params %}
+{% if param_type == 'education' %}
+<div class="panel-heading">История</div>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Начальная дата</th>
+                    <th>Конечная дата</th>
+                    <th>Учреждение</th>
+                    <th>Класс</th>
+                    <th>Возрастная группа</th>
+                </tr>
+            </thead>
+            <tbody>
+             {% for param in params  %}
+                <tr>
+                {% if param.parameter.slug == 'education' %}
+                    <td><a href="#">{{ param.first_date }}</a></td>
+                    <td>{{ param.last_date|default_if_none:"-" }}</td>
+                    <td>{{ param.institution|default_if_none:"-" }}</td>
+                    <td>{{ param.grade|default_if_none:"-" }}</td>
+                    <td>{{ param.group|default_if_none:"-" }}</td>
+                {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% elif param_type == 'health' %}
+        <div class="panel-heading">История</div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Начальная дата</th>
+                    <th>Конечная дата</th>
+                    <th>Состояние</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    {% for param in params %}
+                        {% if param.parameter.slug == 'health' %}
+                            <td><a href="#">{{ param.first_date }}</a></td>
+                            <td>{{ param.last_date|default_if_none:"-" }}</td>
+                            <td>{% for states in param.health_states.all %}
+                                {{ states }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+        </div>
+{% elif param_type == 'parent' %}
+ <div class="panel-heading">История</div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Начальная дата</th>
+                    <th>Конечная дата</th>
+                    <th>Статус</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    {% for param in params  %}
+                        {% if param.parameter.slug == 'parent' %}
+                            <td><a href="#">{{ param.first_date }}</a></td>
+                            <td>{{ param.last_date|default_if_none:"-" }}</td>
+                            <td>{% for status in param.parents_status.all %}
+                                {{ status }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+        </div>
+{% elif param_type == 'risk' %}
+            <div class="panel-heading">История</div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Начальная дата</th>
+                        <th>Конечная дата</th>
+                        <th>Группа риска</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {% for param in params  %}
+                                {% if param.parameter.slug == 'risk' %}
+                                    <td><a href="#">{{ param.first_date }}</a></td>
+                                    <td>{{ param.last_date|default_if_none:"-" }}</td>
+                                    <td>{{ param.get_risk_group_display }}</td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+{% elif param_type == 'note' %}
+        <div class="panel-heading">История</div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Начальная дата</th>
+                    <th>Конечная дата</th>
+                    <th>Примечание</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    {% for param in params %}
+                        {% if param.parameter.slug == 'note' %}
+                        <td><a href="#">{{ param.first_date }}</a></td>
+                        <td>{{ param.last_date|default_if_none:"-" }}</td>
+                        <td>{{ param.text }}</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+        </div>
+{% endif %}
+{% else %}
+<div class="panel-body">Нет истории</div>
+{% endif %}
+</div>

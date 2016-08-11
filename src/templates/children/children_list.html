@@ -1,4 +1,5 @@
 {% extends 'children/layout.html' %}
+{% load get_params %}
 {% block page_header %}
             {{ block.super }}
             <div class="pull-right">
@@ -25,24 +26,16 @@
                         </tr>
                     </thead>
                     <tbody>
+
                     {% for child in children %}
                         <tr>
                             <td><a href="{{ child.get_absolute_url }}">{{ child }}</a></td>
                             <td>{{ child.birthday }}</td>
                             <td>{{ child.get_age }}</td>
-                            {% with child.studenthistory_set.all.first as student_history %}
-                                {% if student_history %}
-                                    <td>{{ student_history.institution|default_if_none:'-' }}</td>
-                                    <td>{{ student_history.grade|default_if_none:'-' }}</td>
-                                    <td>{{ student_history.group|default_if_none:'-' }}</td>
-                                {% else %}
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                {% endif %}
-                            {% endwith %}
+                            {% get_last_education child %}
                         </tr>
                     {% endfor %}
+
                     </tbody>
                 </table>
             </div>

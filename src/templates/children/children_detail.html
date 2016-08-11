@@ -1,5 +1,5 @@
 {% extends 'children/layout.html' %}
-
+{% load get_params %}
 
 {% block page_header %}
     {{ block.super }}
@@ -97,18 +97,15 @@
 
             <div class="tab-content">
             {% for param in params %}
-
                 <div role="tabpanel" class="tab-pane fade {% if forloop.first %}active in{% endif %}" id="{{ param.slug }}">
                     <h4 class="tab-header">
                         <span class="title title_tab">{{ param.name }}</span>
                         <div class="pull-right">
-                            <a href="{% url 'educations:list' child.id %}" class="btn btn-default">Вся история</a>
-                            <a href="{% url 'educations:add' child.id %}" class="btn btn-primary">Добавить</a>
+                            <a href="#{{ param.slug }}" class="btn btn-primary">Добавить</a>
                         </div>
                     </h4>
-
-                    {% with child.paramhistory_set.all|slice:":5" as paramhistory %}
-                        {{ paramhistory }}
+                    {% with child.paramhistory_set.all as param_history %}
+                        {% get_history child param_history param.slug %}
                     {% endwith %}
                 </div>
 
