@@ -3,6 +3,7 @@ from django.views.generic.base import ContextMixin, View
 from django.views.generic import CreateView
 from history.models import ParamHistory, Param
 from children.models import Child
+from history.forms import HistoryForm
 
 
 class HistoryBaseView(LoginRequiredMixin, ContextMixin, View):
@@ -20,3 +21,7 @@ class HistoryBaseView(LoginRequiredMixin, ContextMixin, View):
 class HistoryAddView(HistoryBaseView, CreateView):
     template_name = 'history/edit.html'
     fields = '__all__'
+
+    def get_form_class(self):
+        return HistoryForm
+
