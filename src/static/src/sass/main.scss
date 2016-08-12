@@ -3,12 +3,14 @@
 @import "../vendors/Bootflat/bootflat/scss/bootflat";
 @import "../vendors/select2/src/scss/core";
 @import "../vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker.css";
+@import "../vendors/datatables.net-bs/css/dataTables.bootstrap.css";
 
 @import "abstracts/variables";
 @import "base/adjustment";
 
 @import "components/select2";
 @import "components/datepicker";
+@import "components/datatables";
 
 @import "pages/children/children_detail";
 

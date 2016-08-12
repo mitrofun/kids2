@@ -17,7 +17,7 @@ class ChildBaseView(ChildrenBaseView):
     context_object_name = 'child'
 
 
-class ChildrenListView(ChildrenBaseView, ListView):
+class ChildrenListView(ChildrenBaseView, ListView):  # TODO сделать на ajax по скролу
     template_name = 'children/children_list.html'
 
     def get_queryset(self):

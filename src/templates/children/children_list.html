@@ -14,15 +14,12 @@
         <div class="panel panel-default">
             {% if children %}
             <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped">
+                <table id="children" class="table table-bordered table-hover table-striped">
                     <thead>
                         <tr>
                             <th>Ребенок</th>
-                            <th>Дата рождения</th>
                             <th>Возраст</th>
                             <th>Учреждение</th>
-                            <th>Класс</th>
-                            <th>Возрастная группа</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,7 +27,6 @@
                     {% for child in children %}
                         <tr>
                             <td><a href="{{ child.get_absolute_url }}">{{ child }}</a></td>
-                            <td>{{ child.birthday }}</td>
                             <td>{{ child.get_age }}</td>
                             {% get_last_education child %}
                         </tr>

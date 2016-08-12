@@ -6,7 +6,9 @@
     "jquery": "~2.1.4",
     "Bootflat": "^2.0.4",
     "select2": "^4.0.3",
-    "bootstrap-datepicker": "^1.6.4"
+    "bootstrap-datepicker": "^1.6.4",
+    "datatables.net": "^1.10.12",
+    "datatables.net-bs": "^1.10.12"
   },
   "private": true
 }

@@ -10,10 +10,10 @@ class HistoryForm(forms.ModelForm):
                                          label='Учреждение', required=False)
     group = forms.ModelChoiceField(Dictionary.objects.filter(type__slug='groups'), label='Группа', required=False)
     grade = forms.ModelChoiceField(Dictionary.objects.filter(type__slug='grades'), label='Класс', required=False)
-    parents_status = forms.ModelChoiceField(Dictionary.objects.filter(type__slug='parents'),
-                                            label='Статус родителей', required=False)
-    health_states = forms.ModelChoiceField(Dictionary.objects.filter(type__slug='health'),
-                                           label='Состояние здоровья', required=False)
+    parents_status = forms.ModelMultipleChoiceField(Dictionary.objects.filter(type__slug='parents'),
+                                                    label='Статус родителей', required=False)
+    health_states = forms.ModelMultipleChoiceField(Dictionary.objects.filter(type__slug='health'),
+                                                   label='Состояние здоровья', required=False)
 
     class Meta:
         model = ParamHistory

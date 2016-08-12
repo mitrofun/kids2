@@ -15,15 +15,15 @@
             </thead>
             <tbody>
              {% for param in params  %}
-                <tr>
                 {% if param.parameter.slug == 'education' %}
+                <tr>
                     <td><a href="#">{{ param.first_date }}</a></td>
                     <td>{{ param.last_date|default_if_none:"-" }}</td>
                     <td>{{ param.institution|default_if_none:"-" }}</td>
                     <td>{{ param.grade|default_if_none:"-" }}</td>
                     <td>{{ param.group|default_if_none:"-" }}</td>
-                {% endif %}
                 </tr>
+                {% endif %}
             {% endfor %}
             </tbody>
         </table>
@@ -40,17 +40,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
                     {% for param in params %}
                         {% if param.parameter.slug == 'health' %}
+                        <tr>
                             <td><a href="#">{{ param.first_date }}</a></td>
                             <td>{{ param.last_date|default_if_none:"-" }}</td>
                             <td>{% for states in param.health_states.all %}
                                 {{ states }}{% if not forloop.last %}, {% endif %}
                             {% endfor %}</td>
+                        </tr>
                         {% endif %}
                     {% endfor %}
-                </tr>
                 </tbody>
             </table>
         </div>
@@ -66,17 +66,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
                     {% for param in params  %}
                         {% if param.parameter.slug == 'parent' %}
-                            <td><a href="#">{{ param.first_date }}</a></td>
-                            <td>{{ param.last_date|default_if_none:"-" }}</td>
-                            <td>{% for status in param.parents_status.all %}
-                                {{ status }}{% if not forloop.last %}, {% endif %}
-                            {% endfor %}</td>
+                            <tr>
+                                <td><a href="#">{{ param.first_date }}</a></td>
+                                <td>{{ param.last_date|default_if_none:"-" }}</td>
+                                <td>{% for status in param.parents_status.all %}
+                                    {{ status }}{% if not forloop.last %}, {% endif %}
+                                {% endfor %}</td>
+                            </tr>
                         {% endif %}
                     {% endfor %}
-                </tr>
                 </tbody>
             </table>
         </div>
@@ -92,15 +92,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            {% for param in params  %}
-                                {% if param.parameter.slug == 'risk' %}
-                                    <td><a href="#">{{ param.first_date }}</a></td>
-                                    <td>{{ param.last_date|default_if_none:"-" }}</td>
-                                    <td>{{ param.get_risk_group_display }}</td>
-                                {% endif %}
-                            {% endfor %}
-                        </tr>
+                        {% for param in params  %}
+                            {% if param.parameter.slug == 'risk' %}
+                            <tr>
+                                <td><a href="#">{{ param.first_date }}</a></td>
+                                <td>{{ param.last_date|default_if_none:"-" }}</td>
+                                <td>{{ param.get_risk_group_display }}</td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -116,15 +116,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
                     {% for param in params %}
                         {% if param.parameter.slug == 'note' %}
-                        <td><a href="#">{{ param.first_date }}</a></td>
-                        <td>{{ param.last_date|default_if_none:"-" }}</td>
-                        <td>{{ param.text }}</td>
+                        <tr>
+                            <td><a href="#">{{ param.first_date }}</a></td>
+                            <td>{{ param.last_date|default_if_none:"-" }}</td>
+                            <td>{{ param.note }}</td>
+                        </tr>
                         {% endif %}
                     {% endfor %}
-                </tr>
                 </tbody>
             </table>
         </div>
