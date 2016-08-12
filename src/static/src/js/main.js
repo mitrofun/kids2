@@ -43,7 +43,6 @@
 (function () {
     if (document.readyState||document.body.readyState=='complete'){
         $('#children').DataTable( {
-            "processing": true,
             "pageLength": 50,
             "language": {
                 "url": "../static/src/json/dataTables.ru.json"

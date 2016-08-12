@@ -33,9 +33,9 @@ class ParamHistory(HistoryParamsBase):
     grade = models.ForeignKey(Dictionary, verbose_name='Класс',
                               related_name="history_grade", blank=True, null=True)
     parents_status = models.ManyToManyField(Dictionary, verbose_name='Статус семьи',
-                                            related_name="history_parents_status", blank=True, null=True)
+                                            related_name="history_parents_status", blank=True)
     health_states = models.ManyToManyField(Dictionary, verbose_name='Состояние здоровья',
-                                           related_name="history_health_states", blank=True, null=True)
+                                           related_name="history_health_states", blank=True)
     risk_group = models.BooleanField(choices=BOOL_CHOICES, verbose_name='Группа риска')
     note = models.CharField('Примечание', max_length=256, blank=True, null=True)
 
