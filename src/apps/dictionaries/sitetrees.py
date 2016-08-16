@@ -73,7 +73,3 @@ sitetrees = (
     ]),
 )
 
-
-# item('Сформировать отчет', '', in_menu=True, in_sitetree=True),
-# item('Загрузить данные', '', in_menu=True, in_sitetree=True),
-# item('Фильтр', 'children:filter', in_menu=False, in_sitetree=False),
