@@ -8,9 +8,9 @@ def upload(request):
     if request.method == "POST":
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            on_date = request.POST['load_date']
-            filehandle = request.FILES['file']
-            data = filehandle.get_array()
+            on_date = form.cleaned_data['load_date']
+            file_handle = request.FILES['file']
+            data = file_handle.get_array()
             loader(data[5:], on_date)
 
             return render_to_response(

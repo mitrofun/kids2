@@ -57,3 +57,11 @@
         );
     }
 })();
+
+(function () {
+    $('input[type=file]').bootstrapFileInput();
+})();
+
+(function () {
+    setTimeout(function() {$(".alert").fadeOut()}, 2000);
+})();

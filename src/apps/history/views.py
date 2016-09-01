@@ -49,7 +49,6 @@ class HistoryAddView(HistoryBaseView, CreateView):
             for field in form.fields:
                 if field not in visible_fields:
                     form.fields[field].widget = HiddenInput()
-                    form.fields[field].disabled = True
         if self.kwargs['param'] == 'education':
             form.fields['institution'].required = True
         return form
