@@ -108,37 +108,29 @@ def set_children_m2m_param(param_type, child, date, values):
         pass
 
 
-def set_children_risk(param_type, child, date, value):
-
+def set_children_simple_param(param_type, child, date, value):
     try:
         parameter = Param.objects.get(slug=param_type)
 
-        value = list(filter(lambda val_list: val_list[1] == value, ParamHistory.BOOL_CHOICES))
+        if param_type == 'risk':
+            value = list(filter(lambda val_list: val_list[1] == value, ParamHistory.BOOL_CHOICES))
 
         if date_is_free(child, param_type, date) and value:
-            ParamHistory.objects.create(
-                first_date=date,
-                parameter=parameter,
-                child=child,
-                risk_group=value[0]
-            )
-
-    except Param.DoesNotExist:
-        pass
-
-
-def set_children_note(param_type, child, date, value):
-    try:
-        parameter = Param.objects.get(slug=param_type)
-
-        if date_is_free(child, param_type, date) and value:
-            ParamHistory.objects.create(
-                first_date=date,
-                parameter=parameter,
-                child=child,
-                risk_group=0,
-                note=value
-            )
+            if param_type == 'risk':
+                ParamHistory.objects.create(
+                    first_date=date,
+                    parameter=parameter,
+                    child=child,
+                    risk_group=value[0]
+                )
+            else:
+                ParamHistory.objects.create(
+                    first_date=date,
+                    parameter=parameter,
+                    child=child,
+                    risk_group=0,
+                    note=value
+                )
 
     except Param.DoesNotExist:
         pass
@@ -152,5 +144,5 @@ def loader(data, on_date):
         set_children_education(child, on_date, item)
         set_children_m2m_param('health', child, on_date, item[12])
         set_children_m2m_param('parents', child, on_date, item[13])
-        set_children_risk('risk', child, on_date, item[14])
-        set_children_note('note', child, on_date, item[15])
+        set_children_simple_param('risk', child, on_date, item[14])
+        set_children_simple_param('note', child, on_date, item[15])
