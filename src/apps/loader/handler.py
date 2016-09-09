@@ -82,13 +82,12 @@ def set_children_education(child, date, args):
         pass
 
 
-def set_children_health_states(child, date, values):
+def set_children_m2m_param(param_type, child, date, values):
 
     try:
-        parameter = Param.objects.get(slug='health')
+        parameter = Param.objects.get(slug=param_type)
         values = values.replace(' ', '').split(',')
-
-        if date_is_free(child, 'health', date) and values_is_in_dictionary(values, 'health'):
+        if date_is_free(child, param_type, date) and values_is_in_dictionary(values, param_type):
 
             history = ParamHistory.objects.create(
                 first_date=date,
@@ -98,9 +97,12 @@ def set_children_health_states(child, date, values):
             )
 
             for value in values:
-                health_state = get_dictionary_item(value, 'health')
-                if health_state:
-                    history.health_states.add(health_state)
+                dict_value = get_dictionary_item(value, param_type)
+                if dict_value:
+                    if param_type == 'health':
+                        history.health_states.add(dict_value)
+                    if param_type == 'parents':
+                        history.parents_status.add(dict_value)
 
     except Param.DoesNotExist:
         pass
@@ -112,4 +114,5 @@ def loader(data, on_date):
         child = get_child(item)
         set_children_address(child, item)
         set_children_education(child, on_date, item)
-        set_children_health_states(child, on_date, item[12])
+        set_children_m2m_param('health', child, on_date, item[12])
+        set_children_m2m_param('parents', child, on_date, item[13])

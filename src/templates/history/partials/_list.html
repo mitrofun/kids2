@@ -33,7 +33,7 @@
                             <td>{% for states in param.health_states.all %}
                                     {{ states }}{% if not forloop.last %}, {% endif %}
                             {% endfor %}</td>
-                        {% elif param_type == 'parent' %}
+                        {% elif param_type == 'parents' %}
                             <td>{% for status in param.parents_status.all %}
                                         {{ status }}{% if not forloop.last %}, {% endif %}
                                     {% endfor %}</td>
