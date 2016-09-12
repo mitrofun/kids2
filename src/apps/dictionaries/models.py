@@ -14,7 +14,7 @@ class Category(NameSlugUniqueModel):
     def save(self, *args, **kwargs):
         if self.position == 0:
             self.position = Category.objects.all().count() + 1
-        return super().save(*args, **kwargs)
+        return super(Category, self).save(*args, **kwargs)
 
     @permalink
     def get_absolute_url(self):
@@ -32,7 +32,7 @@ class DictionariesType(NameSlugUniqueModel):
     def save(self, *args, **kwargs):
         if self.position == 0:
             self.position = DictionariesType.objects.filter(category=self.category).count() + 1
-        return super().save(*args, **kwargs)
+        return super(DictionariesType, self).save(*args, **kwargs)
 
     @permalink
     def get_absolute_url(self):

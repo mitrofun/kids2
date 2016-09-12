@@ -12,7 +12,7 @@ PARAM_ACCORDANCE = [
         'title': ['Состояние']
     },
     {
-        'name': 'parent',
+        'name': 'parents',
         'params': ['parents_status'],
         'title': ['Статус']
     },
