@@ -1,14 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import xlwt
+
 import xlrd
 from xlutils.copy import copy
-from common.utils import get_next_date, get_param_on_date
+from common.utils import get_next_date, get_param_on_date, get_display_age
 from children.functions import get_age
 
 from django.http import HttpResponse
 from children.models import Child
 from itertools import groupby
+from reports.drafters.styles import style, group_style, date_style
 
 content_type = 'application/vnd.ms-excel'
 report_template_dir = 'src/apps/reports/templates/list.xls'
@@ -26,50 +27,6 @@ def report(on_date):
     rb = xlrd.open_workbook(report_template_dir, formatting_info=True)
     wb = copy(rb)
     sheet = wb.get_sheet(0)
-
-    font = xlwt.Font()
-    font.name = 'Arial Cyr'
-
-    font_group = xlwt.Font()
-    font_group.name = 'Arial Cyr'
-    font_group.bold = True
-
-    alignment = xlwt.Alignment()
-    alignment.wrap = 1
-    alignment.horz = xlwt.Alignment.HORZ_CENTER
-    alignment.vert = xlwt.Alignment.VERT_CENTER
-
-    alignment_group = xlwt.Alignment()
-    alignment_group.wrap = 1
-    alignment_group.horz = xlwt.Alignment.HORZ_LEFT
-    alignment_group.vert = xlwt.Alignment.VERT_CENTER
-
-    borders = xlwt.Borders()
-    borders.left = xlwt.Borders.THIN
-    borders.right = xlwt.Borders.THIN
-    borders.top = xlwt.Borders.THIN
-    borders.bottom = xlwt.Borders.THIN
-
-    style = xlwt.XFStyle()
-    style.font = font
-    style.alignment = alignment
-    style.borders = borders
-
-    date_style = xlwt.XFStyle()
-    date_style.num_format_str = "dd/mm/yyyy"
-    date_style.font = font
-    date_style.alignment = alignment
-    date_style.borders = borders
-
-    pattern = xlwt.Pattern()
-    pattern.pattern = xlwt.Pattern.SOLID_PATTERN
-    pattern.pattern_fore_colour = xlwt.Style.colour_map['gray25']
-
-    group_style = xlwt.XFStyle()
-    group_style.font = font_group
-    group_style.borders = borders
-    group_style.alignment = alignment_group
-    group_style.pattern = pattern
 
     children = Child.objects.all()
 
@@ -96,7 +53,7 @@ def report(on_date):
     current_row = first_row
     for g in groupby(sorted(children_list, key=lambda x: x[0]), key=lambda x: x[0]):
         sheet.write_merge(current_row, current_row, 0, 15, style=group_style)
-        sheet.write(current_row, 0, g[0], group_style)  # function age to string
+        sheet.write(current_row, 0, get_display_age(g[0]), group_style)
         for i, child in enumerate(g[1]):
             current_row += 1
             i += 1

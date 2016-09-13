@@ -4,6 +4,18 @@ from datetime import timedelta
 from dictionaries.models import Dictionary
 from history.models import ParamHistory
 from django.db.models import Q
+from children.functions import get_age
+from children.models import Child
+
+
+def get_list_age():
+
+    ages = []
+    ages.extend(range(1, 7))
+    ages.extend([6.6])
+    ages.extend(range(7, 20))
+
+    return ages
 
 
 def get_next_date(date):
@@ -37,6 +49,12 @@ def get_param_on_date(child, parameter_type, parameter, date):
         if parameter == 'institution_name':
             if all_history[0].institution is not None:
                 return all_history[0].institution.name
+            else:
+                return None
+
+        if parameter == 'institution_id':
+            if all_history[0].institution is not None:
+                return all_history[0].institution.id
             else:
                 return None
 
@@ -82,3 +100,55 @@ def get_param_on_date(child, parameter_type, parameter, date):
 
     else:
         return None
+
+
+def get_display_age(age):
+
+    if age == 1:
+        return '{} год'.format(age)
+    elif age in range(2, 5):
+        return '{} года'.format(age)
+    elif age in range(5, 19):
+        return '{} лет'.format(age)
+    elif age == 6.6:
+        return '6 лет 6м'
+    elif age > 18:
+        return 'старше 18 лет'
+    else:
+        return 'проверте дату рождения'
+
+
+def get_institution(institution_type=None):
+
+    institution_qs = Dictionary.objects.filter(type__slug='institutions', ).order_by('institution_type', 'name')
+    if institution_type is not None:
+        institution_qs = institution_qs.filter(institution_type=institution_type)
+
+    return institution_qs
+
+
+def get_children_count(date, institution, age):
+
+    children_list = []
+
+    children = Child.objects.all()
+
+    for child in children:
+        children_list.append([
+            get_age(child.birthday, on_date=date),
+            get_param_on_date(child, 'education', 'institution_id', date),
+        ])
+
+    if age != 19:
+        _children_list = list(filter(lambda el: el[0] == age, children_list))
+    else:
+        _children_list = list(filter(lambda el: el[0] > 18, children_list))
+
+    if _children_list:
+        if institution != '':
+            __children_list = list(filter(lambda el: el[1] == institution.id, _children_list))
+        else:
+            __children_list = list(filter(lambda el: el[1] is None, _children_list))
+        return len(__children_list)
+    else:
+        return 0

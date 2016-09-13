@@ -2,18 +2,15 @@ from reports.forms import ReportsForm
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from reports.drafters.list import report as report_list
-
-
-def report_summery(on_date):
-    print("2\n")
-    print(on_date)
+from reports.drafters.summary import report as report_summary
 
 
 def reports(request):
 
-    options = {1: report_list,
-               2: report_summery,
-               }
+    options = {
+        1: report_list,
+        2: report_summary
+    }
 
     if request.method == "POST":
         form = ReportsForm(request.POST)
