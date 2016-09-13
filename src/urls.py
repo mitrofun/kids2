@@ -3,13 +3,13 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
-from django.views.generic import TemplateView
 from loader.views import upload
 from reports.views import reports
+from common.dashboard import DashboardView
 
 
 urlpatterns = [
-    url(r'^$', login_required(TemplateView.as_view(template_name='dashboard.html')), name='dashboard'),
+    url(r'^$', login_required(DashboardView.as_view()), name='dashboard'),
     url(r'', include('accounts.urls', namespace='accounts')),
 
     url(r'^children/', include('children.urls', namespace='children')),

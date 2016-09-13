@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django import template
+from common.utils import get_display_age
 from history.helper import PARAM_ACCORDANCE
-from common.utils import get_param_on_date
+from common.utils import get_param_on_date, get_children_count
 import datetime
+
 
 register = template.Library()
 
@@ -33,3 +35,12 @@ def get_last_education(child):
         'last_education': current_education,
     }
 
+
+@register.filter
+def display_age(age):
+    return get_display_age(age)
+
+
+@register.filter
+def get_child_count(age):
+    return get_children_count(datetime.date.today(), '', age, False)

@@ -127,7 +127,7 @@ def get_institution(institution_type=None):
     return institution_qs
 
 
-def get_children_count(date, institution, age):
+def get_children_count(date, institution, age, consider_institution=True):
 
     children_list = []
 
@@ -145,10 +145,13 @@ def get_children_count(date, institution, age):
         _children_list = list(filter(lambda el: el[0] > 18, children_list))
 
     if _children_list:
-        if institution != '':
-            __children_list = list(filter(lambda el: el[1] == institution.id, _children_list))
+        if consider_institution:
+            if institution != '':
+                __children_list = list(filter(lambda el: el[1] == institution.id, _children_list))
+            else:
+                __children_list = list(filter(lambda el: el[1] is None, _children_list))
+            return len(__children_list)
         else:
-            __children_list = list(filter(lambda el: el[1] is None, _children_list))
-        return len(__children_list)
+            return len(_children_list)
     else:
         return 0
