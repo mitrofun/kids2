@@ -43,6 +43,12 @@
             todayBtn: "linked",
             autoclose: true
         });
+        $('#id_report_date').datepicker({
+            language: "ru",
+            clearBtn: true,
+            todayBtn: "linked",
+            autoclose: true
+        });
     }
 })();
 

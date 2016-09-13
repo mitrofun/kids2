@@ -1,17 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from children.models import Child
-from dictionaries.models import Dictionary
 from history.models import ParamHistory, Param
-
-
-def get_dictionary_item(value, type_name):
-
-    try:
-        result = Dictionary.objects.get(type__slug=type_name, name=value)
-    except Dictionary.DoesNotExist:
-        result = None
-    return result
+from common.utils import get_dictionary_item
 
 
 def values_is_in_dictionary(values_list, type_name):
@@ -72,7 +63,7 @@ def set_children_education(child, date, args):
                 first_date=date,
                 parameter=parameter,
                 child=child,
-                institution=get_dictionary_item(institution, 'institutions'),
+                institution=get_dictionary_item(institution, 'institution_name'),
                 group=get_dictionary_item(group, 'groups'),
                 grade=get_dictionary_item(grade, 'grades'),
                 risk_group=0

@@ -7,3 +7,5 @@ django-excel==0.0.4
 pyexcel-xlsx==0.2.1
 pyexcel-ods==0.2.0
 pyexcel-xls==0.2.1
+xlwt==1.1.2
+xlwt-future==0.8.0
