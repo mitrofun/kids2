@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django import template
-from history.models import ParamHistory
 from history.helper import PARAM_ACCORDANCE
+from common.utils import get_param_on_date
+import datetime
 
 register = template.Library()
 
@@ -24,8 +25,11 @@ def get_history(child, params, param_type):
 
 @register.inclusion_tag('history/partials/_last_education.html')
 def get_last_education(child):
-    last_education = ParamHistory.objects.filter(child=child).filter(parameter__slug='education').last()
+
+    current_education = get_param_on_date(child=child, parameter_type='education',
+                                          parameter='', date=datetime.date.today())
+
     return {
-        'last_education': last_education,
+        'last_education': current_education,
     }
 

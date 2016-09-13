@@ -18,7 +18,7 @@ class Param(NameSlugUniqueModel):
     def save(self, *args, **kwargs):
         if self.position == 0:
             self.position = Param.objects.all().count() + 1
-        return super().save(*args, **kwargs)
+        return super(Param, self).save(*args, **kwargs)
 
 
 class ParamHistory(HistoryParamsBase):
@@ -53,6 +53,12 @@ class ParamHistory(HistoryParamsBase):
             return 'c {} по {} - {}'.format(self.first_date, self.last_date, self.parameter.name)
         else:
             return 'c {} по н.в. - {}'.format(self.first_date, self.parameter.name)
+
+    def get_health_states(self):
+        return ', '.join([val.name for val in self.health_states.all()])
+
+    def get_parents_status(self):
+        return ', '.join([val.name for val in self.parents_status.all()])
 
     def save(self, *args, **kwargs):
 

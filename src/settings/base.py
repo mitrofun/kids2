@@ -35,6 +35,7 @@ INTERNAL_APPS = [
     'history',
     'dictionaries',
     'loader',
+    'reports'
 
 ]
 

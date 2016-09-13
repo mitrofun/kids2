@@ -103,8 +103,8 @@ class HistoryAddView(FormBaseHistory, CreateView):
             for field in form.fields:
                 if field not in visible_fields:
                     form.fields[field].widget = HiddenInput()
-        if self.kwargs['param'] == 'education':
-            form.fields['institution'].required = True
+        # if self.kwargs['param'] == 'education':
+        #     form.fields['institution'].required = True
         return form
 
 
@@ -126,8 +126,8 @@ class HistoryUpdateView(FormBaseHistory, UpdateView):
                 if field not in visible_fields:
                     form.fields[field].widget = HiddenInput()
                     form.fields[field].disabled = True
-        if self.kwargs['param'] == 'education':
-            form.fields['institution'].required = True
+        # if self.kwargs['param'] == 'education':
+        #     form.fields['institution'].required = True
         return form
 
     def get_success_url(self):

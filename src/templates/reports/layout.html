@@ -1,0 +1,12 @@
+{% extends 'layout/content.html' %}
+{% load sitetree %}
+
+{% block title %}{% sitetree_page_title from "reports" %} |  {{ block.super }}{% endblock title %}
+
+{% block page_header %}
+    {% sitetree_page_title from "reports" %}
+{% endblock page_header %}
+
+{% block breadcrumbs %}
+    {% sitetree_breadcrumbs from "reports" template "layout/breadcrumbs.html" %}
+{% endblock breadcrumbs %}

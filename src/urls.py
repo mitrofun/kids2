@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from loader.views import upload
+from reports.views import reports
 
 
 urlpatterns = [
@@ -15,6 +16,7 @@ urlpatterns = [
     url(r'^dictionaries/', include('dictionaries.urls', namespace='dictionaries')),
 
     url(r'^upload/$', login_required(upload), name='loader'),
+    url(r'^reports/$', login_required(reports), name='reports'),
 
     url(r'^admin/', include(admin.site.urls)),
 
