@@ -6,8 +6,12 @@ django-bootstrap-form==3.2
 django-excel==0.0.4
 pyexcel-xlsx==0.2.1
 pyexcel-ods==0.2.0
-pyexcel-xls==0.2.1
+pyexcel-xls==0.2.2
 xlwt==1.1.2
 xlwt-future==0.8.0
 Fabric3==1.12.post1
 Jinja2==2.8
+future==0.15.2
+pyexcel-io==0.2.2
+xlrd==1.0.0
+xlwt-future==0.8.0
