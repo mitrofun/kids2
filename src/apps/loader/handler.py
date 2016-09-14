@@ -35,7 +35,7 @@ def get_child(args):
     middle_name = args[3]
     birthday = args[4]
 
-    print(last_name, first_name , middle_name, birthday)
+    print(last_name, first_name, middle_name, birthday)
 
     child, created = Child.objects.get_or_create(
         last_name=last_name,
