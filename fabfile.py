@@ -321,6 +321,7 @@ def bower_install():
             install_bower()
             run('bower i')
 
+
 @task
 def deploy(user=USER, pas=PASS):
     """
@@ -335,7 +336,7 @@ def deploy(user=USER, pas=PASS):
     env.password = pas
     env.pg_user = 'user_{project}'.format(project=PROJECT_NAME)
     env.pg_password = pas
-    env.pg_database = 'db_{project}'.format(user=user, project=PROJECT_NAME)
+    env.pg_database = 'db_{project}'.format(project=PROJECT_NAME)
     env.token = get_rand_str(32)
     mk_dirs()
     create_env()
