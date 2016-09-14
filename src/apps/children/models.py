@@ -13,6 +13,7 @@ class Child(PersonModel, AddressModel):
         db_table = 'children'
         verbose_name = 'Ребенок'
         verbose_name_plural = 'Дети'
+        unique_together = ('last_name', 'first_name', 'middle_name', 'birthday')
 
     @permalink
     def get_absolute_url(self):
