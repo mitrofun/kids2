@@ -7,6 +7,7 @@ from src.settings import ROOT_DIR
 from django.db import IntegrityError
 from django.core.management import BaseCommand
 from dictionaries.models import Category, DictionariesType, Dictionary
+from history.models import Param
 
 
 class DbFiller:
@@ -75,16 +76,33 @@ class DbFiller:
                 print('Error: {0} - {1}'.format(e, type["name"]))
         print('all types completed')
 
+    def _fill_params(self):
+        param_text = open(os.path.join(ROOT_DIR, "fixtures", "params.json"), "r", encoding='utf-8').read()
+        params = json.loads(param_text)
+
+        for param in params:
+            try:
+                Param.objects.create(
+                    name=param["name"],
+                    slug=param["slug"],
+                    position=param["position"]
+                )
+            except IntegrityError as e:
+                print('Error: {0} - {1}'.format(e, param["name"]))
+        print('all param completed')
+
     def _clean_db(self):
         Category.objects.all().delete()
         DictionariesType.objects.all().delete()
         Dictionary.objects.all().delete()
+        Param.objects.all().delete()
         print('Database cleaned')
 
     def _fill_dictionaries(self):
         print('start fill dictionaries')
         self._fill_category()
         self._fill_all_dict()
+        self._fill_params()
 
     def run(self):
         if self.options.get('clean', False):

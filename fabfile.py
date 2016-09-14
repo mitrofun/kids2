@@ -8,7 +8,7 @@ from fabric.contrib.files import upload_template
 from fabric.contrib.files import exists
 
 from settings import USER, PASS
-from settings import HOSTS, DOMAIN, SUBDOMAIN
+from settings import HOSTS
 
 REPO = 'https://github.com/mitrofun/kids2'
 PROJECT_NAME = 'kids2'
@@ -346,7 +346,6 @@ def deploy(user=USER, pas=PASS):
     local_settings()
     migrate_db()
     create_conf()
-    collectstatic()
     link_conf()
     link_log()
     createsuperuser()
@@ -355,5 +354,6 @@ def deploy(user=USER, pas=PASS):
     bower_install()
     with cd(env.root):
         run('npm i')
-        run('bundle install')
-        run('node_modules/gulp/bin/gulp.js build')
+        run('node_modules/gulp/bin/gulp.js dev')
+    collectstatic()
+    restart()
