@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from loader.forms import UploadFileForm
 from loader.handler import loader
+from django.conf import settings
 
 
 def upload(request):
@@ -11,8 +12,8 @@ def upload(request):
             on_date = form.cleaned_data['load_date']
             file_handle = request.FILES['file']
             data = file_handle.get_array()
-            print(data[4:])
-            loader(data[4:], on_date)
+
+            loader(data[settings.EXCEL_START_STRING:], on_date)
 
             return render_to_response(
                 'loader/index.html',
