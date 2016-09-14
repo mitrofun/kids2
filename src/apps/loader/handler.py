@@ -21,8 +21,8 @@ def set_children_address(child, args):
     house = args[7]
     flat = args[8]
 
-    child.locality = get_dictionary_item('locality', locality)
-    child.street = get_dictionary_item('streets', street)
+    child.locality = get_dictionary_item(locality, 'locality')
+    child.street = get_dictionary_item(street, 'streets')
     child.house = house
     child.flat = flat
     child.save()
@@ -63,7 +63,7 @@ def set_children_education(child, date, args):
                 first_date=date,
                 parameter=parameter,
                 child=child,
-                institution=get_dictionary_item(institution, 'institution_name'),
+                institution=get_dictionary_item(institution, 'institutions'),
                 group=get_dictionary_item(group, 'groups'),
                 grade=get_dictionary_item(grade, 'grades'),
                 risk_group=0
