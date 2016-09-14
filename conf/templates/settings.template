@@ -1,0 +1,49 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from .base import *
+
+SECRET_KEY = '{{ secret_key }}'
+
+
+DEBUG = False
+
+ALLOWED_HOSTS = ['{{ project }}','www.{{ project }}']
+
+ADMINS = [
+
+]
+
+MANAGERS = ADMINS
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': '{{ pg_database }}',
+        'USER': '{{ pg_user }}',
+        'PASSWORD': '{{ pg_password }}',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
+
+
+LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'file': {
+                'level': 'WARNING',
+                'class': 'logging.FileHandler',
+                'filename': '/home/{{ user }}/logs/{{ project }}/django.log',
+            },
+        },
+        'loggers': {
+            'django': {
+                'handlers': ['file'],
+                'level': 'WARNING',
+                'propagate': True,
+            },
+        },
+    }

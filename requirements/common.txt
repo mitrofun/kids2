@@ -9,3 +9,5 @@ pyexcel-ods==0.2.0
 pyexcel-xls==0.2.1
 xlwt==1.1.2
 xlwt-future==0.8.0
+Fabric3==1.12.post1
+Jinja2==2.8
