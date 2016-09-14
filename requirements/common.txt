@@ -14,3 +14,4 @@ Jinja2==2.8
 future==0.15.2
 pyexcel-io==0.2.2
 xlrd==1.0.0
+xlutils==2.0.0
