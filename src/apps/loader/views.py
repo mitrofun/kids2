@@ -11,7 +11,7 @@ def upload(request):
             on_date = form.cleaned_data['load_date']
             file_handle = request.FILES['file']
             data = file_handle.get_array()
-            print(data)
+            print(data[5:])
             loader(data[5:], on_date)
 
             return render_to_response(
