@@ -354,6 +354,6 @@ def deploy(user=USER, pas=PASS):
     bower_install()
     with cd(env.root):
         run('npm i')
-        run('node_modules/gulp/bin/gulp.js dev')
+        run('node_modules/gulp/bin/gulp.js prod')
     collectstatic()
     restart()

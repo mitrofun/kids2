@@ -1,16 +1,29 @@
 {% load static %}
+{% spaceless %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="">
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'src/ico/apple-icon-57x57.png' %}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'src/ico/apple-icon-60x60.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'src/ico/apple-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'src/ico/apple-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'src/ico/apple-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'src/ico/apple-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'src/ico/apple-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'src/ico/apple-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'src/ico/apple-icon-180x180.png' %}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{% static 'src/ico/android-icon-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'src/ico/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'src/ico/favicon-96x96.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'src/ico/favicon-16x16.png' %}">
 
     <title>{% block title %}Учет детей{% endblock title %}</title>
 
     <!-- Custom styles for this template -->
-    <link href="{% static 'src/css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'src/css/main.min.css' %}" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="{% static  'src/js/ie-emulation-modes-warning.js' %}"></script>
@@ -41,8 +54,9 @@
 <script src="{% static 'src/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
 <script src="{% static 'src/vendors/bootstrap-file-input/bootstrap.file-input.js' %}"></script>
 
-<script src="{% static 'src/js/main.js' %}"></script>
+<script src="{% static 'src/js/main.min.js' %}"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="{% static 'src/js/ie10-viewport-bug-workaround.js' %}"></script>
 </body>
 </html>
+{% endspaceless %}
