@@ -6,15 +6,96 @@
 {% block content %}
 
     <div class="row">
-        <div class="col-lg-6">
-            <ul class="list-group">
-              {% for age in list_age %}
-              <li class="list-group-item">
-                <span class="badge">{{ age | get_child_count }}</span>
-                {{ age | display_age }}
-              </li>
-              {% endfor %}
-            </ul>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="glyphicon glyphicon-user huge"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">{{ children }}</div>
+                            <div>Кол-во детей</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="{% url 'children:list' %}">
+                    <div class="panel-footer">
+                        <span class="pull-left">Подробнее</span>
+                        <span class="pull-right"><i class="glyphicon glyphicon-circle-arrow-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="glyphicon glyphicon-education huge"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">{{ institution }}</div>
+                            <div>Кол-во учреждений</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="{% url 'dictionaries:items-list' 'education' 'institutions' %}">
+                    <div class="panel-footer">
+                        <span class="pull-left">Подробнее</span>
+                        <span class="pull-right"><i class="glyphicon glyphicon-circle-arrow-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="glyphicon glyphicon-globe huge"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">{{ locality }}</div>
+                            <div>Кол-во нас.пунктов</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="{% url 'dictionaries:items-list' 'address' 'locality' %}">
+                    <div class="panel-footer">
+                        <span class="pull-left">Подробнее</span>
+                        <span class="pull-right"><i class="glyphicon glyphicon-circle-arrow-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="glyphicon glyphicon-home huge"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">{{ street }}</div>
+                            <div>Кол-во улиц</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="{% url 'dictionaries:items-list' 'address' 'streets' %}">
+                    <div class="panel-footer">
+                        <span class="pull-left">Подробнее</span>
+                        <span class="pull-right"><i class="glyphicon glyphicon-circle-arrow-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 {% endblock content %}

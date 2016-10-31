@@ -18,6 +18,8 @@ def _validate_excel_data(file_data):
         birthday = item[4]
         locality = item[5]
         street = item[6]
+        house = item[7]
+        flat = item[8]
         institution = item[9]
         group = item[10]
         grade = item[11]
@@ -48,6 +50,20 @@ def _validate_excel_data(file_data):
             except Dictionary.DoesNotExist:
                     text_error = 'В строке c номером п/п {number} указана улица отсутствующая в ' \
                                  'справочнике - {street}'.format(number=number, street=street)
+                    list__error.append(text_error)
+
+        if house:
+            if isinstance(house, str):
+                if len(house) > 4:
+                    text_error = 'В строке c номером п/п {number} формат номер дома ' \
+                                 'не верен - {house}'.format(number=number, house=house)
+                    list__error.append(text_error)
+
+        if flat:
+            if isinstance(flat, str):
+                if len(flat) > 4:
+                    text_error = 'В строке c номером п/п {number} формат номера квартиры ' \
+                                 'не верен - {flat}'.format(number=number, flat=flat)
                     list__error.append(text_error)
 
         if institution:

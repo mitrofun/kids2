@@ -31,6 +31,11 @@ def report(on_date):
     children = Child.objects.all()
 
     for child in children:
+        if child.street:
+            street = child.street.name
+        else:
+            street = ''
+
         children_list.append([
             get_age(child.birthday, on_date=on_date),
             child.last_name,
@@ -38,7 +43,7 @@ def report(on_date):
             child.middle_name,
             child.birthday,
             child.locality.name,
-            child.street.name,
+            street,
             child.house,
             child.flat,
             get_param_on_date(child, 'education', 'institution_name', on_date),
