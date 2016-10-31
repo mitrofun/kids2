@@ -3,6 +3,8 @@ from django.template import RequestContext
 from loader.forms import UploadFileForm
 from loader.handler import loader
 from django.conf import settings
+import pyexcel
+import os
 
 
 def upload(request):
@@ -11,10 +13,10 @@ def upload(request):
         if form.is_valid():
             on_date = form.cleaned_data['load_date']
             file_handle = request.FILES['file']
-            data = file_handle.get_array()
-
+            path = "{}/{}".format(settings.MEDIA_ROOT, file_handle)
+            data = pyexcel.get_array(file_name=path)
             loader(data[settings.EXCEL_START_STRING:], on_date)
-
+            os.remove(path)
             return render_to_response(
                 'loader/index.html',
                 {
