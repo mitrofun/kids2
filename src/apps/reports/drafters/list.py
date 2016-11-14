@@ -55,8 +55,10 @@ def report(on_date):
             get_param_on_date(child, 'note', 'display_note', on_date),
         ])
 
+    children_list.sort(key=lambda x: (x[0], x[1]))
+
     current_row = first_row
-    for g in groupby(sorted(children_list, key=lambda x: x[0]), key=lambda x: x[0]):
+    for g in groupby(children_list, key=lambda x: x[0]):
         sheet.write_merge(current_row, current_row, 0, 15, style=group_style)
         sheet.write(current_row, 0, get_display_age(g[0]), group_style)
         for i, child in enumerate(g[1]):

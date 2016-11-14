@@ -129,11 +129,8 @@ def set_children_simple_param(param_type, child, date, value):
 
 def loader(data, on_date):
 
-    # print(data)
-
     for item in data:
         child = get_child(item)
-        # print(child)
         set_children_address(child, item)
         set_children_education(child, on_date, item)
         set_children_m2m_param('health', child, on_date, item[12])

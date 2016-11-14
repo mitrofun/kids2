@@ -3,14 +3,15 @@
 import xlrd
 from xlwt import Formula, Utils
 from xlutils.copy import copy
-from common.utils import get_next_date, get_institution, get_list_age, get_children_count
+from common.utils import get_next_date, get_institution, get_list_age, \
+    get_children_institution_list_on_date, get_children_count_by_list
 from django.http import HttpResponse
 from reports.drafters.styles import style, style_bold
 
 
 FIRST_ROW = 2
 FIRST_COLUMN = 0
-children_list = []
+
 
 do_title = 'Дошкольные образовательные организации, из них'
 full_title = 'Общеобразовательные организации, из них'
@@ -46,9 +47,10 @@ def write_head(sheet):
     write_text(sheet, minor_title, c_col, c_row, style)
 
 
-def write_data_by_institution(sheet, col, row, institution, on_date):
+def write_data_by_institution(sheet, col, row, institution_id, children_list):
+
     for age in get_list_age():
-        sheet.write(col, row, get_children_count(on_date, institution, age), style)
+        sheet.write(col, row, get_children_count_by_list(children_list, institution_id, age), style)
         col += 1
 
 
@@ -57,15 +59,23 @@ def write_table(sheet, on_date):
     c_row = FIRST_ROW + 1
     c_col = FIRST_COLUMN + 1
 
+    _children_list = get_children_institution_list_on_date(on_date)
+
+    print(_children_list)
+
     for institution in get_institution(0):
-        write_data_by_institution(sheet, c_col, c_row, institution, on_date)
+        write_data_by_institution(sheet, c_col, c_row, institution.id, _children_list)
         c_row += 1
+
+    # удалить не нужное из списка с типом 0  при оптимизации
 
     for institution in get_institution(1):
-        write_data_by_institution(sheet, c_col, c_row + 1, institution, on_date)
+        write_data_by_institution(sheet, c_col, c_row + 1, institution.id, _children_list)
         c_row += 1
 
-    write_data_by_institution(sheet, c_col, c_row + 1, '', on_date)
+    # удалить не нужное из списка с типом 1 учреждений при оптимизации
+
+    write_data_by_institution(sheet, c_col, c_row + 1, None, _children_list)
 
 
 def write_total(sheet):
@@ -103,7 +113,6 @@ def write_total(sheet):
 
 
 def report(on_date):
-
     next_date = get_next_date(on_date)
     response = HttpResponse(content_type=content_type)
     response['Content-Disposition'] = 'attachment; filename=summary({}).xls'.format(next_date)
