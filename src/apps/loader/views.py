@@ -3,6 +3,7 @@ from django.template import RequestContext
 from loader.forms import UploadFileForm
 from loader.handler import loader
 from django.conf import settings
+from loader.validators import get_extension
 import pyexcel
 import os
 
@@ -13,7 +14,8 @@ def upload(request):
         if form.is_valid():
             on_date = form.cleaned_data['load_date']
             file_handle = request.FILES['file']
-            path = "{}/{}".format(settings.MEDIA_ROOT, file_handle)
+            tmp_name_file = 'tmp' + get_extension(file_handle)
+            path = "{}/{}".format(settings.MEDIA_ROOT, tmp_name_file)
             data = pyexcel.get_array(file_name=path)
             loader(data[settings.EXCEL_START_STRING:], on_date)
             os.remove(path)

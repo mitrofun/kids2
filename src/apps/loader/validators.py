@@ -9,6 +9,10 @@ from dictionaries.models import Dictionary
 import pyexcel
 
 
+def get_extension(file):
+    return os.path.splitext(file.name)[1].lower()
+
+
 def _validate_excel_data(file_data):
 
     list__error = []
@@ -141,19 +145,20 @@ def _validate_prev_data_in_file(file_data):
 
 
 def validate_type_file(file):
-    ext = os.path.splitext(file.name)[1]
     valid_extensions = ['.xlsx', '.xls', ]
-    if not ext.lower() in valid_extensions:
+    if not get_extension(file) in valid_extensions:
         raise ValidationError('Не поддерживается тип файла, можно загружать только файлы excel')
 
 
 def validate_data_file(file):
 
-    tmp_file = open('{}/{}'.format(settings.MEDIA_ROOT, file), 'wb')
+    tmp_name_file = 'tmp' + get_extension(file)
+
+    tmp_file = open('{}/{}'.format(settings.MEDIA_ROOT, tmp_name_file), 'wb')
     tmp_file.write(file.read())
     tmp_file.close()
 
-    file_data = pyexcel.get_array(file_name="{}/{}".format(settings.MEDIA_ROOT, file))
+    file_data = pyexcel.get_array(file_name="{}/{}".format(settings.MEDIA_ROOT, tmp_name_file))
 
     list_error = []
 
