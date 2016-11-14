@@ -61,8 +61,6 @@ def write_table(sheet, on_date):
 
     _children_list = get_children_institution_list_on_date(on_date)
 
-    print(_children_list)
-
     for institution in get_institution(0):
         write_data_by_institution(sheet, c_col, c_row, institution.id, _children_list)
         c_row += 1
