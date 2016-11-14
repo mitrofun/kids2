@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 from datetime import timedelta
 from dictionaries.models import Dictionary
 from history.models import ParamHistory

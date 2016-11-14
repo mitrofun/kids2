@@ -55,9 +55,21 @@
 (function () {
     if (document.readyState||document.body.readyState=='complete'){
         $('#children').DataTable( {
-            "pageLength": 50,
-            "language": {
-                "url": "../static/src/json/dataTables.ru.json"
+            'scrollY': '50vh',
+            'scrollCollapse': true,
+            'paging': false,
+            'processing': true,
+            'columns': [
+                { 'data': 'full_name' ,
+                    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+            $(nTd).html("<a href='"+oData.link+"'>"+oData.full_name+"</a>");
+                    }
+                },
+                { 'data': 'age' }
+                ],
+            'ajax': '/api/v1.0/children/',
+            'language': {
+                'url': '../static/src/json/dataTables.ru.json'
             }
         }
         );

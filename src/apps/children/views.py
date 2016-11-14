@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import ContextMixin
 from django.core.urlresolvers import reverse_lazy
-from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
+from django.views.generic import DetailView, UpdateView, CreateView, DeleteView, TemplateView
 from children.models import Child
 from children.forms import ChildForm
 from history.models import Param
@@ -17,11 +17,8 @@ class ChildBaseView(ChildrenBaseView):
     context_object_name = 'child'
 
 
-class ChildrenListView(ChildrenBaseView, ListView):  # TODO сделать на ajax по скролу
+class ChildrenTemplateView(ChildrenBaseView, TemplateView):  # TODO сделать на ajax по скролу
     template_name = 'children/children_list.html'
-
-    def get_queryset(self):
-        return Child.objects.all()
 
 
 class ChildrenCreateView(ChildBaseView, CreateView):

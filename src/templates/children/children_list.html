@@ -12,35 +12,18 @@
     <div class="col-md-12 col-sm-12">
 
         <div class="panel panel-default">
-            {% if children %}
             <div class="table-responsive">
                 <table id="children" class="table table-bordered table-hover table-striped">
                     <thead>
                         <tr>
                             <th>Ребенок</th>
                             <th>Возраст</th>
-                            <th>Учреждение</th>
                         </tr>
                     </thead>
-                    <tbody>
 
-                    {% for child in children %}
-                        <tr>
-                            <td><a href="{{ child.get_absolute_url }}">{{ child }}</a></td>
-                            <td>{{ child.get_age }}</td>
-                            {% get_last_education child %}
-                        </tr>
-                    {% endfor %}
-
-                    </tbody>
                 </table>
             </div>
-            {% else %}
-                <div class="panel-body">
-                Объектов нет
-                </div>
-            {% endif %}
-        </div>
+    </div>
     </div>
 </div>
 {% endblock content %}

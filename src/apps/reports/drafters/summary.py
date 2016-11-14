@@ -65,13 +65,13 @@ def write_table(sheet, on_date):
         write_data_by_institution(sheet, c_col, c_row, institution.id, _children_list)
         c_row += 1
 
-    # удалить не нужное из списка с типом 0  при оптимизации
+    # todo: удалить не нужное из списка с типом 0  при оптимизации
 
     for institution in get_institution(1):
         write_data_by_institution(sheet, c_col, c_row + 1, institution.id, _children_list)
         c_row += 1
 
-    # удалить не нужное из списка с типом 1 учреждений при оптимизации
+    # todo: удалить не нужное из списка с типом 1 учреждений при оптимизации
 
     write_data_by_institution(sheet, c_col, c_row + 1, None, _children_list)
 

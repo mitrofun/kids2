@@ -3,10 +3,10 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
+
+from common.dashboard import DashboardView
 from loader.views import upload
 from reports.views import reports
-from common.dashboard import DashboardView
-
 
 urlpatterns = [
     url(r'^$', login_required(DashboardView.as_view()), name='dashboard'),
@@ -17,6 +17,8 @@ urlpatterns = [
 
     url(r'^upload/$', login_required(upload), name='loader'),
     url(r'^reports/$', login_required(reports), name='reports'),
+
+    url(r'^api/', include('src.api.urls', namespace='api')),
 
     url(r'^admin/', include(admin.site.urls)),
 

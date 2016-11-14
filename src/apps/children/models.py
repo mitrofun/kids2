@@ -14,6 +14,12 @@ class Child(PersonModel, AddressModel):
         verbose_name = 'Ребенок'
         verbose_name_plural = 'Дети'
 
+    def to_json(self):
+        return {'full_name': self.get_full_name(),
+                'link': self.get_absolute_url(),
+                'age': self.get_age()
+                }
+
     @permalink
     def get_absolute_url(self):
         return 'children:detail', None, {'child_id': self.id}

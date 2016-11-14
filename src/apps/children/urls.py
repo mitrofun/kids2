@@ -3,12 +3,12 @@
 
 
 from django.conf.urls import url, include
-from children.views import ChildrenListView, ChildrenDetailView, ChildrenUpdateView
+from children.views import ChildrenTemplateView, ChildrenDetailView, ChildrenUpdateView
 from children.views import ChildrenCreateView, ChildrenDeleteView
 
 
 urlpatterns = [
-    url(r'^$', ChildrenListView.as_view(), name='list'),
+    url(r'^$', ChildrenTemplateView.as_view(), name='list'),
     url(r'^add/$', ChildrenCreateView.as_view(), name='add'),
 
     url(r'^(?P<child_id>[0-9]+)/$', ChildrenDetailView.as_view(), name='detail'),
