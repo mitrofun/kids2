@@ -12,4 +12,4 @@ SOCKFILE=${PROJECTDIR}/run/gunicorn.sock
 
 . ${VIRTUALENV}/bin/activate
 cd ${PROJECTDIR}
-gunicorn src.wsgi:application --bind unix:${SOCKFILE}
+gunicorn src.wsgi:application --bind unix:${SOCKFILE} --timeout 120
