@@ -83,3 +83,15 @@
 (function () {
     setTimeout(function() {$(".alert").fadeOut()}, 2000);
 })();
+
+// slug
+
+(function () {
+    if (document.readyState||document.body.readyState=='complete'){
+        $("#id_name").keyup(function(){
+        var Text = $(this).val();
+        Text = slugify(Text);
+        $("#id_slug").val((Text));
+});
+    }
+})();
