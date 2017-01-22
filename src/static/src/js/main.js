@@ -52,6 +52,8 @@
     }
 })();
 
+// datatables
+
 (function () {
     if (document.readyState||document.body.readyState=='complete'){
         $('#children').DataTable( {
@@ -59,6 +61,7 @@
             'scrollCollapse': true,
             'paging': false,
             'processing': true,
+            // 'serverSide': true,
             'columns': [
                 { 'data': 'full_name' ,
                     "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
