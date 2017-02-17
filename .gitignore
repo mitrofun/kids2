@@ -1,6 +1,8 @@
 /public
 /node_modules
 /external
+/tmp
+
 
 /src/settings/local.py
 /src/static/src/vendors/
