@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import ContextMixin
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import DetailView, UpdateView, CreateView, DeleteView, TemplateView
+from django_datatables_view.base_datatable_view import BaseDatatableView
 from children.models import Child
 from children.forms import ChildForm
 from history.models import Param
@@ -17,7 +18,7 @@ class ChildBaseView(ChildrenBaseView):
     context_object_name = 'child'
 
 
-class ChildrenTemplateView(ChildrenBaseView, TemplateView):  # TODO сделать на ajax по скролу
+class ChildrenTemplateView(ChildrenBaseView, TemplateView):
     template_name = 'children/children_list.html'
 
 
@@ -57,3 +58,37 @@ class ChildrenDeleteView(ChildBaseView, DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('children:list')
+
+
+class ChildListJson(BaseDatatableView):
+    order_columns = ['last_name', 'birthday']
+
+    def get_initial_queryset(self):
+        return Child.objects.all()
+
+    def filter_queryset(self, qs):
+        search = self.request.GET.get(u'search[value]', None)
+
+        if search:
+
+            if search.find(' ') != -1:
+                filter_last_name = search.split(' ')[0]
+                filter_first_name = search.split(' ')[1]
+                qs = qs.filter(last_name__istartswith=filter_last_name,
+                               first_name__istartswith=filter_first_name)
+            else:
+                qs = qs.filter(last_name__istartswith=search)
+
+        return qs
+
+    def prepare_results(self, qs):
+
+        json_data = []
+        for item in qs:
+            json_data.append(
+                {'full_name': item.get_full_name(),
+                 'link': item.get_absolute_url(),
+                 'age': item.get_age()
+                 }
+            )
+        return json_data

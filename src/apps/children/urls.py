@@ -3,8 +3,10 @@
 
 
 from django.conf.urls import url, include
+from django.contrib.auth.decorators import login_required
+
 from children.views import ChildrenTemplateView, ChildrenDetailView, ChildrenUpdateView
-from children.views import ChildrenCreateView, ChildrenDeleteView
+from children.views import ChildrenCreateView, ChildrenDeleteView, ChildListJson
 
 
 urlpatterns = [
@@ -16,4 +18,6 @@ urlpatterns = [
     url(r'^(?P<child_id>[0-9]+)/delete/$', ChildrenDeleteView.as_view(), name='delete'),
 
     url(r'^(?P<child_id>[0-9]+)/params/', include('history.urls')),
+
+    url(r'^data-table/$', login_required(ChildListJson.as_view()), name='child_list_json')
 ]

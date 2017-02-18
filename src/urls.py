@@ -18,8 +18,6 @@ urlpatterns = [
     url(r'^upload/$', login_required(upload), name='loader'),
     url(r'^reports/$', login_required(reports), name='reports'),
 
-    url(r'^api/', include('src.api.urls', namespace='api')),
-
     url(r'^admin/', include(admin.site.urls)),
 
 ]

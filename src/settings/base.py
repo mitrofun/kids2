@@ -26,7 +26,7 @@ EXTERNAL_APPS = [
     'django_extensions',
     'compressor',
     'bootstrapform',
-    'sitetree'
+    'sitetree',
 ]
 
 INTERNAL_APPS = [

@@ -57,11 +57,13 @@
 (function () {
     if (document.readyState||document.body.readyState=='complete'){
         $('#children').DataTable( {
+            "aLengthMenu": [[25, 50, 75, 100, -1], [25, 50, 75, 100, "Все"]],
+            "iDisplayLength": 100,
             'scrollY': '50vh',
             'scrollCollapse': true,
-            'paging': false,
             'processing': true,
-            // 'serverSide': true,
+            'serverSide': true,
+            'stateSave': true,
             'columns': [
                 { 'data': 'full_name' ,
                     "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
@@ -70,7 +72,7 @@
                 },
                 { 'data': 'age' }
                 ],
-            'ajax': '/api/v1.0/children/',
+            'ajax': '/children/data-table/',
             'language': {
                 'url': '../static/src/json/dataTables.ru.json'
             }
