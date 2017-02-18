@@ -16,9 +16,11 @@ def reports(request):
         form = ReportsForm(request.POST)
         if form.is_valid():
             report_date = form.cleaned_data['report_date']
+            parents_status = form.cleaned_data['parents_status']
+            mode_parents_status = int(form.cleaned_data['mode_parents_status'])
             report_type = int(form.cleaned_data['report_type'])
 
-            response = options[report_type](report_date)
+            response = options[report_type](report_date, parents_status, mode_parents_status)
 
             if response:
                 return response

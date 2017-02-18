@@ -5,9 +5,10 @@ import xlrd
 from xlutils.copy import copy
 from common.utils import get_next_date, get_param_on_date, get_display_age
 from children.functions import get_age
-
+from django.db.models import Q
 from django.http import HttpResponse
 from children.models import Child
+from history.models import ParamHistory
 from itertools import groupby
 from reports.drafters.styles import style, group_style, date_style
 
@@ -15,7 +16,7 @@ content_type = 'application/vnd.ms-excel'
 report_template_dir = 'src/apps/reports/templates/list.xls'
 
 
-def report(on_date):
+def report(on_date, parents_status, mode_parents_status):
 
     children_list = []
 
@@ -28,7 +29,23 @@ def report(on_date):
     wb = copy(rb)
     sheet = wb.get_sheet(0)
 
-    children = Child.objects.all()
+    children = Child.objects.none()
+
+    if parents_status:
+
+        _children_list = ParamHistory.objects.\
+            filter(first_date__lt=on_date).\
+            filter(Q(last_date__lte=on_date) | Q(last_date__isnull=True)).\
+            filter(parents_status__in=parents_status). \
+            values_list('child_id', flat=True)
+
+        if _children_list:
+            children = Child.objects.filter(pk__in=set(_children_list))
+
+        # print(_children_list)
+
+    else:
+        children = Child.objects.all()
 
     for child in children:
         if child.street:
@@ -54,6 +71,27 @@ def report(on_date):
             get_param_on_date(child, 'risk', 'display_risk', on_date),
             get_param_on_date(child, 'note', 'display_note', on_date),
         ])
+
+    if parents_status and mode_parents_status:
+
+        _children_list = children_list.copy()
+        children_list.clear()
+
+        if mode_parents_status == 2:
+
+            _condition = ', '.join([status.name for status in parents_status])
+            for _children in _children_list:
+                if _children[13] == _condition:
+                    children_list.append(_children)
+        else:
+
+            _condition = [status.name for status in parents_status]
+            for _children in _children_list:
+
+                if set(_condition) <= set(_children[13].split(', ')):
+                    children_list.append(_children)
+
+    # print(children_list)
 
     children_list.sort(key=lambda x: (x[0], x[1]))
 
