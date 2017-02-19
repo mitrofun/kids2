@@ -110,7 +110,8 @@ def write_total(sheet):
         sheet.write(col + count_ages, row - 1 + j, Formula(formula_total_col), style_bold)
 
 
-def report(on_date):
+def report(**kwargs):
+    on_date = kwargs['report_date']
     next_date = get_next_date(on_date)
     response = HttpResponse(content_type=content_type)
     response['Content-Disposition'] = 'attachment; filename=summary({}).xls'.format(next_date)
