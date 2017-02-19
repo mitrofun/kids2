@@ -18,8 +18,6 @@ report_template_dir = 'src/apps/reports/templates/list.xls'
 
 def report(**kwargs):
 
-    print(kwargs)
-
     on_date = kwargs['report_date']
     institution = kwargs['institution']
     group = kwargs['group']
