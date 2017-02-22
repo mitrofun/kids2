@@ -139,3 +139,14 @@
 
     }
 })();
+
+// page loader
+(function () {
+    $(window).load(function() {
+        // console.log('load');
+        var pageLoader = document.getElementById('page-loader'),
+            spinner = document.getElementsByClassName('spinner')[0];
+        spinner.classList.add('is_hide');
+        pageLoader.classList.add('is_hide');
+    });
+})();
