@@ -54,12 +54,12 @@ def write_data_by_institution(sheet, col, row, institution_id, children_list):
         col += 1
 
 
-def write_table(sheet, on_date):
+def write_table(sheet, on_date, **kwargs):
 
     c_row = FIRST_ROW + 1
     c_col = FIRST_COLUMN + 1
 
-    _children_list = get_children_institution_list_on_date(on_date)
+    _children_list = get_children_institution_list_on_date(on_date, **kwargs)
 
     for institution in get_institution(0):
         write_data_by_institution(sheet, c_col, c_row, institution.id, _children_list)
@@ -112,6 +112,7 @@ def write_total(sheet):
 
 def report(**kwargs):
     on_date = kwargs['report_date']
+
     next_date = get_next_date(on_date)
     response = HttpResponse(content_type=content_type)
     response['Content-Disposition'] = 'attachment; filename=summary({}).xls'.format(next_date)
@@ -121,7 +122,7 @@ def report(**kwargs):
     sheet = wb.get_sheet(0)
 
     write_head(sheet)
-    write_table(sheet, on_date)
+    write_table(sheet, on_date, **kwargs)
     write_total(sheet)
 
     wb.save(response)

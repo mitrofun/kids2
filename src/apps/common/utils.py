@@ -128,17 +128,95 @@ def get_institution(institution_type=None):
     return institution_qs
 
 
-def get_children_institution_list_on_date(date):
+def get_qs_by_param_name(date, qs, name, **kwargs):
+
+    _children_qs = ParamHistory.objects. \
+        filter(first_date__lt=date). \
+        filter(Q(last_date__lte=date) | Q(last_date__isnull=True))
+
+    if name == 'institution':
+        _children_qs = _children_qs.filter(institution=kwargs['institution'])
+    if name == 'group':
+        _children_qs = _children_qs.filter(group=kwargs['group'])
+    if name == 'grade':
+        _children_qs = _children_qs.filter(grade=kwargs['grade'])
+    if name == 'parents_status':
+        _children_qs = _children_qs.filter(parents_status__in=kwargs['parents_status'])
+    if name == 'health_states':
+        _children_qs = _children_qs.filter(health_states__in=kwargs['health_states'])
+
+    _children_list = _children_qs.values_list('child_id', flat=True)
+
+    if _children_list:
+        qs = qs.filter(pk__in=set(_children_list))
+    else:
+        qs = qs.none()
+
+    return qs
+
+
+def get_children_institution_list_on_date(date, **kwargs):
+
+    health_states = kwargs['health_states']
+    mode_health_states = int(kwargs['mode_health_states'])
+    parents_status = kwargs['parents_status']
+    mode_parents_status = int(kwargs['mode_parents_status'])
 
     children_list = []
 
-    children = Child.objects.all()
+    children_qs = Child.objects.all()
 
-    for child in children:
+    if health_states:
+        children_qs = get_qs_by_param_name(date=date, name='health_states', qs=children_qs, **kwargs)
+
+    if parents_status:
+        children_qs = get_qs_by_param_name(date=date, name='parents_status', qs=children_qs, **kwargs)
+
+    for child in children_qs:
         children_list.append([
             get_age(child.birthday, on_date=date),
             get_param_on_date(child, 'education', 'institution_id', date),
+            get_param_on_date(child, 'health', 'health_list', date),
+            get_param_on_date(child, 'parents', 'parents_list', date),
         ])
+
+    if health_states and mode_health_states != 0:
+
+        _children_list = children_list.copy()
+        children_list.clear()
+
+        if mode_health_states == 2:
+
+            _condition = ', '.join([states.name for states in health_states])
+            for _children in _children_list:
+                if _children[2] == _condition:
+                    children_list.append(_children)
+        else:
+
+            _condition = [states.name for states in health_states]
+            for _children in _children_list:
+
+                if set(_condition) <= set(_children[2].split(', ')):
+                    children_list.append(_children)
+
+    if parents_status and mode_parents_status != 0:
+
+        _children_list = children_list.copy()
+        children_list.clear()
+
+        if mode_parents_status == 2:
+
+            _condition = ', '.join([status.name for status in parents_status])
+            for _children in _children_list:
+                if _children[3] == _condition:
+                    children_list.append(_children)
+        else:
+
+            _condition = [status.name for status in parents_status]
+            for _children in _children_list:
+
+                if set(_condition) <= set(_children[3].split(', ')):
+                    children_list.append(_children)
 
     return children_list
 

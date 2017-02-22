@@ -109,11 +109,7 @@
         var $eventSelect = $("#id_report_type"),
             $institutionSelect = $("#id_institution"),
             $groupSelect = $("#id_group"),
-            $gradeSelect = $("#id_grade"),
-            $healthStatesSelect = $("#id_health_states"),
-            $modeHealthStatesRadio = $("#id_mode_health_states_0"),
-            $parentsStatusSelect = $("#id_parents_status"),
-            $modeParentsStatusRadio = $("#id_mode_parents_status_0");
+            $gradeSelect = $("#id_grade");
 
         $eventSelect.on("change", function (e) {
 
@@ -121,18 +117,11 @@
                 $institutionSelect[0].parentNode.parentNode.classList.add('is_hide');
                 $groupSelect[0].parentNode.parentNode.classList.add('is_hide');
                 $gradeSelect[0].parentNode.parentNode.classList.add('is_hide');
-                $healthStatesSelect[0].parentNode.parentNode.classList.add('is_hide');
-                $modeHealthStatesRadio[0].parentNode.parentNode.parentElement.parentElement.classList.add('is_hide');
-                $parentsStatusSelect[0].parentNode.parentNode.classList.add('is_hide');
-                $modeParentsStatusRadio[0].parentNode.parentNode.parentElement.parentElement.classList.add('is_hide');
+
             } else {
                 $institutionSelect[0].parentNode.parentNode.classList.remove('is_hide');
                 $groupSelect[0].parentNode.parentNode.classList.remove('is_hide');
                 $gradeSelect[0].parentNode.parentNode.classList.remove('is_hide');
-                $healthStatesSelect[0].parentNode.parentNode.classList.remove('is_hide');
-                $modeHealthStatesRadio[0].parentNode.parentNode.parentElement.parentElement.classList.remove('is_hide');
-                $parentsStatusSelect[0].parentNode.parentNode.classList.remove('is_hide');
-                $modeParentsStatusRadio[0].parentNode.parentNode.parentElement.parentElement.classList.remove('is_hide');
             }
 
         });

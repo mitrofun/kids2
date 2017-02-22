@@ -27,6 +27,8 @@ class ReportsForm(forms.Form):
 
     report_date = forms.DateField(label='Дата', initial=get_last_date())
 
+    report_type = forms.ChoiceField(label='Тип отчета', choices=REPORT_CHOICES)
+
     institution = forms.ModelChoiceField(Dictionary.objects.filter(type__slug='institutions'),
                                          label='Учреждение', required=False)
     group = forms.ModelChoiceField(Dictionary.objects.filter(type__slug='groups'),
@@ -43,4 +45,4 @@ class ReportsForm(forms.Form):
                                                     label='Статус родителей', required=False)
     mode_parents_status = forms.ChoiceField(label='Условия', choices=MODE_CHOICES,
                                             widget=forms.RadioSelect(), initial=0)
-    report_type = forms.ChoiceField(label='Тип отчета', choices=REPORT_CHOICES)
+

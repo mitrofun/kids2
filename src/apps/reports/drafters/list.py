@@ -3,12 +3,10 @@
 
 import xlrd
 from xlutils.copy import copy
-from common.utils import get_next_date, get_param_on_date, get_display_age
+from common.utils import get_next_date, get_param_on_date, get_display_age, get_qs_by_param_name
 from children.functions import get_age
-from django.db.models import Q
 from django.http import HttpResponse
 from children.models import Child
-from history.models import ParamHistory
 from itertools import groupby
 from reports.drafters.styles import style, group_style, date_style
 
@@ -41,75 +39,22 @@ def report(**kwargs):
     children_qs = Child.objects.all()
 
     if institution:
-
-        _children_list = ParamHistory.objects. \
-            filter(first_date__lt=on_date). \
-            filter(Q(last_date__lte=on_date) | Q(last_date__isnull=True)). \
-            filter(institution=institution). \
-            values_list('child_id', flat=True)
-
-        if _children_list:
-            children_qs = Child.objects.filter(pk__in=set(_children_list))
+        children_qs = get_qs_by_param_name(date=on_date, name='institution', qs=children_qs, **kwargs)
 
     if group:
-
-        _children_list = ParamHistory.objects. \
-            filter(first_date__lt=on_date). \
-            filter(Q(last_date__lte=on_date) | Q(last_date__isnull=True)). \
-            filter(group=group). \
-            values_list('child_id', flat=True)
-
-        if _children_list:
-            children_qs = children_qs.filter(pk__in=set(_children_list))
-        else:
-            children_qs = children_qs.none()
+        children_qs = get_qs_by_param_name(date=on_date, name='group', qs=children_qs, **kwargs)
 
     if grade:
-
-        _children_list = ParamHistory.objects. \
-            filter(first_date__lt=on_date). \
-            filter(Q(last_date__lte=on_date) | Q(last_date__isnull=True)). \
-            filter(grade=grade). \
-            values_list('child_id', flat=True)
-
-        # print(children_qs.query)
-
-        if _children_list:
-            children_qs = children_qs.filter(pk__in=set(_children_list))
-        else:
-            children_qs = children_qs.none()
+        children_qs = get_qs_by_param_name(date=on_date, name='grade', qs=children_qs, **kwargs)
 
     if health_states:
-
-        _children_list = ParamHistory.objects.\
-            filter(first_date__lt=on_date).\
-            filter(Q(last_date__lte=on_date) | Q(last_date__isnull=True)).\
-            filter(health_states__in=health_states). \
-            values_list('child_id', flat=True)
-
-        if _children_list:
-            children_qs = children_qs.filter(pk__in=set(_children_list))
-        else:
-            children_qs = children_qs.none()
+        children_qs = get_qs_by_param_name(date=on_date, name='health_states', qs=children_qs, **kwargs)
 
     if parents_status:
-
-        _children_list = ParamHistory.objects.\
-            filter(first_date__lt=on_date).\
-            filter(Q(last_date__lte=on_date) | Q(last_date__isnull=True)).\
-            filter(parents_status__in=parents_status). \
-            values_list('child_id', flat=True)
-
-        if _children_list:
-            children_qs = children_qs.filter(pk__in=set(_children_list))
-        else:
-            children_qs = children_qs.none()
+        children_qs = get_qs_by_param_name(date=on_date, name='parents_status', qs=children_qs, **kwargs)
 
     if not institution and not group and not grade and not health_states and not parents_status:
         children_qs = Child.objects.all()
-
-    # print(children_qs)
-    # print(children_qs.query)
 
     for child in children_qs:
         if child.street:
@@ -138,9 +83,6 @@ def report(**kwargs):
 
     if health_states and mode_health_states != 0:
 
-        # print(health_states)
-        # print(mode_health_states)
-
         _children_list = children_list.copy()
         children_list.clear()
 
@@ -148,14 +90,14 @@ def report(**kwargs):
 
             _condition = ', '.join([states.name for states in health_states])
             for _children in _children_list:
-                if _children[13] == _condition:
+                if _children[12] == _condition:
                     children_list.append(_children)
         else:
 
             _condition = [states.name for states in health_states]
             for _children in _children_list:
 
-                if set(_condition) <= set(_children[13].split(', ')):
+                if set(_condition) <= set(_children[12].split(', ')):
                     children_list.append(_children)
 
     if parents_status and mode_parents_status != 0:
@@ -176,8 +118,6 @@ def report(**kwargs):
 
                 if set(_condition) <= set(_children[13].split(', ')):
                     children_list.append(_children)
-
-    # print(children_list)
 
     children_list.sort(key=lambda x: (x[0], x[1]))
 
