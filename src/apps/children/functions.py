@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from datetime import date
+import calendar
+from datetime import date, datetime
 
 
 def get_age(birthday, on_date=date.today()):
@@ -32,3 +33,10 @@ def get_age(birthday, on_date=date.today()):
         if delta_month > 6:
             age = 6.6
     return age
+
+
+def get_last_date():
+    current_date = datetime.now()
+    last_date = (calendar.monthrange(current_date.year, current_date.month))[1]
+    _date = date(current_date.year, current_date.month, last_date)
+    return _date

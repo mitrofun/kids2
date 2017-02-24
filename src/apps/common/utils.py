@@ -239,3 +239,14 @@ def get_children_count_by_list(children_list, institution_id, age, consider_inst
             return len(_children_list)
     else:
         return 0
+
+
+def get_list_names_in_param(list_id, param):
+
+    _list = []
+
+    for item_id in list_id:
+        item = Dictionary.objects.filter(type__slug=param).get(pk=item_id)
+        _list.append(item.name)
+
+    return _list

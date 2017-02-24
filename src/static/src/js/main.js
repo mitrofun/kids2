@@ -56,7 +56,8 @@
 
 (function () {
     if (document.readyState||document.body.readyState=='complete'){
-        $('#children').DataTable( {
+
+        var table = $('#children').DataTable( {
             "aLengthMenu": [[25, 50, 75, 100, -1], [25, 50, 75, 100, "Все"]],
             "iDisplayLength": 100,
             'scrollY': '50vh',
@@ -76,8 +77,99 @@
             'language': {
                 'url': '../static/src/json/dataTables.ru.json'
             }
+        });
+
+        var date = document.getElementById('id_report_date'),
+            institution = document.getElementById('id_institution'),
+            group = document.getElementById('id_group'),
+            grade = document.getElementById('id_grade'),
+            healthStates = document.getElementById('id_health_states'),
+            healthStatesMode = document.getElementsByName('mode_health_states'),
+            parentsStatus = document.getElementById('id_parents_status'),
+            parentsStatusMode = document.getElementsByName('mode_parents_status'),
+            btnFilter = document.getElementById('btnFilter'),
+            btnReset = document.getElementById('btnReset');
+
+        function getSelectValues(select) {
+            var result = [];
+            var options = select && select.options;
+            var opt;
+
+            for (var i=0; i<options.length; i++) {
+                opt = options[i];
+
+                if (opt.selected) {
+                  result.push(opt.value || opt.text);
+                }
+              }
+            return result;
         }
-        );
+
+        function getCheckedValues(radio) {
+            var result = 0;
+
+            for (var i=0; i < radio.length; i++) {
+                if (radio[i].checked) {
+                    result = i;
+                }
+            }
+
+            return result;
+        }
+
+        function applyFilter() {
+            console.log('filter');
+            var searchText = {};
+            if (institution.value) {
+                searchText['institution'] = parseInt(institution.value);
+            }
+            if (group.value) {
+                searchText['group'] = parseInt(group.value);
+            }
+            if (grade.value) {
+                searchText['grade'] = parseInt(grade.value);
+            }
+            if (healthStates.value) {
+                searchText['health_states'] = getSelectValues(healthStates);
+                searchText['mode_health_states'] = getCheckedValues(healthStatesMode);
+            }
+            if (parentsStatus.value) {
+                searchText['parents_status'] = getSelectValues(parentsStatus);
+                searchText['mode_parents_status'] = getCheckedValues(parentsStatusMode);
+            }
+
+            if (date.value) {
+                var dateArray = date.value.split('.');
+                searchText['date'] = new Date (dateArray[2], dateArray[1], dateArray[0]);
+            }
+
+            console.log(searchText);
+
+            table.columns(0).search(JSON.stringify(searchText));
+            localStorage.setItem("filter_" + window.location.pathname, JSON.stringify(searchText));
+            table.draw();
+
+        }
+
+        function resetFilter() {
+            // console.log('reset');
+
+            $("#id_institution").select2().val('').change();
+            $("#id_group").select2().val('').change();
+            $("#id_grade").select2().val('').change();
+            $("#id_health_states").select2().val('').change();
+            $("#id_parents_status").select2().val('').change();
+
+            healthStatesMode[0].checked = true;
+            parentsStatusMode[0].checked = true;
+            table.columns(0).search('');
+            localStorage.clear("filter_" + window.location.pathname);
+            table.draw();
+
+        }
+        if (btnFilter) {btnFilter.addEventListener('click', applyFilter );}
+        if (btnReset) {btnReset.addEventListener('click',resetFilter );}
+
     }
 })();
 
@@ -138,4 +230,64 @@
         spinner.classList.add('is_hide');
         pageLoader.classList.add('is_hide');
     });
+})();
+
+
+// init filter field
+(function () {
+    if (document.readyState||document.body.readyState=='complete'){
+
+        function padWithZeroes(number, length) {
+            var myString = '' + number;
+            while (myString.length < length) {
+                myString = '0' + myString;
+            }
+
+            return myString;
+        }
+
+        var filterParams = JSON.parse(localStorage.getItem("filter_" + window.location.pathname));
+        var healthStatesMode = document.getElementsByName('mode_health_states'),
+            parentsStatusMode = document.getElementsByName('mode_parents_status');
+
+        console.log(filterParams);
+
+        if (filterParams) {
+            if ('date' in filterParams) {
+                var date = new Date(filterParams['date']);
+                var month = padWithZeroes(date.getMonth(), 2);
+                var day = padWithZeroes(date.getDate(), 2);
+                var strDate = `${day}.${month}.${date.getFullYear()}`;
+                $('#id_report_date').val(strDate).change()
+            }
+
+            if ('institution' in filterParams) {
+                $("#id_institution").select2().val(filterParams['institution']).change();
+            }
+            if ('group' in filterParams) {
+                $("#id_group").select2().val(filterParams['group']).change();
+            }
+            if ('grade' in filterParams) {
+                $("#id_group").select2().val(filterParams['grade']).change();
+            }
+            if ('health_states' in filterParams) {
+                $("#id_health_states").select2().val(filterParams['health_states']).change();
+            }
+            if ('mode_health_states' in filterParams) {
+                if (healthStatesMode.length) {
+                    healthStatesMode[parseInt(filterParams['mode_health_states'])].checked = true;
+                }
+            }
+            if ('parents_status' in filterParams) {
+                $("#id_parents_status").select2().val(filterParams['parents_status']).change();
+            }
+            if ('mode_parents_status' in filterParams) {
+                if (parentsStatusMode.length) {
+                    parentsStatusMode[parseInt(filterParams['mode_parents_status'])].checked = true;
+                }
+
+            }
+
+        }
+    }
 })();

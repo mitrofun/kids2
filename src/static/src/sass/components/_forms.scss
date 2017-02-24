@@ -17,3 +17,40 @@
   text-transform: uppercase;
   font-weight: bold;
 }
+
+
+.form-filter label {
+  font-weight: normal;
+  font-size: 10px;
+  margin-bottom: 2px;
+}
+
+.form-filter .radio label {
+  font-size: 12px;
+}
+
+.form-filter .form-group {
+  margin-bottom: 0;
+}
+
+.form-filter .radio {
+  margin-bottom: 5px;
+  height: 20px;
+}
+
+.form-filter {
+  margin-top: -18px;
+}
+
+.form-filter #btnFilter {
+  margin-top: 6px;
+}
+
+.form-filter .form-control {
+  height: 30px!important;
+  line-height: 30px;
+}
+
+.form-filter .form-group  label.control-label:not([for]) {
+  display: none;
+}

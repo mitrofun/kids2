@@ -1,5 +1,6 @@
 {% extends 'children/layout.html' %}
 {% load get_params %}
+{% load bootstrap  %}
 {% block page_header %}
             {{ block.super }}
             <div class="pull-right">
@@ -9,7 +10,21 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-12 col-sm-12">
+
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-filter">
+                    {{ filter_form | bootstrap }}
+                    <button id="btnFilter" class="btn btn-block btn-primary" type="submit">Показать</button>
+                    <button id="btnReset" class="btn btn-block btn-default" type="submit">Сбросить</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-9">
 
         <div class="panel panel-default">
             <div class="table-responsive">

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django import forms
-
 from children.models import Child
+from common.forms import FilterForm
 from dictionaries.models import Dictionary
 
 
@@ -23,3 +23,7 @@ class ChildForm(forms.ModelForm):
             'house',
             'flat'
         ]
+
+
+class FilterChildrenForm(FilterForm):
+    field_order = ['report_date', ]
