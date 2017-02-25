@@ -39,7 +39,7 @@
 }
 
 .form-filter {
-  margin-top: -18px;
+  margin-top: 0;
 }
 
 .form-filter #btnFilter {
@@ -53,4 +53,13 @@
 
 .form-filter .form-group  label.control-label:not([for]) {
   display: none;
+}
+
+.form-filter label[for='id_report_date']  {
+  display: none;
+}
+
+.form-report label,
+.form-loader label {
+  font-weight: normal;
 }

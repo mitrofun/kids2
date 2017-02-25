@@ -18,7 +18,7 @@
     <div class="col-md-12 col-sm-12">
         <div class="panel panel-default">
             <div class="panel-body">
-             <form class="form-horizontal" enctype="multipart/form-data"  method="post">
+             <form class="form-horizontal form-loader" enctype="multipart/form-data"  method="post">
                  {% csrf_token %}
                  {{ form | bootstrap_horizontal }}
                  <div class="pull-right">

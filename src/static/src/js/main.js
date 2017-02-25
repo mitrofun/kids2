@@ -118,7 +118,7 @@
         }
 
         function applyFilter() {
-            console.log('filter');
+            // console.log('filter');
             var searchText = {};
             if (institution.value) {
                 searchText['institution'] = parseInt(institution.value);
@@ -143,7 +143,7 @@
                 searchText['date'] = new Date (dateArray[2], dateArray[1], dateArray[0]);
             }
 
-            console.log(searchText);
+            // console.log(searchText);
 
             table.columns(0).search(JSON.stringify(searchText));
             localStorage.setItem("filter_" + window.location.pathname, JSON.stringify(searchText));
@@ -250,7 +250,7 @@
         var healthStatesMode = document.getElementsByName('mode_health_states'),
             parentsStatusMode = document.getElementsByName('mode_parents_status');
 
-        console.log(filterParams);
+        // console.log(filterParams);
 
         if (filterParams) {
             if ('date' in filterParams) {
