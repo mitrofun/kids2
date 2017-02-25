@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from django.db.models import Q
-from history.models import ParamHistory
 from datetime import datetime
+
+from django.db.models import Q
+
+from history.models import ParamHistory
 
 
 def run_transfer(on_date=datetime.now()):
@@ -11,4 +13,3 @@ def run_transfer(on_date=datetime.now()):
 
     for history in history_qs:
         history.set_next_step(date=on_date)
-
