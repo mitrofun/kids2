@@ -131,8 +131,8 @@ def get_institution(institution_type=None):
 def get_qs_by_param_name(date, qs, name, **kwargs):
 
     _children_qs = ParamHistory.objects. \
-        filter(first_date__lt=date). \
-        filter(Q(last_date__lte=date) | Q(last_date__isnull=True))
+        filter(first_date__lte=date). \
+        filter(Q(last_date__gt=date) | Q(last_date__isnull=True))
 
     if name == 'institution':
         _children_qs = _children_qs.filter(institution=kwargs['institution'])

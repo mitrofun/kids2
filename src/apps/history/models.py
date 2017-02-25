@@ -106,6 +106,14 @@ class ParamHistory(HistoryParamsBase):
         except Step.DoesNotExist:
             return None
 
+    def get_institution_next_step(self):
+        position = self.get_step()
+
+        if position == 17 or position == 0:
+            return None
+        else:
+            return self.institution
+
     def set_next_step(self, date):
 
         try:
@@ -115,7 +123,7 @@ class ParamHistory(HistoryParamsBase):
                 first_date=date,
                 parameter=parameter,
                 child=self.child,
-                institution=self.institution,
+                institution=self.get_institution_next_step(),
                 group=self.get_next_step_value(slug='groups'),
                 grade=self.get_next_step_value(slug='grades'),
                 risk_group=0
