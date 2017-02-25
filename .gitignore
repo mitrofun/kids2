@@ -1,4 +1,4 @@
-/public
+
 /node_modules
 /external
 /tmp
@@ -6,6 +6,13 @@
 
 /src/settings/local.py
 /src/static/src/vendors/
-/src/static/src/fonts/bootstrap/
 /src/static/src/css/
 /settings.py
+conf/nginx/
+conf/supervisor/
+src/static/src/fonts/
+src/static/src/icons/
+src/static/src/sass/layout/
+/node_modules/
+/.sass-cache/
+/public/

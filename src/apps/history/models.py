@@ -3,7 +3,8 @@ from children.models import Child
 from common.models import HistoryModel, NameSlugUniqueModel
 from history.base_models import HistoryParamsBase
 from dictionaries.models import Category, DictionariesType, Dictionary
-from datetime import timedelta
+from datetime import timedelta, datetime
+from transfer.models import Step
 
 
 class Param(NameSlugUniqueModel):
@@ -22,7 +23,6 @@ class Param(NameSlugUniqueModel):
 
 
 class ParamHistory(HistoryParamsBase):
-
     BOOL_CHOICES = (
         (True, 'Да'),
         (False, 'Нет')
@@ -64,7 +64,7 @@ class ParamHistory(HistoryParamsBase):
 
         one_day = timedelta(days=1)
 
-        all_history_list = ParamHistory.objects.filter(child=self.child).\
+        all_history_list = ParamHistory.objects.filter(child=self.child). \
             filter(parameter__slug=self.parameter.slug).order_by('first_date')
 
         open_history_list = all_history_list.filter(last_date=None)
@@ -76,3 +76,50 @@ class ParamHistory(HistoryParamsBase):
                     open_history.save()
 
         return super(ParamHistory, self).save(*args, **kwargs)
+
+    def get_step(self):
+
+        _filter = None
+        step = 0
+
+        if self.group:
+            _filter = self.group
+        if self.grade:
+            _filter = self.grade
+        if _filter:
+            try:
+                step = Step.objects.get(level_id=_filter).position
+            except Step.DoesNotExist:
+                step = 0
+        return step
+
+    def get_next_step_value(self, slug):
+        step = Step.objects.get(position=self.get_step())
+
+        try:
+            next_step = Step.objects.get(position=step.get_next_position())
+
+            if next_step.level.type.slug == slug:
+                return next_step.level
+            else:
+                return None
+        except Step.DoesNotExist:
+            return None
+
+    def set_next_step(self, date):
+
+        try:
+            parameter = Param.objects.get(slug='education')
+
+            ParamHistory.objects.create(
+                first_date=date,
+                parameter=parameter,
+                child=self.child,
+                institution=self.institution,
+                group=self.get_next_step_value(slug='groups'),
+                grade=self.get_next_step_value(slug='grades'),
+                risk_group=0
+            )
+
+        except Param.DoesNotExist:
+            pass

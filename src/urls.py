@@ -14,7 +14,6 @@ urlpatterns = [
 
     url(r'^children/', include('children.urls', namespace='children')),
     url(r'^dictionaries/', include('dictionaries.urls', namespace='dictionaries')),
-
     url(r'^upload/$', login_required(upload), name='loader'),
     url(r'^reports/$', login_required(reports), name='reports'),
 
