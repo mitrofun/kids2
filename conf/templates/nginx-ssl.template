@@ -1,0 +1,70 @@
+server {
+
+   listen         80;
+   server_name    {{ project }} www.{{ project }};
+
+   if ($http_x_forwarded_proto = "http") {
+     return 301 https://$server_name$request_uri;
+   }
+
+    # Set the charset
+    charset utf-8;
+
+    # Set the max size for file uploads to 10Mb
+    client_max_body_size 10M;
+
+    access_log  /var/log/nginx/{{ project }}-access.log;
+    error_log   /var/log/nginx/{{ project }}-error.log;
+
+    gzip on;
+    gzip_disable "msie6";
+    gzip_types
+        text/plain
+        application/atom+xml
+        application/rss+xml
+        application/vnd.ms-fontobject
+        application/x-font-ttf
+        application/x-web-app-manifest+json
+        font/opentype
+        image/x-icon
+        application/xhtml+xml
+        text/css
+        application/json
+        image/svg+xml
+        application/x-javascript
+        text/xml
+        application/xml
+        application/xml+rss
+        text/javascript
+        application/javascript
+        text/x-component;
+
+    location /static/ {
+        root /home/{{ user }}/projects/{{ project }}/public;
+        expires 30d;
+        autoindex on;
+    }
+
+    location /media/ {
+        root /home/{{ user }}/projects/{{ project }}/public;
+        expires 30d;
+        autoindex on;
+    }
+
+    location /robots.txt {
+        alias /home/{{ user }}/projects/{{ project }}/src/templates/robots.txt;
+    }
+
+    location / {
+        proxy_pass http://unix:/home/{{ user }}/projects/{{ project }}/run/gunicorn.sock;
+        proxy_set_header Host $server_name;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        client_max_body_size                            32M;
+        client_body_buffer_size                         512k;
+        proxy_connect_timeout                           300;
+        proxy_send_timeout                              90;
+        proxy_read_timeout                              4000;
+        proxy_buffers                                   32 4k;
+    }
+  }
