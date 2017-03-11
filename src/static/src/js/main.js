@@ -268,7 +268,7 @@
                 $("#id_group").select2().val(filterParams['group']).change();
             }
             if ('grade' in filterParams) {
-                $("#id_group").select2().val(filterParams['grade']).change();
+                $("#id_grade").select2().val(filterParams['grade']).change();
             }
             if ('health_states' in filterParams) {
                 $("#id_health_states").select2().val(filterParams['health_states']).change();
