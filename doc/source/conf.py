@@ -32,8 +32,7 @@ sys.path.insert(0, os.path.abspath('.'))
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc',
-    'sphinx.ext.githubpages']
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.githubpages']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -48,9 +47,9 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'Документация «Учет детей»'
-copyright = '2017, mitri4'
-author = 'mitri4'
+project = u'Документация «Учет детей»'
+copyright = u'2016-2017, mitri4'
+author = u'mitri4'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -128,7 +127,15 @@ latex_elements = {
     # Latex figure (float) alignment
     #
     # 'figure_align': 'htbp',
+
+    # Additional stuff for the LaTeX preamble.
+    # 'preamble': '\\usepackage[utf8]{inputenc}\setcounter{tocdepth}{4}',
+    # 'babel': '\\usepackage[russian]{babel}',
+    # 'cmappkg': '\\usepackage{cmap}',
+    # 'fontenc': '\usepackage[T1,T2A]{fontenc}',
+    # 'utf8extra':'\\DeclareUnicodeCharacter{00A0}{\\nobreakspace}',
 }
+
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
@@ -168,6 +175,3 @@ html_show_copyright = False
 # If true, "Created using Sphinx" is shown in the HTML footer.
 # Default is True.
 html_show_sphinx = False
-
-
-

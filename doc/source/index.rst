@@ -15,10 +15,11 @@
 .. note:: *Последняя правка:* |today|
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 4
 
    preface
    children
+   dictionaries
 
 
 
