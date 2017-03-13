@@ -20,6 +20,8 @@
    preface
    children
    dictionaries
+   upload
+   reports
 
 
 
