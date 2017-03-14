@@ -52,6 +52,8 @@ copyright = u'2016-2017, mitri4'
 # author = u'mitri4'
 author = u''
 
+html_favicon = '_static/favicon-32x32.ico'
+
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
