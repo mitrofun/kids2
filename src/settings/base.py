@@ -143,3 +143,5 @@ LOGOUT_REDIRECT_URL = '/'
 
 FILE_UPLOAD_HANDLERS = ("django_excel.ExcelMemoryFileUploadHandler",
                         "django_excel.TemporaryExcelFileUploadHandler")
+
+DOCUMENTATION_URL = '/static/docs/index.html'

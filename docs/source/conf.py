@@ -49,7 +49,8 @@ master_doc = 'index'
 # General information about the project.
 project = u'Документация «Учет детей»'
 copyright = u'2016-2017, mitri4'
-author = u'mitri4'
+# author = u'mitri4'
+author = u''
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -106,7 +107,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'viewkidsdoc'
+htmlhelp_basename = u'Документация «Учет детей»'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -129,11 +130,11 @@ latex_elements = {
     # 'figure_align': 'htbp',
 
     # Additional stuff for the LaTeX preamble.
-    # 'preamble': '\\usepackage[utf8]{inputenc}\setcounter{tocdepth}{4}',
-    # 'babel': '\\usepackage[russian]{babel}',
-    # 'cmappkg': '\\usepackage{cmap}',
-    # 'fontenc': '\usepackage[T1,T2A]{fontenc}',
-    # 'utf8extra':'\\DeclareUnicodeCharacter{00A0}{\\nobreakspace}',
+    'preamble': '\\usepackage[utf8]{inputenc}\setcounter{tocdepth}{4}',
+    'babel': '\\usepackage[russian]{babel}',
+    'cmappkg': '\\usepackage{cmap}',
+    'fontenc': '\usepackage[T1,T2A]{fontenc}',
+    'utf8extra':'\\DeclareUnicodeCharacter{00A0}{\\nobreakspace}',
 }
 
 
@@ -141,8 +142,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'viewkids.tex', 'viewkids Documentation',
-     'mitri4', 'manual'),
+    (master_doc, 'viewkids.tex', u'Документация «Учет детей»',
+     '', 'manual'),
 ]
 
 
@@ -151,7 +152,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'viewkids', 'Viewkids Documentation',
+    (master_doc, 'viewkids', u'Документация «Учет детей»',
      [author], 1)
 ]
 
@@ -162,7 +163,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'viewkids', 'Viewkids Documentation',
+    (master_doc, 'viewkids', u'Документация «Учет детей»',
      author, 'viewkids', 'One line description of project.',
      'Miscellaneous'),
 ]

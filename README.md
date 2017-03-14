@@ -15,3 +15,8 @@ Add to cron
     crontab -e
 
     0 0 1 9 * /.env/name/bin/python /projects/kids2/manage.py transfer_children
+
+### Doc
+
+    ln -s ~/projects/kids2/docs/build/html/ ~/projects/kids2/src/static/html
+    ln -s ~/projects/kids2/docs/build/html/ ~/projects/kids2/public/static/html
