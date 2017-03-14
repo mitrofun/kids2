@@ -22,11 +22,5 @@
    dictionaries
    upload
    reports
+   admin
 
-
-
-Дополнительно
-=============
-
-* :ref:`genindex`
-* :ref:`search`

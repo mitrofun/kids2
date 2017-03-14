@@ -8,6 +8,8 @@ from common.dashboard import DashboardView
 from loader.views import upload
 from reports.views import reports
 
+admin.site.site_header = settings.ADMIN_SITE_HEADER
+
 urlpatterns = [
     url(r'^$', login_required(DashboardView.as_view()), name='dashboard'),
     url(r'', include('accounts.urls', namespace='accounts')),

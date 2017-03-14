@@ -17,7 +17,7 @@
 
 * :ref:`dict-cat-education-label`
 * :ref:`dict-cat-address-label`
-* :ref:`dict--cat-extra-label`
+* :ref:`dict-cat-extra-label`
 
 .. _dict-cat-education-label:
 
@@ -73,7 +73,7 @@
 Справочник «Улицы»
 ~~~~~~~~~~~~~~~~~~
 
-Справочник улиц, всех населенных пунктов.
+Справочник улиц всех населенных пунктов.
 
 .. _dict-location-label:
 
@@ -82,7 +82,7 @@
 
 Населенные пункты района.
 
-.. _dict--cat-extra-label:
+.. _dict-cat-extra-label:
 
 Категория «Дополнительные»
 --------------------------
