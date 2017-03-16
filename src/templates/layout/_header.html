@@ -28,7 +28,7 @@
                         {{ user.first_name }} <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        {% if user.is_superuser %}
+                        {% if user.is_staff %}
                             <li>
                                 <a href="{% url 'admin:index' %}">Администрирование</a>
                             </li>
