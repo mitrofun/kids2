@@ -3,16 +3,17 @@ services:
 
   db:
     restart: always
-    image: postgres:latest
+    image: postgres
     environment:
-      - POSTGRES_PASSWORD=mysecretpassword
-      - POSTGRES_USER=postgres
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'mysecretpassword'
     volumes:
       - ./db:/var/lib/postgresql/data
+
   web:
     restart: always
     build: .
-    command: bash -c 'python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000'
+    command: bash -c 'python manage.py makemigrations && python manage.py migrate && python manage.py filldicts --fill && python manage.py sitetree_resync_apps && python manage.py runserver 0.0.0.0:8000'
     volumes:
       - .:/code
     ports:
