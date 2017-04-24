@@ -1,9 +1,36 @@
+# Compiled source #
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Logs and databases #
+*.log
+*.sql
+*.sqlite
+*.sqlite3
+*.fdb
+*.gdb
+
+# OS generated files #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
 
 /node_modules
 /external
 /tmp
-
-
 /src/settings/local.py
 /src/static/src/vendors/
 /src/static/src/css/
@@ -13,6 +40,7 @@ conf/supervisor/
 src/static/src/fonts/
 src/static/src/icons/
 src/static/src/sass/layout/
-/node_modules/
 /.sass-cache/
 /public/
+/db/
+!.gitkeep
