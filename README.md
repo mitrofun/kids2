@@ -8,6 +8,8 @@ Application for registration of children ages 0 to 18 +
 
 Backend - Python 3, Djangо 1.9
 
+Package manager for frontend - Bower
+
 ## How to start
 
 Clone project
@@ -31,20 +33,24 @@ Init database and install some fixtures:
     python manage.py filldicts --fill
     python manage.py sitetree_resync_apps
 
+Install vendor static
+
+    bower i
+
 Create super user
     
     python manage.py createsuper
-    
+
+
 ## Deploy with fabric
 
 Copy settings for fabric script deploy
     
     cp ./settings.py.skeleton ./settings.py
-    
+
 Enter your parameters in the file `./settings.py` and just run script 
     
     fab deploy
-
 
 #### Command transfer children
 
