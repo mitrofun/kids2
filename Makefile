@@ -31,7 +31,7 @@ create_admin:
 	echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@site.com', 'admin')" | $(PYTHON) manage.py shell
 
 create_menu:
-    $(PYTHON) manage.py sitetree_resync_apps
+	$(PYTHON) manage.py sitetree_resync_apps
 
 run:
 	$(PYTHON) manage.py runserver localhost:8000
