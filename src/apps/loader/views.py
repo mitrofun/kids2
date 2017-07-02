@@ -17,16 +17,19 @@ def upload(request):
             tmp_name_file = 'tmp' + get_extension(file_handle)
             path = "{}/{}".format(settings.MEDIA_ROOT, tmp_name_file)
             data = pyexcel.get_array(file_name=path)
-            loader(data[settings.EXCEL_START_STRING:], on_date)
+            job = loader.delay(data[settings.EXCEL_START_STRING:], on_date)
             os.remove(path)
-            return render_to_response(
+            response = render_to_response(
                 'loader/index.html',
                 {
-                    'message': 'Данные загруженны',
+                    'message': 'Данные будут загружены',
                     'message_type': 'success',
                     'form': form,
                 },
                 context_instance=RequestContext(request))
+            response.set_cookie('kids_loader_job', job.get_id())
+            response.set_cookie('kids_job_task', '2')
+            return response
         else:
             return render_to_response(
                 'loader/index.html',

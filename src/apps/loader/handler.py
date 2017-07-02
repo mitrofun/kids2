@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from django_rq import job
+
 from children.models import Child
 from history.models import ParamHistory, Param
 from common.utils import get_dictionary_item
@@ -126,6 +128,7 @@ def set_children_simple_param(param_type, child, date, value):
         pass
 
 
+@job
 def loader(data, on_date):
 
     for item in data:

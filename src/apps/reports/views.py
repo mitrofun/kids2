@@ -1,4 +1,3 @@
-import json
 import logging
 
 import django_rq
@@ -38,7 +37,7 @@ def reports_view(request):
                     },
                     context_instance=RequestContext(request))
                 response.set_cookie('kids_report_job', job.get_id())
-                response.set_cookie('kids_report_job_task', '1')
+                response.set_cookie('kids_job_task', '1')
                 return response
 
             else:
@@ -68,23 +67,6 @@ def reports_view(request):
         'reports/index.html',
         {'form': form},
         context_instance=RequestContext(request))
-
-
-def status_view(request):
-    ret = {}
-    job_id = request.GET.get('job_id')
-    redis_conn = django_rq.get_connection()
-    job = Job.fetch(job_id, redis_conn)
-    if job.is_finished:
-        ret = {'status': 'finished'}
-    elif job.is_queued:
-        ret = {'status': 'in-queue'}
-    elif job.is_started:
-        ret = {'status': 'waiting'}
-    elif job.is_failed:
-        ret = {'status': 'failed'}
-
-    return HttpResponse(json.dumps(ret), content_type="application/json")
 
 
 def reports_file(request):

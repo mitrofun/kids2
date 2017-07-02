@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 
 from common.dashboard import DashboardView
+from common.views import status_view
 from loader.views import upload
 
 admin.site.site_header = settings.ADMIN_SITE_HEADER
@@ -17,6 +18,7 @@ urlpatterns = [
     url(r'^dictionaries/', include('dictionaries.urls', namespace='dictionaries')),
     url(r'^upload/$', login_required(upload), name='loader'),
     url(r'^reports/', include('reports.urls', namespace='reports')),
+    url(r'^status/$', status_view, name="status"),
     url(r'^django-rq/', include('django_rq.urls')),
     url(r'^admin/', include(admin.site.urls)),
 

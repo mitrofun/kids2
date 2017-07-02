@@ -299,7 +299,8 @@
         jobName = document.getElementsByClassName('job__name')[0],
         jobLoader = document.getElementsByClassName('job__loader')[0],
         jobResult = document.getElementsByClassName('job__result')[0],
-        jobLink = document.getElementById('jobLink');
+        jobLink = document.getElementById('jobLink'),
+        task;
 
     function readCookie(name) {
         var nameEQ = name + "=";
@@ -334,7 +335,7 @@
             clearInterval(intervalID);
             jobName.innerHTML = 'Ошибка формирования';
             deleteCookie('kids_report_job');
-            deleteCookie('kids_report_job_task');
+            deleteCookie('kids_job_task');
         }
         if (data.status === "waiting"){
             // do nothing
@@ -342,10 +343,20 @@
         }
         else if (data.status === "finished"){
             // console.log(data.status);
-            jobName.innerHTML = 'Отчет сформирован';
-            jobLoader.style.display = 'none';
-            jobLink.href = '/reports/get/?job_id=' + job;
-            jobResult.style.display = 'block';
+            if (task === '1') {
+                jobName.innerHTML = 'Отчет сформирован';
+                jobLoader.style.display = 'none';
+                jobLink.href = '/reports/get/?job_id=' + job;
+                jobResult.style.display = 'block';
+            } else {
+                jobName.innerHTML = 'Данные загружены';
+                jobLoader.style.display = 'none';
+                deleteCookie('kids_loader_job');
+                deleteCookie('kids_job_task');
+                setTimeout(function () {
+                    jobPopup.style.display='none'
+                }, 2500);
+            }
             clearInterval(intervalID);
         }
         else {
@@ -359,9 +370,17 @@
     }
 
     function check_status() {
+        var sendID = '';
+
+        if (task === '1') {
+            sendID = job;
+        } else {
+            sendID = jobCookeLoader;
+        }
+
         $.ajax({
             type: "GET",
-            url: "/reports/status/?job_id=" + job,
+            url: "/status/?job_id=" + sendID,
             success: show_status,
             error: handle_error
         });
@@ -369,25 +388,28 @@
 
     if (document.readyState||document.body.readyState=='complete'){
         var job = readCookie('kids_report_job'),
-            task = readCookie('kids_report_job_task'),
-            nameTask = getNameTask(task);
+            jobCookeLoader = readCookie('kids_loader_job'),
+            intervalID;
+
+        task = readCookie('kids_job_task');
+        var nameTask = getNameTask(task);
         // console.log(job);
-        if (job) {
-            // console.log('loading');
+        if (job || jobCookeLoader)  {
+            console.log('loading');
+            console.log(task);
 
             jobPopup.style.display = 'block';
             jobName.innerHTML = nameTask;
 
             setTimeout(check_status, 0.05);
-            var intervalID = setInterval(check_status, 1000);
-
+            intervalID = setInterval(check_status, 1000);
         }
     }
 
     jobLink.addEventListener('click', function () {
         jobPopup.style.display = 'none';
         deleteCookie('kids_report_job');
-        deleteCookie('kids_report_job_task');
+        deleteCookie('kids_job_task');
     })
 
 })();
