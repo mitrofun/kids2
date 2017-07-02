@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import ContextMixin
@@ -29,9 +28,7 @@ class DicItemsListView(DictionaryBaseView, ListView):
         context['add_item'] = reverse_lazy('dictionaries:items-add',
                                            kwargs={
                                                'category': self.kwargs['category'],
-                                               'dictionary_type': self.kwargs['dictionary_type']
-                                                  }
-                                           )
+                                               'dictionary_type': self.kwargs['dictionary_type']})
         context['category'] = Category.objects.get(slug=self.kwargs['category'])
         context['type'] = DictionariesType.objects.get(slug=self.kwargs['dictionary_type'])
         return context
@@ -46,19 +43,19 @@ class DicItemsCreateView(DictionaryBaseView, CreateView):
         context['category'] = Category.objects.get(slug=self.kwargs['category'])
         context['type'] = DictionariesType.objects.get(slug=self.kwargs['dictionary_type'])
         context['back_url'] = \
-            self.request.META.get('HTTP_REFERER',
-                                  reverse_lazy('dictionaries:items-list',
-                                               kwargs={'category': self.kwargs['category'],
-                                                       'dictionary_type': self.kwargs['dictionary_type']
-                                                       }
-                                               )
-                                  )
+            self.request.META.get(
+                'HTTP_REFERER',
+                reverse_lazy('dictionaries:items-list',
+                             kwargs={'category': self.kwargs['category'],
+                                     'dictionary_type': self.kwargs['dictionary_type']}))
         return context
 
     def get_form(self, *args, **kwargs):
         form = super(DicItemsCreateView, self).get_form(*args, **kwargs)
         if 'dictionary_type' in self.kwargs:
-            form.fields['type'].initial = DictionariesType.objects.get(slug=self.kwargs['dictionary_type'])
+            form.fields['type'].initial = DictionariesType.objects.get(
+                slug=self.kwargs['dictionary_type']
+            )
             form.fields['type'].widget = HiddenInput()
             if self.kwargs['dictionary_type'] != 'institutions':
                 form.fields['institution_type'].widget = HiddenInput()
@@ -89,7 +86,9 @@ class DicItemsUpdateView(DictionaryBaseView, UpdateView):
     def get_form(self, *args, **kwargs):
         form = super(DicItemsUpdateView, self).get_form(*args, **kwargs)
         if 'dictionary_type' in self.kwargs:
-            form.fields['type'].initial = DictionariesType.objects.get(slug=self.kwargs['dictionary_type'])
+            form.fields['type'].initial = DictionariesType.objects.get(
+                slug=self.kwargs['dictionary_type']
+            )
             form.fields['type'].widget = HiddenInput()
             if self.kwargs['dictionary_type'] != 'institutions':
                 form.fields['institution_type'].widget = HiddenInput()
@@ -101,11 +100,10 @@ class DicItemsUpdateView(DictionaryBaseView, UpdateView):
         context['type'] = DictionariesType.objects.get(slug=self.kwargs['dictionary_type'])
         context['back_url'] = \
             self.request.META.get('HTTP_REFERER',
-                                  reverse_lazy('dictionaries:items-list',
-                                               kwargs={'category': self.kwargs['category'],
-                                                       'dictionary_type': self.kwargs['dictionary_type']
-                                                       }
-                                               )
+                                  reverse_lazy(
+                                      'dictionaries:items-list',
+                                      kwargs={'category': self.kwargs['category'],
+                                              'dictionary_type': self.kwargs['dictionary_type']})
                                   )
         return context
 

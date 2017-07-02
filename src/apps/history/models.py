@@ -1,9 +1,8 @@
 from django.db import models
-from children.models import Child
-from common.models import HistoryModel, NameSlugUniqueModel
+from common.models import NameSlugUniqueModel
 from history.base_models import HistoryParamsBase
-from dictionaries.models import Category, DictionariesType, Dictionary
-from datetime import timedelta, datetime
+from dictionaries.models import Dictionary
+from datetime import timedelta
 from transfer.models import Step
 
 

@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.test import TestCase
 from dictionaries.models import Dictionary, DictionariesType, Category
@@ -20,7 +19,11 @@ class InstitutionList(TestCase):
 
     def setUp(self):
         category = Category.objects.create(name='Образование', slug='education')
-        _type = DictionariesType.objects.create(category=category, slug='institutions', name='Учреждения')
+        _type = DictionariesType.objects.create(
+            category=category,
+            slug='institutions',
+            name='Учреждения'
+        )
         Dictionary.objects.create(type=_type, institution_type=0, name='Садик')
         Dictionary.objects.create(type=_type, institution_type=1, name='Школа')
 

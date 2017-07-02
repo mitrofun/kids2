@@ -21,4 +21,5 @@ class StepAdmin(admin.ModelAdmin):
 
     list_display = ('level', 'position')
 
+
 admin.site.register(Step, StepAdmin)

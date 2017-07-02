@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
 import datetime
@@ -31,7 +30,9 @@ def _validate_excel_data(file_data):
         parent = item[13]
 
         if birthday == '':
-            list__error.append('В строке c номером п/п {number} отсутствует дата'.format(number=number))
+            list__error.append(
+                'В строке c номером п/п {number} отсутствует дата'.format(number=number)
+            )
         if not isinstance(birthday, datetime.date):
             list__error.append('В строке c номером п/п {number} не верный формат даты - {date}'.
                                format(number=number, date=birthday)
@@ -44,8 +45,9 @@ def _validate_excel_data(file_data):
                 text_error = 'В строке c номером п/п {number} не указан населенный пункт'.\
                     format(number=number)
             else:
-                text_error = 'В строке c номером п/п {number} указан населенный пункт отсутствующий в ' \
-                             'справочнике - {locality}'.format(number=number, locality=locality)
+                text_error = \
+                    'В строке c номером п/п {number} указан населенный пункт отсутствующий в ' \
+                    'справочнике - {locality}'.format(number=number, locality=locality)
             list__error.append(text_error)
 
         if street:
@@ -74,15 +76,17 @@ def _validate_excel_data(file_data):
             try:
                 Dictionary.objects.get(type__slug='institutions', name=institution)
             except Dictionary.DoesNotExist:
-                text_error = 'В строке c номером п/п {number} указано учреждение отсутствующее в ' \
-                                 'справочнике - {institution}'.format(number=number, institution=institution)
+                text_error = 'В строке c номером п/п {number} указано учреждение ' \
+                             'отсутствующее в справочнике - {institution}'.\
+                    format(number=number, institution=institution)
                 list__error.append(text_error)
 
         if group:
             try:
                 Dictionary.objects.get(type__slug='groups', name=group)
             except Dictionary.DoesNotExist:
-                    text_error = 'В строке c номером п/п {number} указана возрастная группа отсутствующая в ' \
+                    text_error = 'В строке c номером п/п {number} указана возрастная ' \
+                                 'группа отсутствующая в ' \
                                  'справочнике - {group}'.format(number=number, group=group)
                     list__error.append(text_error)
 
@@ -101,7 +105,8 @@ def _validate_excel_data(file_data):
                     try:
                         Dictionary.objects.get(type__slug='health', name=value)
                     except Dictionary.DoesNotExist:
-                        text_error = 'В строке c номером п/п {number} указано состаяние здоровья отсутствующее в ' \
+                        text_error = 'В строке c номером п/п {number} указано' \
+                                     ' состаяние здоровья отсутствующее в ' \
                                      'справочнике - {value}'.format(number=number, value=value)
                         list__error.append(text_error)
 
@@ -112,7 +117,8 @@ def _validate_excel_data(file_data):
                     try:
                         Dictionary.objects.get(type__slug='parents', name=value)
                     except Dictionary.DoesNotExist:
-                        text_error = 'В строке c номером п/п {number} указан статус родителей отсутствующей в ' \
+                        text_error = 'В строке c номером п/п {number} указан ' \
+                                     'статус родителей отсутствующей в ' \
                                      'справочнике - {value}'.format(number=number, value=value)
                         list__error.append(text_error)
 

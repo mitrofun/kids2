@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 from datetime import timedelta
@@ -40,7 +39,8 @@ def get_dictionary_item(value, type_name):
 def get_param_on_date(child, parameter_type, parameter, date):
 
     all_history = ParamHistory.objects.filter(child=child, parameter__slug=parameter_type).\
-        filter(first_date__lte=date).filter(Q(last_date__gte=date) | Q(last_date__isnull=True)).order_by('last_date')
+        filter(first_date__lte=date).\
+        filter(Q(last_date__gte=date) | Q(last_date__isnull=True)).order_by('last_date')
 
     if all_history:
 
@@ -121,7 +121,8 @@ def get_display_age(age):
 
 def get_institution(institution_type=None):
 
-    institution_qs = Dictionary.objects.filter(type__slug='institutions', ).order_by('institution_type', 'name')
+    institution_qs = Dictionary.objects.filter(type__slug='institutions', ).\
+        order_by('institution_type', 'name')
     if institution_type is not None:
         institution_qs = institution_qs.filter(institution_type=institution_type)
 
@@ -167,10 +168,12 @@ def get_children_institution_list_on_date(date, **kwargs):
     children_qs = Child.objects.all()
 
     if health_states:
-        children_qs = get_qs_by_param_name(date=date, name='health_states', qs=children_qs, **kwargs)
+        children_qs = get_qs_by_param_name(
+            date=date, name='health_states', qs=children_qs, **kwargs)
 
     if parents_status:
-        children_qs = get_qs_by_param_name(date=date, name='parents_status', qs=children_qs, **kwargs)
+        children_qs = get_qs_by_param_name(
+            date=date, name='parents_status', qs=children_qs, **kwargs)
 
     for child in children_qs:
         children_list.append([

@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin

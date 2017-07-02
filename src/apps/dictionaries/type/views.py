@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import ContextMixin
@@ -27,7 +26,8 @@ class DicTypesListView(DicTypesBaseView, ListView):
 
     def get_context_data(self, **kwargs):
         context = super(DicTypesListView, self).get_context_data(**kwargs)
-        context['add_types'] = reverse_lazy('dictionaries:types-add', kwargs={'category': self.kwargs['category']})
+        context['add_types'] = reverse_lazy('dictionaries:types-add',
+                                            kwargs={'category': self.kwargs['category']})
         context['category'] = Category.objects.get(slug=self.kwargs['category'])
         return context
 
@@ -46,9 +46,9 @@ class DicTypesCreateView(DicTypesBaseView, CreateView):
     def get_context_data(self, **kwargs):
         context = super(DicTypesCreateView, self).get_context_data(**kwargs)
         context['category'] = Category.objects.get(slug=self.kwargs['category'])
-        context['back_url'] = self.request.META.get('HTTP_REFERER',
-                                                    reverse_lazy('dictionaries:types-list',
-                                                                 kwargs={'category': self.kwargs['category']}))
+        context['back_url'] = self.request.META.get(
+            'HTTP_REFERER', reverse_lazy('dictionaries:types-list',
+                                         kwargs={'category': self.kwargs['category']}))
         return context
 
 
@@ -81,4 +81,5 @@ class DicTypesDeleteView(DicTypesBaseView, DeleteView):
     pass
 
     def get_success_url(self):
-        return reverse_lazy('dictionaries:types-list', kwargs={'category': self.object.category.slug})
+        return reverse_lazy('dictionaries:types-list',
+                            kwargs={'category': self.object.category.slug})

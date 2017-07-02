@@ -95,7 +95,10 @@ class ChildListJson(BaseDatatableView):
             mode_parents_status = 0
 
             if 'date' in filter_params:
-                filter_params['date'] = datetime.strptime(filter_params['date'], '%Y-%m-%dT%H:%M:%S.%fZ')
+                filter_params['date'] = datetime.strptime(
+                    filter_params['date'],
+                    '%Y-%m-%dT%H:%M:%S.%fZ'
+                )
                 self.date = filter_params['date']
             if 'institution' in filter_params:
                 qs = get_qs_by_param_name(name='institution', qs=qs, **filter_params)
@@ -104,11 +107,17 @@ class ChildListJson(BaseDatatableView):
             if 'grade' in filter_params:
                 qs = get_qs_by_param_name(name='grade', qs=qs, **filter_params)
             if 'health_states'in filter_params:
-                health_states = get_list_names_in_param(filter_params['health_states'], param='health')
+                health_states = get_list_names_in_param(
+                    filter_params['health_states'],
+                    param='health'
+                )
                 mode_health_states = filter_params['mode_health_states']
                 qs = get_qs_by_param_name(name='health_states', qs=qs, **filter_params)
             if 'parents_status' in filter_params:
-                parents_status = get_list_names_in_param(filter_params['parents_status'], param='parents')
+                parents_status = get_list_names_in_param(
+                    filter_params['parents_status'],
+                    param='parents'
+                )
                 mode_parents_status = filter_params['mode_parents_status']
                 qs = get_qs_by_param_name(name='parents_status', qs=qs, **filter_params)
 

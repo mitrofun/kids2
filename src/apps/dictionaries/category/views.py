@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import ContextMixin
@@ -35,7 +34,8 @@ class CategoriesCreateView(CategoriesBaseView, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(CategoriesCreateView, self).get_context_data(**kwargs)
-        context['back_url'] = self.request.META.get('HTTP_REFERER', reverse_lazy('dictionaries:categories-list'))
+        context['back_url'] = self.request.META.get(
+            'HTTP_REFERER', reverse_lazy('dictionaries:categories-list'))
         return context
 
 

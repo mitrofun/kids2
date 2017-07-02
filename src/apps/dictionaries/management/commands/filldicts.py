@@ -17,7 +17,8 @@ class DbFiller:
         self._type = None
 
     def _fill_category(self):
-        category_text = open(os.path.join(ROOT_DIR, "fixtures", "category.json"), "r", encoding='utf-8').read()
+        category_text = open(os.path.join(ROOT_DIR, "fixtures", "category.json"),
+                             "r", encoding='utf-8').read()
         categories = json.loads(category_text)
 
         for category in categories:
@@ -34,7 +35,8 @@ class DbFiller:
 
     def _fill_dictionary_by_name(self):
         dic_text = open(
-            os.path.join(ROOT_DIR, "fixtures", "{}.json".format(self._dic_name)), "r", encoding='utf-8').read()
+            os.path.join(ROOT_DIR, "fixtures", "{}.json".format(self._dic_name)),
+            "r", encoding='utf-8').read()
         dic = json.loads(dic_text)
 
         for item in dic:
@@ -55,7 +57,8 @@ class DbFiller:
         print('{} completed'.format(self._dic_name))
 
     def _fill_all_dict(self):
-        types_text = open(os.path.join(ROOT_DIR, "fixtures", "types.json"), "r", encoding='utf-8').read()
+        types_text = open(os.path.join(ROOT_DIR, "fixtures", "types.json"),
+                          "r", encoding='utf-8').read()
         types = json.loads(types_text)
 
         for type in types:
@@ -77,7 +80,8 @@ class DbFiller:
         print('all types completed')
 
     def _fill_params(self):
-        param_text = open(os.path.join(ROOT_DIR, "fixtures", "params.json"), "r", encoding='utf-8').read()
+        param_text = open(os.path.join(ROOT_DIR, "fixtures", "params.json"),
+                          "r", encoding='utf-8').read()
         params = json.loads(param_text)
 
         for param in params:

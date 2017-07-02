@@ -2,7 +2,6 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as django_login
 from django.contrib import auth
 from django.contrib.auth.forms import AuthenticationForm
-from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 

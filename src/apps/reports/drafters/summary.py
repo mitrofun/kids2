@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import xlrd
 from django_rq import job
@@ -51,7 +50,8 @@ def write_head(sheet):
 def write_data_by_institution(sheet, col, row, institution_id, children_list):
 
     for age in get_list_age():
-        sheet.write(col, row, get_children_count_by_list(children_list, institution_id, age), style)
+        sheet.write(col, row,
+                    get_children_count_by_list(children_list, institution_id, age), style)
         col += 1
 
 

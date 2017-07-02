@@ -5,9 +5,20 @@ from dictionaries.models import Dictionary
 
 
 class Child(PersonModel, AddressModel):
-    locality = models.ForeignKey(Dictionary, verbose_name="Населенный пункт",
-                                 related_name='locality', blank=True, null=True)
-    street = models.ForeignKey(Dictionary, verbose_name="Улица", related_name='street', blank=True, null=True)
+    locality = models.ForeignKey(
+        Dictionary,
+        verbose_name="Населенный пункт",
+        related_name='locality',
+        blank=True,
+        null=True
+    )
+    street = models.ForeignKey(
+        Dictionary,
+        verbose_name="Улица",
+        related_name='street',
+        blank=True,
+        null=True
+    )
 
     class Meta:
         db_table = 'children'

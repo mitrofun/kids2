@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from children.models import Child
 from history.models import ParamHistory, Param

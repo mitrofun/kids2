@@ -27,4 +27,3 @@ class Step(models.Model):
         except Step.DoesNotExist:
             next_position = 0
         return next_position
-

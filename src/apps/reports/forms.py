@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django import forms
 
@@ -14,4 +13,3 @@ class ReportsForm(FilterForm):
         (2, 'Свод')
     )
     report_type = forms.ChoiceField(label='Тип отчета', choices=REPORT_CHOICES)
-

@@ -16,7 +16,8 @@ class DbFiller:
         self._type = None
 
     def _fill_params(self):
-        params_text = open(os.path.join(ROOT_DIR, "fixtures", "params.json"), "r", encoding='utf-8').read()
+        params_text = open(os.path.join(ROOT_DIR, "fixtures", "params.json"),
+                           "r", encoding='utf-8').read()
         params = json.loads(params_text)
 
         for param in params:

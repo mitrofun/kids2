@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import xlrd
@@ -40,19 +39,24 @@ def report(**kwargs):
     children_qs = Child.objects.all()
 
     if institution:
-        children_qs = get_qs_by_param_name(date=on_date, name='institution', qs=children_qs, **kwargs)
+        children_qs = get_qs_by_param_name(
+            date=on_date, name='institution', qs=children_qs, **kwargs)
 
     if group:
-        children_qs = get_qs_by_param_name(date=on_date, name='group', qs=children_qs, **kwargs)
+        children_qs = get_qs_by_param_name(
+            date=on_date, name='group', qs=children_qs, **kwargs)
 
     if grade:
-        children_qs = get_qs_by_param_name(date=on_date, name='grade', qs=children_qs, **kwargs)
+        children_qs = get_qs_by_param_name(
+            date=on_date, name='grade', qs=children_qs, **kwargs)
 
     if health_states:
-        children_qs = get_qs_by_param_name(date=on_date, name='health_states', qs=children_qs, **kwargs)
+        children_qs = get_qs_by_param_name(
+            date=on_date, name='health_states', qs=children_qs, **kwargs)
 
     if parents_status:
-        children_qs = get_qs_by_param_name(date=on_date, name='parents_status', qs=children_qs, **kwargs)
+        children_qs = get_qs_by_param_name(
+            date=on_date, name='parents_status', qs=children_qs, **kwargs)
 
     if not institution and not group and not grade and not health_states and not parents_status:
         children_qs = Child.objects.all()

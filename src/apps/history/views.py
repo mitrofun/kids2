@@ -20,8 +20,9 @@ class HistoryBaseView(LoginRequiredMixin, ContextMixin, View):
             context['child'] = Child.objects.get(pk=self.kwargs['child_id'])
             context['param'] = Param.objects.get(slug=self.kwargs['param'])
             context['back_url'] = \
-                self.request.META.get('HTTP_REFERER', reverse_lazy('children:detail',
-                                                                   kwargs={'child_id': self.kwargs['child_id']}))
+                self.request.META.get('HTTP_REFERER',
+                                      reverse_lazy('children:detail',
+                                                   kwargs={'child_id': self.kwargs['child_id']}))
         if 'history_id' in self.kwargs:
             context['history'] = ParamHistory.objects.get(pk=self.kwargs['history_id'])
         return context
@@ -70,7 +71,8 @@ class FormBaseHistory(HistoryBaseView):
             if next_history:
                 if form.cleaned_data['last_date'] > next_history.first_date - one_day:
                     text_error = 'Позже уже есть история.' \
-                                 'Конечная дата не может быть больше {}'.format(next_history.first_date - one_day)
+                                 'Конечная дата не может быть больше {}'.\
+                        format(next_history.first_date - one_day)
                     form.errors['last_date'] = [text_error]
                     return self.form_invalid(form)
 
