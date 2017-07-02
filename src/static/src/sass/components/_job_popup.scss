@@ -1,0 +1,36 @@
+.job {
+  display: none;
+  width: 290px;
+  height: 80px;
+  z-index: 100;
+  background: white;
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 20px;
+  left: 50%;
+  margin-left: -145px;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.38)
+}
+
+.job__wrapper {
+  margin: 10px;
+}
+
+.job__loader,
+.job__name,
+.job__result {
+  margin: 5px 0;
+  text-align: center;
+}
+
+.job__loader {
+  height: 18px;
+  display: block;
+  margin-top: 12px;
+  background: url('../img/loader.gif') no-repeat 50% 50%;
+}
+
+.job__result {
+  display: none;
+}

@@ -4,6 +4,6 @@ from sitetree.utils import tree, item
 
 sitetrees = (
     tree('reports', items=[
-        item('Сформировать отчет', 'reports', in_menu=True, in_sitetree=True),
+        item('Сформировать отчет', 'reports:index', in_menu=True, in_sitetree=True),
         ]),
 )

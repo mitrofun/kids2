@@ -13,6 +13,7 @@ bower_install:
 
 copy_settings:
 	cp $(PROJECT_DIR)/src/settings/local.py.skeleton $(PROJECT_DIR)/src/settings/local.py
+
 virtualenv:
 	virtualenv -p python3 $(VENV_DIR) --no-site-packages
 

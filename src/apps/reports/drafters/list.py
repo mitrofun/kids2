@@ -2,8 +2,10 @@
 # -*- coding: utf-8 -*-
 
 import xlrd
+
+from django_rq import job
 from xlutils.copy import copy
-from common.utils import get_next_date, get_param_on_date, get_display_age, get_qs_by_param_name
+from common.utils import get_param_on_date, get_display_age, get_qs_by_param_name
 from children.functions import get_age
 from django.http import HttpResponse
 from children.models import Child
@@ -14,6 +16,7 @@ content_type = 'application/vnd.ms-excel'
 report_template_dir = 'src/apps/reports/templates/list.xls'
 
 
+@job
 def report(**kwargs):
 
     on_date = kwargs['report_date']
@@ -28,9 +31,7 @@ def report(**kwargs):
     children_list = []
 
     first_row = 3
-    next_date = get_next_date(on_date)
-    response = HttpResponse(content_type=content_type)
-    response['Content-Disposition'] = 'attachment; filename=list({}).xls'.format(next_date)
+    response = HttpResponse()
 
     rb = xlrd.open_workbook(report_template_dir, formatting_info=True)
     wb = copy(rb)

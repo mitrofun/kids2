@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import os
 import random
 from fabric.api import *
 from fabric.colors import white, red

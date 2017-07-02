@@ -291,3 +291,103 @@
         }
     }
 })();
+
+// status report load
+(function () {
+
+    var jobPopup = document.getElementsByClassName('job')[0],
+        jobName = document.getElementsByClassName('job__name')[0],
+        jobLoader = document.getElementsByClassName('job__loader')[0],
+        jobResult = document.getElementsByClassName('job__result')[0],
+        jobLink = document.getElementById('jobLink');
+
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+    return null;
+    }
+
+
+    function deleteCookie(name) {
+        document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+
+    function getNameTask(task) {
+
+        var result;
+        if (task === '1') {
+            result = 'Формирование отчета' }
+        else {
+            result = 'Загрузка данных'
+        }
+        return result;
+    }
+
+    function show_status(data) {
+        if (data.status === "failed") {
+            // console.log(data.status);
+            clearInterval(intervalID);
+            jobName.innerHTML = 'Ошибка формирования';
+            deleteCookie('kids_report_job');
+            deleteCookie('kids_report_job_task');
+        }
+        if (data.status === "waiting"){
+            // do nothing
+            // console.log(data.status);
+        }
+        else if (data.status === "finished"){
+            // console.log(data.status);
+            jobName.innerHTML = 'Отчет сформирован';
+            jobLoader.style.display = 'none';
+            jobLink.href = '/reports/get/?job_id=' + job;
+            jobResult.style.display = 'block';
+            clearInterval(intervalID);
+        }
+        else {
+            // console.log(data.status);
+            clearInterval(intervalID);
+        }
+    }
+
+    function handle_error(xhr, textStatus, errorThrown) {
+        console.log("Please report this error: "+errorThrown+xhr.status+xhr.responseText);
+    }
+
+    function check_status() {
+        $.ajax({
+            type: "GET",
+            url: "/reports/status/?job_id=" + job,
+            success: show_status,
+            error: handle_error
+        });
+    }
+
+    if (document.readyState||document.body.readyState=='complete'){
+        var job = readCookie('kids_report_job'),
+            task = readCookie('kids_report_job_task'),
+            nameTask = getNameTask(task);
+        // console.log(job);
+        if (job) {
+            // console.log('loading');
+
+            jobPopup.style.display = 'block';
+            jobName.innerHTML = nameTask;
+
+            setTimeout(check_status, 0.05);
+            var intervalID = setInterval(check_status, 1000);
+
+        }
+    }
+
+    jobLink.addEventListener('click', function () {
+        jobPopup.style.display = 'none';
+        deleteCookie('kids_report_job');
+        deleteCookie('kids_report_job_task');
+    })
+
+})();

@@ -6,7 +6,6 @@ from django.contrib.auth.decorators import login_required
 
 from common.dashboard import DashboardView
 from loader.views import upload
-from reports.views import reports
 
 admin.site.site_header = settings.ADMIN_SITE_HEADER
 
@@ -17,8 +16,8 @@ urlpatterns = [
     url(r'^children/', include('children.urls', namespace='children')),
     url(r'^dictionaries/', include('dictionaries.urls', namespace='dictionaries')),
     url(r'^upload/$', login_required(upload), name='loader'),
-    url(r'^reports/$', login_required(reports), name='reports'),
-
+    url(r'^reports/', include('reports.urls', namespace='reports')),
+    url(r'^django-rq/', include('django_rq.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
 ]

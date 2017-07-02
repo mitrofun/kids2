@@ -43,6 +43,13 @@
     <div id="page-loader"><div class="spinner"></div></div>
     <div class="spinner"></div>
     {% block layout %}{% endblock layout %}
+      <div class="job" {% if job %}style="display: block;"{% endif %}>
+        <div class="job__wrapper">
+          <div class="job__name">{{ task }}</div>
+          <div class="job__loader"></div>
+          <div class="job__result"><a id="jobLink" href="{% url 'reports:get' %}" class="btn btn-primary btn-block">Скачать</a></div>
+        </div>
+      </div>
 </div><!-- /.container -->
 
 <script src="{% static 'src/vendors/jquery/dist/jquery.min.js' %}"></script>
@@ -56,7 +63,7 @@
 <script src="{% static 'src/vendors/bootstrap-file-input/bootstrap.file-input.js' %}"></script>
 <script src="{% static 'src/vendors/transliteration/lib/browser/transliteration.min.js' %}"></script>
 
-<script src="{% static 'src/js/main.min.js' %}?v=4"></script>
+<script src="{% static 'src/js/main.js' %}?v=4"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="{% static 'src/js/ie10-viewport-bug-workaround.js' %}"></script>
 </body>

@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import xlrd
+from django_rq import job
 from xlwt import Formula, Utils
 from xlutils.copy import copy
-from common.utils import get_next_date, get_institution, get_list_age, \
+from common.utils import get_institution, get_list_age, \
     get_children_institution_list_on_date, get_children_count_by_list
 from django.http import HttpResponse
 from reports.drafters.styles import style, style_bold
@@ -110,12 +111,11 @@ def write_total(sheet):
         sheet.write(col + count_ages, row - 1 + j, Formula(formula_total_col), style_bold)
 
 
+@job
 def report(**kwargs):
     on_date = kwargs['report_date']
 
-    next_date = get_next_date(on_date)
-    response = HttpResponse(content_type=content_type)
-    response['Content-Disposition'] = 'attachment; filename=summary({}).xls'.format(next_date)
+    response = HttpResponse()
 
     rb = xlrd.open_workbook(report_template_dir, formatting_info=True)
     wb = copy(rb)
